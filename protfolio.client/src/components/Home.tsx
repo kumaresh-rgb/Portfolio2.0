@@ -21,6 +21,7 @@ const Home = () => {
   const animationRef = useRef<number | null>(null);
   const [sceneSize, setSceneSize] = useState(0);
   const [imageError, setImageError] = useState(false);
+  const [iconsLaunched, setIconsLaunched] = useState(false);
 
   // Planet data for orbiting icons
   const PLANET_DATA: PlanetData[] = [
@@ -515,10 +516,30 @@ const Home = () => {
       const labelH = 20;
 
       PLANET_DATA.forEach((p, i) => {
-        const r = (p.rPct / 100) * sceneSize;
-        const a = ((p.startAngle + frame * p.speed) * Math.PI) / 180;
-        const x = Math.cos(a) * r - half;
-        const y = Math.sin(a) * r - half - labelH / 2;
+        let x, y;
+        
+        // Calculate launch progress (0 to 1 over 3 seconds for dramatic effect)
+        const launchProgress = Math.min(frame / 180, 1); // 3 seconds at 60fps
+        
+        if (launchProgress < 1) {
+          // Big Bang burst animation - explosive ease out
+          const easeOut = 1 - Math.pow(1 - launchProgress, 4);
+          const targetR = (p.rPct / 100) * sceneSize;
+          const targetA = (p.startAngle * Math.PI) / 180; // Use initial angle, no rotation yet
+          const targetX = Math.cos(targetA) * targetR - half;
+          const targetY = Math.sin(targetA) * targetR - half - labelH / 2;
+          
+          // Burst from center with explosive force
+          x = 0 + targetX * easeOut;
+          y = 0 + targetY * easeOut;
+        } else {
+          // Normal orbiting after Big Bang burst
+          const r = (p.rPct / 100) * sceneSize;
+          const a = ((p.startAngle + (frame - 180) * p.speed) * Math.PI) / 180;
+          x = Math.cos(a) * r - half;
+          y = Math.sin(a) * r - half - labelH / 2;
+        }
+        
         if (elements[i]) {
           elements[i].style.transform = `translate(${x}px, ${y}px)`;
         }
@@ -534,7 +555,7 @@ const Home = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [sceneSize]);
+  }, [sceneSize, iconsLaunched]);
 
   // Canvas background animation
   useEffect(() => {
@@ -713,6 +734,9 @@ const Home = () => {
 
     // Big Bang effect only on initial page load
     burst(0);
+    
+    // Launch icons immediately with Big Bang
+    setIconsLaunched(true);
 
     const render = () => {
       fr2++;
