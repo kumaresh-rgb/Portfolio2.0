@@ -83,9 +83,9 @@ const Home = () => {
     },
     {
       id: "ic7",
-      rPct: 46,
-      speed: 0.14,
-      startAngle: 160,
+      rPct: 37,
+      speed: 0.22,
+      startAngle: 320,
       name: "DevOps",
       color: "rgba(0,180,255,0.6)",
     },
@@ -128,6 +128,14 @@ const Home = () => {
       startAngle: 30,
       name: "SSMS",
       color: "rgba(255,140,0,0.6)",
+    },
+    {
+      id: "ic13",
+      rPct: 48,
+      speed: 0.14,
+      startAngle: 110,
+      name: "Azure",
+      color: "rgba(0,120,212,0.6)",
     },
   ];
 
@@ -417,6 +425,28 @@ const Home = () => {
                   height: "70%",
                   objectFit: "contain",
                   filter: "drop-shadow(0 0 4px rgba(255, 140, 0, 0.6))",
+                }}
+              />
+            </div>
+          );
+        case "Azure":
+          return (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/Azure.png"
+                alt="Azure"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(0, 120, 212, 0.6))",
                 }}
               />
             </div>
