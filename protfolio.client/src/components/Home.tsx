@@ -54,8 +54,8 @@ const Home = () => {
       rPct: 28,
       speed: 0.3,
       startAngle: 200,
-      name: "Azure",
-      color: "rgba(0,140,255,0.6)",
+      name: "Redis",
+      color: "rgba(220,50,50,0.6)",
     },
     {
       id: "ic4",
@@ -105,6 +105,30 @@ const Home = () => {
       name: "C#",
       color: "rgba(190,80,255,0.6)",
     },
+    {
+      id: "ic10",
+      rPct: 50,
+      speed: 0.12,
+      startAngle: 280,
+      name: "EF Core",
+      color: "rgba(100,80,200,0.6)",
+    },
+    {
+      id: "ic11",
+      rPct: 55,
+      speed: 0.1,
+      startAngle: 340,
+      name: "Docker",
+      color: "rgba(0,200,150,0.6)",
+    },
+    {
+      id: "ic12",
+      rPct: 60,
+      speed: 0.08,
+      startAngle: 30,
+      name: "SSMS",
+      color: "rgba(255,140,0,0.6)",
+    },
   ];
 
   // Technology icons
@@ -113,343 +137,289 @@ const Home = () => {
       switch (name) {
         case ".NET":
           return (
-            <svg viewBox="0 0 34 34">
-              <circle cx="17" cy="17" r="16" fill="#512BD4" />
-              <ellipse
-                cx="12"
-                cy="10"
-                rx="5"
-                ry="3"
-                fill="white"
-                opacity="0.12"
-                transform="rotate(-25 12 10)"
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/Microsoft_.NET_logo.png"
+                alt=".NET"
+                style={{
+                  width: "75%",
+                  height: "75%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(120, 80, 255, 0.6))",
+                }}
               />
-              <text
-                x="3"
-                y="22"
-                fontFamily="Arial Black"
-                fontWeight="900"
-                fontSize="11"
-                fill="white">
-                .NET
-              </text>
-            </svg>
+            </div>
           );
         case "React":
           return (
-            <svg viewBox="0 0 34 34" fill="none">
-              <rect width="34" height="34" rx="8" fill="#0d1f3c" />
-              <circle cx="17" cy="17" r="3.8" fill="#61DAFB" />
-              <ellipse
-                cx="17"
-                cy="17"
-                rx="15"
-                ry="5.8"
-                fill="none"
-                stroke="#61DAFB"
-                strokeWidth="1.8"
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/React.png"
+                alt="React"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(0, 230, 255, 0.6))",
+                }}
               />
-              <ellipse
-                cx="17"
-                cy="17"
-                rx="15"
-                ry="5.8"
-                fill="none"
-                stroke="#61DAFB"
-                strokeWidth="1.8"
-                transform="rotate(60 17 17)"
-              />
-              <ellipse
-                cx="17"
-                cy="17"
-                rx="15"
-                ry="5.8"
-                fill="none"
-                stroke="#61DAFB"
-                strokeWidth="1.8"
-                transform="rotate(120 17 17)"
-              />
-            </svg>
+            </div>
           );
         case "Angular":
           return (
-            <svg viewBox="0 0 34 34" fill="none">
-              <rect width="34" height="34" rx="8" fill="#0d1f3c" />
-              <polygon
-                points="17,2 31,8.5 28,26 17,31 6,26 3,8.5"
-                fill="#DD0031"
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/Angular.png"
+                alt="Angular"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(255, 60, 60, 0.6))",
+                }}
               />
-              <polygon
-                points="17,6 17,6 24,24 20.5,24 17,16 13.5,24 10,24"
-                fill="white"
-                opacity="0.95"
-              />
-            </svg>
+            </div>
           );
-        case "Azure":
+        case "Redis":
           return (
-            <svg viewBox="0 0 34 34" fill="none">
-              <rect width="34" height="34" rx="8" fill="#0d1f3c" />
-              <path d="M8 28 L19 3 L29 28 Z" fill="#0078D4" opacity="0.85" />
-              <path d="M4 28 L16 7 L21 18 L12 18 Z" fill="#50E6FF" />
-              <path d="M4 28 L30 28 L21 18 L12 18 Z" fill="#0078D4" />
-            </svg>
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/pngegg.png"
+                alt="Redis"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(220, 50, 50, 0.6))",
+                }}
+              />
+            </div>
           );
         case "SQL Server":
           return (
-            <svg viewBox="0 0 34 34" fill="none">
-              <rect width="34" height="34" rx="8" fill="#0d1f3c" />
-              <ellipse cx="17" cy="9" rx="11" ry="4.5" fill="#CC2927" />
-              <rect x="6" y="9" width="22" height="8" fill="#CC2927" />
-              <ellipse cx="17" cy="17" rx="11" ry="4.5" fill="#E8443A" />
-              <rect x="6" y="17" width="22" height="7" fill="#CC2927" />
-              <ellipse cx="17" cy="24" rx="11" ry="4.5" fill="#E8443A" />
-            </svg>
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/sql-database.png"
+                alt="SQL Server"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(220, 50, 50, 0.6))",
+                }}
+              />
+            </div>
           );
         case "Power BI":
           return (
-            <svg viewBox="0 0 34 34" fill="none">
-              <rect width="34" height="34" rx="8" fill="#0d1f3c" />
-              <rect
-                x="4"
-                y="20"
-                width="7"
-                height="10"
-                fill="#F2C811"
-                rx="1.5"
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/power_bi.png"
+                alt="Power BI"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(255, 200, 0, 0.6))",
+                }}
               />
-              <rect x="4" y="18" width="7" height="3" fill="#FFD700" rx="1" />
-              <rect
-                x="14"
-                y="14"
-                width="7"
-                height="16"
-                fill="#F2C811"
-                rx="1.5"
-                opacity="0.9"
-              />
-              <rect
-                x="14"
-                y="12"
-                width="7"
-                height="3"
-                fill="#FFD700"
-                rx="1"
-                opacity="0.9"
-              />
-              <rect
-                x="24"
-                y="7"
-                width="7"
-                height="23"
-                fill="#F2C811"
-                rx="1.5"
-                opacity="0.75"
-              />
-              <rect
-                x="24"
-                y="5"
-                width="7"
-                height="3"
-                fill="#FFD700"
-                rx="1"
-                opacity="0.75"
-              />
-            </svg>
+            </div>
           );
         case "Kubernetes":
           return (
-            <svg viewBox="0 0 34 34" fill="none">
-              <rect width="34" height="34" rx="8" fill="#0d1f3c" />
-              <circle cx="17" cy="17" r="14" fill="#326CE5" />
-              <circle
-                cx="17"
-                cy="17"
-                r="5"
-                fill="none"
-                stroke="white"
-                strokeWidth="1.4"
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/kubernetes-services.png"
+                alt="Kubernetes"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(50, 108, 229, 0.6))",
+                }}
               />
-              <circle cx="17" cy="17" r="2.2" fill="white" />
-              <line
-                x1="17"
-                y1="3"
-                x2="17"
-                y2="12"
-                stroke="white"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="17"
-                y1="22"
-                x2="17"
-                y2="31"
-                stroke="white"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="3"
-                y1="17"
-                x2="12"
-                y2="17"
-                stroke="white"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="22"
-                y1="17"
-                x2="31"
-                y2="17"
-                stroke="white"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="6.5"
-                y1="6.5"
-                x2="12"
-                y2="12"
-                stroke="white"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="22"
-                y1="22"
-                x2="27.5"
-                y2="27.5"
-                stroke="white"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="27.5"
-                y1="6.5"
-                x2="22"
-                y2="12"
-                stroke="white"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="12"
-                y1="22"
-                x2="6.5"
-                y2="27.5"
-                stroke="white"
-                strokeWidth="1.5"
-              />
-            </svg>
+            </div>
           );
         case "DevOps":
           return (
-            <svg viewBox="0 0 34 34" fill="none">
-              <rect width="34" height="34" rx="8" fill="#0d1f3c" />
-              <path
-                d="M5 23 L9 10 L22 7 L29 12.5 L29 22 L22 27 Z"
-                fill="#0078D4"
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/azure-devops.png"
+                alt="DevOps"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(0, 180, 255, 0.6))",
+                }}
               />
-              <path
-                d="M5 23 L9 10 L29 12.5 L22 27 Z"
-                fill="#005a9e"
-                opacity="0.4"
-              />
-              <circle
-                cx="9"
-                cy="25"
-                r="3.5"
-                fill="#061830"
-                stroke="#50E6FF"
-                strokeWidth="1.7"
-              />
-              <circle
-                cx="25"
-                cy="25"
-                r="3.5"
-                fill="#061830"
-                stroke="#50E6FF"
-                strokeWidth="1.7"
-              />
-              <line
-                x1="12.5"
-                y1="25"
-                x2="21.5"
-                y2="25"
-                stroke="#50E6FF"
-                strokeWidth="1.7"
-              />
-              <path
-                d="M9 21.5 L9 15 L25 15 L25 21.5"
-                fill="none"
-                stroke="#50E6FF"
-                strokeWidth="1.5"
-              />
-            </svg>
+            </div>
           );
         case "MS Fabric":
           return (
-            <svg viewBox="0 0 34 34" fill="none">
-              <rect width="34" height="34" rx="8" fill="#0d1f3c" />
-              <rect x="3" y="3" width="13" height="13" rx="3" fill="#0078D4" />
-              <rect x="18" y="3" width="13" height="13" rx="3" fill="#50E6FF" />
-              <rect
-                x="3"
-                y="18"
-                width="13"
-                height="13"
-                rx="3"
-                fill="#50E6FF"
-                opacity="0.65"
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/fabric.png"
+                alt="MS Fabric"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(0, 210, 240, 0.6))",
+                }}
               />
-              <rect
-                x="18"
-                y="18"
-                width="13"
-                height="13"
-                rx="3"
-                fill="#0078D4"
-                opacity="0.55"
-              />
-              <rect
-                x="3"
-                y="3"
-                width="13"
-                height="4"
-                rx="3"
-                fill="white"
-                opacity="0.1"
-              />
-              <rect
-                x="18"
-                y="3"
-                width="13"
-                height="4"
-                rx="3"
-                fill="white"
-                opacity="0.1"
-              />
-            </svg>
+            </div>
           );
         case "C#":
           return (
-            <svg viewBox="0 0 34 34" fill="none">
-              <rect width="34" height="34" rx="8" fill="#0d1f3c" />
-              <circle cx="17" cy="17" r="15" fill="#9B4F96" />
-              <ellipse
-                cx="12"
-                cy="10"
-                rx="5"
-                ry="3"
-                fill="white"
-                opacity="0.12"
-                transform="rotate(-25 12 10)"
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/Logo_C_sharp.png"
+                alt="C#"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(190, 80, 255, 0.6))",
+                }}
               />
-              <text
-                x="5.5"
-                y="22.5"
-                fontFamily="Arial Black"
-                fontWeight="900"
-                fontSize="14"
-                fill="white">
-                C#
-              </text>
-            </svg>
+            </div>
+          );
+        case "EF Core":
+          return (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/public/Entity.svg"
+                alt="EF Core"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(100, 80, 200, 0.6))",
+                }}
+              />
+            </div>
+          );
+        case "Docker":
+          return (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/Docker.png"
+                alt="Docker"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(0, 200, 150, 0.6))",
+                }}
+              />
+            </div>
+          );
+        case "SSMS":
+          return (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <img
+                src="/ssms_21.png"
+                alt="SSMS"
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 4px rgba(255, 140, 0, 0.6))",
+                }}
+              />
+            </div>
           );
         default:
           return null;
@@ -517,10 +487,10 @@ const Home = () => {
 
       PLANET_DATA.forEach((p, i) => {
         let x, y;
-        
+
         // Calculate launch progress (0 to 1 over 3 seconds for dramatic effect)
         const launchProgress = Math.min(frame / 180, 1); // 3 seconds at 60fps
-        
+
         if (launchProgress < 1) {
           // Big Bang burst animation - explosive ease out
           const easeOut = 1 - Math.pow(1 - launchProgress, 4);
@@ -528,7 +498,7 @@ const Home = () => {
           const targetA = (p.startAngle * Math.PI) / 180; // Use initial angle, no rotation yet
           const targetX = Math.cos(targetA) * targetR - half;
           const targetY = Math.sin(targetA) * targetR - half - labelH / 2;
-          
+
           // Burst from center with explosive force
           x = 0 + targetX * easeOut;
           y = 0 + targetY * easeOut;
@@ -539,7 +509,7 @@ const Home = () => {
           x = Math.cos(a) * r - half;
           y = Math.sin(a) * r - half - labelH / 2;
         }
-        
+
         if (elements[i]) {
           elements[i].style.transform = `translate(${x}px, ${y}px)`;
         }
@@ -734,7 +704,7 @@ const Home = () => {
 
     // Big Bang effect only on initial page load
     burst(0);
-    
+
     // Launch icons immediately with Big Bang
     setIconsLaunched(true);
 
