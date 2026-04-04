@@ -1,175 +1,152 @@
+import React, { useState } from "react"; // Added missing useState
 import { motion } from "framer-motion";
-import { Github, Linkedin, Send } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Send,
+  Terminal as TerminalIcon,
+  CheckCircle2,
+  Sun, // Added missing icon
+  Moon, // Added missing icon
+} from "lucide-react";
 
 export const Contact = () => {
   return (
-    <main className="min-h-screen pt-32 pb-20 px-6 lg:px-12 flex flex-col items-center justify-center bg-[#090f15] relative overflow-hidden">
-      {/* Background Nebula Effect */}
+    // Updated bg-background to match Skills page
+    <div className="min-h-screen bg-background text-on-surface font-body overflow-x-hidden relative">
+      {/* ── Background Nebula Consistency (This was missing) ── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-500/5 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-500/5 blur-[120px] rounded-full" />
+        <div className="absolute top-[10%] left-[-5%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full opacity-50" />
+        <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-tertiary/10 blur-[120px] rounded-full opacity-50" />
       </div>
 
-      <div className="w-full max-w-7xl relative z-10">
-        {/* Header Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-16 text-center lg:text-left">
-          <h1 className="font-['Plus_Jakarta_Sans'] text-5xl md:text-7xl font-extrabold tracking-tighter mb-4 text-[#e6ebf4]">
-            Initialize <span className="text-[#73b1ff]">Connection</span>
+      <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto relative z-10">
+        {/* ── Page Header ── */}
+        <motion.header
+          initial={{ opacity: 0, x: -24 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-16 text-left">
+          <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter mb-4 text-on-surface">
+            Initialize{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary">
+              Connection
+            </span>
           </h1>
-          <p className="font-sans text-[#a6abb4] text-lg md:text-xl max-w-2xl">
+          <p className="font-body text-on-surface-variant text-lg max-w-2xl leading-relaxed">
             Ready to bridge the gap between concept and execution. Reach out via
             the terminal or traditional channels.
           </p>
-        </motion.section>
+        </motion.header>
 
-        {/* Main Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Form Section */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="bg-[#1e272f]/40 backdrop-blur-xl p-8 md:p-10 rounded-xl border border-[#424850]/20 shadow-2xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* ── Contact Form (Now using glass-card and nebula-glow) ── */}
+          <motion.section
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-7 glass-card nebula-glow rounded-xl p-8">
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#73b1ff] font-bold">
+                  <label className="font-label text-xs uppercase tracking-widest text-primary">
                     Name
                   </label>
                   <input
-                    className="w-full bg-[#0d141b] border-none rounded-md p-4 text-[#e6ebf4] focus:ring-2 focus:ring-[#47ccff] transition-all placeholder:text-[#a6abb4]/30 outline-none"
+                    className="w-full bg-surface-container-low border border-outline-variant/20 rounded-lg p-4 text-on-surface focus:ring-1 focus:ring-primary/50 transition-all outline-none"
                     placeholder="John Doe"
-                    type="text"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#73b1ff] font-bold">
+                  <label className="font-label text-xs uppercase tracking-widest text-primary">
                     Email
                   </label>
                   <input
-                    className="w-full bg-[#0d141b] border-none rounded-md p-4 text-[#e6ebf4] focus:ring-2 focus:ring-[#47ccff] transition-all placeholder:text-[#a6abb4]/30 outline-none"
+                    className="w-full bg-surface-container-low border border-outline-variant/20 rounded-lg p-4 text-on-surface focus:ring-1 focus:ring-primary/50 transition-all outline-none"
                     placeholder="john@nebula.dev"
-                    type="email"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="font-['Space_Grotesk'] text-xs uppercase tracking-widest text-[#73b1ff] font-bold">
+                <label className="font-label text-xs uppercase tracking-widest text-primary">
                   Message
                 </label>
                 <textarea
-                  className="w-full bg-[#0d141b] border-none rounded-md p-4 text-[#e6ebf4] focus:ring-2 focus:ring-[#47ccff] transition-all placeholder:text-[#a6abb4]/30 resize-none outline-none"
+                  className="w-full bg-surface-container-low border border-outline-variant/20 rounded-lg p-4 text-on-surface focus:ring-1 focus:ring-primary/50 transition-all outline-none resize-none"
                   placeholder="Transmit your request..."
                   rows={5}
                 />
               </div>
-              <button
-                className="w-full py-4 bg-gradient-to-r from-[#73b1ff] to-[#53a3ff] text-[#002f59] font-['Plus_Jakarta_Sans'] font-bold rounded-full hover:shadow-[0_0_20px_rgba(115,177,255,0.4)] transition-all active:scale-[0.98] flex items-center justify-center gap-2"
-                type="submit">
+              <button className="w-full py-4 bg-primary text-white font-headline font-bold rounded-lg hover:shadow-[0_0_20px_rgba(71,204,255,0.3)] transition-all flex items-center justify-center gap-2">
                 <Send size={18} />
                 Send Transmission
               </button>
             </form>
-          </motion.div>
+          </motion.section>
 
-          {/* Terminal & Socials Section */}
-          <div className="space-y-10">
+          {/* ── Terminal & Hub ── */}
+          <div className="lg:col-span-5 space-y-6">
             {/* Terminal Box */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="bg-[#000000] rounded-xl border border-[#424850]/30 overflow-hidden shadow-2xl font-['Space_Grotesk']">
-              <div className="bg-[#1e272f] px-4 py-2 flex items-center justify-between border-b border-[#424850]/20">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#ff716c]/50"></div>
-                  <div className="w-3 h-3 rounded-full bg-[#c392fc]/50"></div>
-                  <div className="w-3 h-3 rounded-full bg-[#47ccff]/50"></div>
+            <div className="bg-black/40 backdrop-blur-md rounded-xl border border-outline-variant/20 overflow-hidden shadow-2xl font-mono">
+              <div className="bg-surface-container-highest/50 px-4 py-2 flex items-center justify-between border-b border-outline-variant/10">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/40" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/40" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/40" />
                 </div>
-                <span className="text-[10px] text-[#a6abb4] font-bold uppercase tracking-widest">
+                <span className="text-[10px] text-on-surface-variant uppercase tracking-widest">
                   system_status.sh
                 </span>
               </div>
-              <div className="p-6 space-y-3 text-sm leading-relaxed">
-                <div className="flex gap-3">
-                  <span className="text-[#47ccff]">~</span>
-                  <span className="text-[#e6ebf4]">whoami</span>
+              <div className="p-6 space-y-4 text-sm">
+                <div className="flex gap-2">
+                  <span className="text-primary">~</span>{" "}
+                  <span className="text-on-surface">whoami</span>
                 </div>
-                <div className="text-[#a6abb4] pl-6">
+                <div className="text-on-surface-variant pl-4">
                   DevNebula // Full-Stack Architect
                 </div>
-                <div className="flex gap-3">
-                  <span className="text-[#47ccff]">~</span>
-                  <span className="text-[#e6ebf4]">status --check</span>
+                <div className="flex gap-2">
+                  <span className="text-primary">~</span>{" "}
+                  <span className="text-on-surface">status --check</span>
                 </div>
-                <div className="flex items-center gap-2 pl-6">
-                  <span className="w-2 h-2 rounded-full bg-[#0ebef5] animate-pulse"></span>
-                  <span className="text-[#0ebef5]">
-                    Status: Online & Ready for Deployment
-                  </span>
-                </div>
-                <div className="flex gap-3">
-                  <span className="text-[#47ccff]">~</span>
-                  <span className="text-[#e6ebf4]">stack --active</span>
-                </div>
-                <div className="text-[#c392fc] pl-6">
-                  [.NET 8, React, Azure Cloud, SQL Server]
+                <div className="flex items-center gap-2 pl-4">
+                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                  <span className="text-primary">Status: Online</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Social Hub */}
+            {/* Social Links (Matching Skills tiles) */}
             <div className="grid grid-cols-2 gap-4">
               <a
                 href="#"
-                className="group flex items-center gap-4 p-5 bg-[#1e272f]/40 backdrop-blur-md rounded-xl border border-[#424850]/10 hover:border-[#73b1ff]/40 transition-all">
-                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#1e272f] text-[#73b1ff] group-hover:shadow-[0_0_15px_rgba(115,177,255,0.3)] transition-all">
-                  <Github size={20} />
-                </div>
-                <div>
-                  <span className="block text-xs font-['Space_Grotesk'] uppercase tracking-widest text-[#a6abb4]">
-                    GitHub
-                  </span>
-                  <span className="text-[#e6ebf4] font-semibold">
-                    /dev-nebula
-                  </span>
-                </div>
+                className="glass-card p-4 rounded-xl flex items-center gap-3 hover:scale-[1.02] transition-all">
+                <Github size={20} className="text-primary" />
+                <span className="text-sm font-semibold">GitHub</span>
               </a>
               <a
                 href="#"
-                className="group flex items-center gap-4 p-5 bg-[#1e272f]/40 backdrop-blur-md rounded-xl border border-[#424850]/10 hover:border-[#c392fc]/40 transition-all">
-                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#1e272f] text-[#c392fc] group-hover:shadow-[0_0_15px_rgba(195,146,252,0.3)] transition-all">
-                  <Linkedin size={20} />
-                </div>
-                <div>
-                  <span className="block text-xs font-['Space_Grotesk'] uppercase tracking-widest text-[#a6abb4]">
-                    LinkedIn
-                  </span>
-                  <span className="text-[#e6ebf4] font-semibold">
-                    /in/devnebula
-                  </span>
-                </div>
+                className="glass-card p-4 rounded-xl flex items-center gap-3 hover:scale-[1.02] transition-all">
+                <Linkedin size={20} className="text-tertiary" />
+                <span className="text-sm font-semibold">LinkedIn</span>
               </a>
-            </div>
-
-            {/* Network Visualization Box */}
-            <div className="relative h-32 w-full rounded-xl overflow-hidden bg-[#0d141b] border border-[#424850]/10">
-              <img
-                alt="Network Topology"
-                className="w-full h-full object-cover opacity-30"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFZbmCfYWXyvGH4TXNqqbBW3j-9c18G52UttA1XEQP6ldxGyirHqmGsOLBgKtMpHpoo2bnI2N7ReWd6r1M0APuAb5BKZM2C1yotFEkYpn9Ymesu50MT3g3Ag7WSi6AN98MlcYe0Pb1Gnj41Wr-86ERgL2dtsz-HYvRlytlfQx_T4nv8VZ5dxM2WGSVvoTbZhDDvGhiTuRfpVb2woQ42itVFW3XK2k2zp6Wj12oL98t6lvSWzzY3zOi9DlEMz1tOZyaoIjgQDt55ZW0"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#090f15] to-transparent"></div>
-              <div className="absolute bottom-4 left-6">
-                <p className="text-[10px] font-['Space_Grotesk'] uppercase tracking-[0.3em] text-[#47ccff]">
-                  Network Topology Active
-                </p>
-              </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+
+      {/* ── Scoped Styles (Essential for Consistency) ── */}
+      <style>{`
+        .glass-card {
+          background: rgba(30, 39, 47, 0.4);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(115, 177, 255, 0.1);
+        }
+        .nebula-glow {
+          box-shadow: 0 0 40px rgba(71, 204, 255, 0.06);
+        }
+      `}</style>
+    </div>
   );
 };

@@ -55,3 +55,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* Ensure the root layout is always filled */
+html,
+body,
+#root {
+  background-color: var(--color-background) !important;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Grid Lines using your theme color */
+.grid-lines {
+  background-image:
+    linear-gradient(to right, rgba(51, 65, 85, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(51, 65, 85, 0.1) 1px, transparent 1px);
+  background-size: 45px 45px;
+}

@@ -14,33 +14,35 @@ import { Experience } from "./pages/Experience";
 import { Accomplishments } from "./pages/Accomplishments";
 import { Contact } from "./pages/Contact";
 import { Skills } from "./pages/Skills";
-import { VisitorTelemetry } from "./components/VisitorTelemetry";
 import { News } from "./pages/News";
 import { useEffect } from "react";
+
 export default function App() {
   const location = useLocation();
 
+  // Scroll to top on every route change
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "instant" }); // 'instant' prevents scrollbar flickering during transitions
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-nebula-base">
-      {/* Wrap the header elements */}
+    // Added overflow-x-hidden to prevent the horizontal scrollbar during animations
+    <div className="min-h-screen bg-nebula-base flex flex-col overflow-x-hidden">
       <header className="fixed top-0 left-0 w-full z-50">
         <News />
         <Navbar />
       </header>
-      <main className="relative pt-[1px]">
-        {/* Render only on Home page, below Navbar on the right */}
-        <VisitorTelemetry />
+
+      {/* Added w-full and overflow-x-hidden here as well for safety */}
+      <main className="relative pt-[1px] flex-grow w-full overflow-x-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}>
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="w-full">
             <Routes location={location}>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />

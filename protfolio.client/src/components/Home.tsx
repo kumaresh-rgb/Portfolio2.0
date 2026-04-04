@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
+import { VisitorTelemetry } from "./VisitorTelemetry";
 
 interface PlanetData {
   id: string;
@@ -573,6 +574,7 @@ const Home = () => {
   return (
     <section className="home-section">
       {/* Galaxy Canvas */}
+
       <canvas ref={canvasRef} className="galaxy-canvas" />
 
       {/* Main Scene */}
