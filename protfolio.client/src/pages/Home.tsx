@@ -1,7 +1,7 @@
 import { Cloud, Cpu, Database, Layers, ShieldCheck, Zap } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-
+import { Link } from "react-router-dom";
 interface PlanetData {
   id: string;
   rPct: number;
@@ -757,7 +757,6 @@ const Home = () => {
           ))}
         </div>
       </section>
-      typescriptreact
       {/* Section B: The Enterprise Lifecycle */}
       <section className="py-24 md:py-32 px-6 md:px-8 bg-transparent relative overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
@@ -1151,10 +1150,11 @@ const Home = () => {
               Scalable Enterprise Product?
             </span>
           </h2>
-
-          <button className="px-12 py-4 bg-white text-slate-950 font-black rounded-full hover:scale-110 hover:shadow-[0_0_50px_rgba(255,255,255,0.4)] transition-all duration-300 active:scale-95 shadow-xl">
-            LET'S TALK
-          </button>
+          <Link to="/contact">
+            <button className="px-12 py-4 bg-white text-slate-950 font-black rounded-full hover:scale-110 hover:shadow-[0_0_50px_rgba(255,255,255,0.4)] transition-all duration-300 active:scale-95 shadow-xl">
+              LET'S TALK
+            </button>
+          </Link>
         </div>
       </section>
     </>

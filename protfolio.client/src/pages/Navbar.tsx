@@ -1,110 +1,179 @@
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom"; // Essential for no-reload navigation
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  Moon,
-  Sun,
   Home,
   User,
-  Briefcase,
   Code,
+  Briefcase,
   Mail,
+  Sun,
+  Moon,
   Menu,
   X,
+  Award,
 } from "lucide-react";
-import { useState } from "react";
 import { useDarkMode } from "../hooks/useDarkMode";
 
+const navigationItems = [
+  { id: "home", name: "Home", icon: Home, href: "/" },
+  { id: "about", name: "About", icon: User, href: "/about" },
+  { id: "projects", name: "Projects", icon: Code, href: "/projects" },
+  { id: "skills", name: "Skills", icon: Briefcase, href: "/skills" },
+  {
+    id: "experience",
+    name: "Experience",
+    icon: Briefcase,
+    href: "/experience",
+  },
+  { id: "contact", name: "Contact", icon: Mail, href: "/contact" },
+  {
+    id: "accomplishments",
+    name: "Awards",
+    icon: Award,
+    href: "/accomplishments",
+  },
+];
+
 const Navbar = () => {
-  // Destructure as an array: [currentValue, toggleFunction]
   const [theme, toggleTheme] = useDarkMode();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation(); // This detects which page you are on
 
-  const navigationItems = [
-    { id: "home", name: "Home", icon: Home, href: "#home" },
-    { id: "about", name: "About", icon: User, href: "#about" },
-    { id: "projects", name: "Projects", icon: Code, href: "#projects" },
-    { id: "skills", name: "Skills", icon: Briefcase, href: "#skills" },
-    {
-      id: "experience",
-      name: "Experience",
-      icon: Briefcase,
-      href: "#experience",
-    },
-    { id: "contact", name: "Contact", icon: Mail, href: "#contact" },
-  ];
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0 flex items-center">
-            <img
-              src="/Microsoft Logo.png"
-              alt="Microsoft Logo"
-              className="h-8 w-auto mr-2 dark:brightness-100 brightness-90"
-            />
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-1">
-              {navigationItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <a
-                    key={item.id}
-                    href={item.href}
-                    className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200">
-                    <Icon className="w-4 h-4 mr-2 text-primary" />
-                    <span>{item.name}</span>
-                  </a>
-                );
-              })}
+    <div className="fixed top-0 left-0 right-0 z-50">
+      {/* 1. NEWS BANNER */}
+      <div className="h-7 w-full bg-black/40 backdrop-blur-md border-b border-white/5 flex items-center overflow-hidden whitespace-nowrap">
+        <motion.div
+          className="flex gap-12 items-center"
+          animate={{ x: [0, -1000] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}>
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="flex gap-12 items-center text-[10px] tracking-[0.2em] font-bold text-[#47ccff]">
+              <span>WORK MODE: HYBRID</span> <span>•</span>
+              <span>EXP: 3+ YEARS</span> <span>•</span>
+              <span>LOCATION: CHENNAI</span> <span>•</span>
+              <span>WORK STATUS: OPEN TO WORK</span> <span>•</span>
             </div>
-          </div>
+          ))}
+        </motion.div>
+      </div>
 
-          {/* Theme Toggle & Mobile Menu Button */}
-          <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* FIX: toggleTheme is called with 0 arguments */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-surface-container-low hover:bg-surface-variant transition-all border border-outline-variant"
-              aria-label="Toggle theme">
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5 text-yellow-500" />
-              ) : (
-                <Moon className="w-5 h-5 text-primary" />
-              )}
-            </button>
+      {/* NAV BAR */}
+      <nav className="bg-surface/80 backdrop-blur-md border-b border-outline-variant transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-12">
+            {/* LOGO - Fixed with Link */}
+            <Link to="/">
+              <div className="flex-shrink-0 flex items-center gap-2.5">
+                <img
+                  src="/Microsoft_Logo_24px.png"
+                  alt="Logo"
+                  className="h-4 w-auto"
+                />
+                <span className="text-[13px] font-semibold text-white">
+                  MS Stack Dev
+                </span>
+              </div>
+            </Link>
 
-            {/* Mobile menu button */}
-            <div className="md:hidden">
+            {/* Desktop Navigation - No Reload & Icons Included */}
+            <div className="hidden md:block">
+              <div className="flex items-center space-x-6">
+                {navigationItems.map((item) => {
+                  const isActive = location.pathname === item.href;
+                  return (
+                    <Link
+                      key={item.id}
+                      to={item.href}
+                      className={`group relative flex items-center gap-2 py-1 text-[13px] font-medium transition-colors duration-300 ${
+                        isActive
+                          ? "text-white"
+                          : "text-gray-400 hover:text-white"
+                      }`}>
+                      <item.icon
+                        size={14}
+                        className={
+                          isActive
+                            ? "text-[#47ccff]"
+                            : "text-gray-500 group-hover:text-white"
+                        }
+                      />
+                      <span>{item.name}</span>
+
+                      {/* Dynamic Underline Animation based on URL path */}
+                      {isActive && (
+                        <motion.div
+                          layoutId="nav-underline"
+                          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#47ccff] rounded-full"
+                          transition={{
+                            type: "spring",
+                            stiffness: 380,
+                            damping: 30,
+                          }}
+                        />
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Theme & Mobile Menu Actions */}
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={toggleTheme}
+                className="p-1.5 rounded-md hover:bg-white/10">
+                {theme === "dark" ? (
+                  <Sun size={16} className="text-yellow-500" />
+                ) : (
+                  <Moon size={16} className="text-blue-400" />
+                )}
+              </button>
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 rounded-lg text-on-surface-variant hover:text-on-surface">
+                className="md:hidden p-1.5 text-white">
                 {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden bg-surface border-t border-outline-variant">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigationItems.map((item) => (
-                <a
-                  key={item.id}
-                  href={item.href}
-                  className="flex items-center px-3 py-3 rounded-md text-base font-medium text-on-surface-variant hover:bg-surface-variant"
-                  onClick={() => setIsMobileMenuOpen(false)}>
-                  <item.icon className="w-5 h-5 mr-3 text-primary" />
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
+        {/* Mobile Menu - Fixed with Link */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-surface border-t border-outline-variant overflow-hidden">
+              <div className="px-4 py-4 space-y-2">
+                {navigationItems.map((item) => (
+                  <Link
+                    key={item.id}
+                    to={item.href}
+                    className={`flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-colors ${
+                      location.pathname === item.href
+                        ? "bg-primary/10 text-primary"
+                        : "text-on-surface-variant hover:bg-surface-variant"
+                    }`}>
+                    <item.icon className="w-4 h-4 mr-3" />
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+    </div>
   );
 };
 
