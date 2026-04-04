@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 interface PlanetData {
   id: string;
@@ -19,11 +19,12 @@ const Home = () => {
   const sceneRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | null>(null);
+  const orbitAnimRef = useRef<number | null>(null);
   const [sceneSize, setSceneSize] = useState(0);
   const [imageError, setImageError] = useState(false);
-  const [iconsLaunched, setIconsLaunched] = useState(false);
+  const frameRef = useRef(0);
+  const startTimeRef = useRef<number | null>(null);
 
-  // Planet data for orbiting icons
   const PLANET_DATA: PlanetData[] = [
     {
       id: "ic0",
@@ -85,7 +86,7 @@ const Home = () => {
       id: "ic7",
       rPct: 37,
       speed: 0.22,
-      startAngle: 320,
+      startAngle: 340,
       name: "DevOps",
       color: "rgba(0,180,255,0.6)",
     },
@@ -139,337 +140,59 @@ const Home = () => {
     },
   ];
 
-  // Technology icons
   const TechIcon: React.FC<TechIconProps> = ({ name, color, delay }) => {
     const getIcon = () => {
-      switch (name) {
-        case ".NET":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/Microsoft_.NET_logo.png"
-                alt=".NET"
-                style={{
-                  width: "75%",
-                  height: "75%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(120, 80, 255, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "React":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/React.png"
-                alt="React"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(0, 230, 255, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "Angular":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/Angular.png"
-                alt="Angular"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(255, 60, 60, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "Redis":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/pngegg.png"
-                alt="Redis"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(220, 50, 50, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "SQL Server":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/sql-database.png"
-                alt="SQL Server"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(220, 50, 50, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "Power BI":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/power_bi.png"
-                alt="Power BI"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(255, 200, 0, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "Kubernetes":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/kubernetes-services.png"
-                alt="Kubernetes"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(50, 108, 229, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "DevOps":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/azure-devops.png"
-                alt="DevOps"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(0, 180, 255, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "MS Fabric":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/fabric.png"
-                alt="MS Fabric"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(0, 210, 240, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "C#":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/Logo_C_sharp.png"
-                alt="C#"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(190, 80, 255, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "EF Core":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/public/Entity.svg"
-                alt="EF Core"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(100, 80, 200, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "Docker":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/Docker.png"
-                alt="Docker"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(0, 200, 150, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "SSMS":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/ssms_21.png"
-                alt="SSMS"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(255, 140, 0, 0.6))",
-                }}
-              />
-            </div>
-          );
-        case "Azure":
-          return (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <img
-                src="/Azure.png"
-                alt="Azure"
-                style={{
-                  width: "70%",
-                  height: "70%",
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 4px rgba(0, 120, 212, 0.6))",
-                }}
-              />
-            </div>
-          );
-        default:
-          return null;
-      }
+      const imgMap: Record<string, { src: string; alt: string }> = {
+        ".NET": { src: "/Microsoft_.NET_logo.png", alt: ".NET" },
+        React: { src: "/React.png", alt: "React" },
+        Angular: { src: "/Angular.png", alt: "Angular" },
+        Redis: { src: "/pngegg.png", alt: "Redis" },
+        "SQL Server": { src: "/sql-database.png", alt: "SQL Server" },
+        "Power BI": { src: "/power_bi.png", alt: "Power BI" },
+        Kubernetes: { src: "/kubernetes-services.png", alt: "Kubernetes" },
+        DevOps: { src: "/azure-devops.png", alt: "DevOps" },
+        "MS Fabric": { src: "/fabric.png", alt: "MS Fabric" },
+        "C#": { src: "/Logo_C_sharp.png", alt: "C#" },
+        "EF Core": { src: "/Entity.svg", alt: "EF Core" },
+        Docker: { src: "/Docker.png", alt: "Docker" },
+        SSMS: { src: "/ssms_21.png", alt: "SSMS" },
+        Azure: { src: "/Azure.png", alt: "Azure" },
+      };
+      const info = imgMap[name];
+      if (!info) return null;
+      return (
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
+          <img
+            src={info.src}
+            alt={info.alt}
+            style={{
+              width: "70%",
+              height: "70%",
+              objectFit: "contain",
+              filter: `drop-shadow(0 0 4px ${color})`,
+            }}
+          />
+        </div>
+      );
     };
 
     return (
-      <div
-        className="icon-pill"
-        style={{
-          animation: `icon-pulse ${3.5 + Math.random() * 2}s ease-in-out infinite ${delay}s`,
-        }}>
+      <div className="icon-pill-inner">
         <div
           className="ibox"
           style={
             {
-              "--gc": color as any,
+              "--gc": color,
               "--gsize": "14px",
-              "--pd": `${2.5 + Math.random() * 2}s`,
-              "--poff": `${delay}s`,
+              "--pd": `${3.5 + delay * 0.4}s`,
+              "--poff": `${delay * 0.15}s`,
             } as React.CSSProperties
           }>
           {getIcon()}
@@ -479,9 +202,9 @@ const Home = () => {
     );
   };
 
-  // Initialize scene and animations
+  // Scene size
   useEffect(() => {
-    const updateSceneSize = () => {
+    const update = () => {
       if (sceneRef.current) {
         const size = Math.min(
           sceneRef.current.offsetWidth,
@@ -490,335 +213,370 @@ const Home = () => {
         setSceneSize(size);
       }
     };
-
-    updateSceneSize();
-    window.addEventListener("resize", updateSceneSize);
-
-    return () => window.removeEventListener("resize", updateSceneSize);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
-  // Orbit animation
+  // Orbit animation — uses timestamp-based timing for smoothness, no jank
   useEffect(() => {
-    if (!sceneRef.current || sceneSize === 0) return;
+    if (!sceneSize) return;
 
     const elements = PLANET_DATA.map((p) => document.getElementById(p.id));
-    let frame = 0;
+    startTimeRef.current = null;
+
+    // LAUNCH_DURATION in ms — smooth cubic ease-out over 1.2s
+    const LAUNCH_DURATION = 1200;
+
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
     const getIconHalf = () => {
-      const ibox = elements[0]?.querySelector(".ibox");
-      if (!ibox) return 27;
-      return (ibox as HTMLElement).offsetWidth / 2;
+      const ibox = elements[0]?.querySelector(".ibox") as HTMLElement | null;
+      return ibox ? ibox.offsetWidth / 2 : 27;
     };
 
-    const orbitLoop = () => {
-      frame++;
+    const loop = (timestamp: number) => {
+      if (!startTimeRef.current) startTimeRef.current = timestamp;
+      const elapsed = timestamp - startTimeRef.current;
       const half = getIconHalf();
       const labelH = 20;
 
       PLANET_DATA.forEach((p, i) => {
-        let x, y;
+        const r = (p.rPct / 100) * sceneSize;
+        let x: number, y: number;
 
-        // Calculate launch progress (0 to 1 over 3 seconds for dramatic effect)
-        const launchProgress = Math.min(frame / 180, 1); // 3 seconds at 60fps
-
-        if (launchProgress < 1) {
-          // Big Bang burst animation - explosive ease out
-          const easeOut = 1 - Math.pow(1 - launchProgress, 4);
-          const targetR = (p.rPct / 100) * sceneSize;
-          const targetA = (p.startAngle * Math.PI) / 180; // Use initial angle, no rotation yet
-          const targetX = Math.cos(targetA) * targetR - half;
-          const targetY = Math.sin(targetA) * targetR - half - labelH / 2;
-
-          // Burst from center with explosive force
-          x = 0 + targetX * easeOut;
-          y = 0 + targetY * easeOut;
+        if (elapsed < LAUNCH_DURATION) {
+          const t = easeOutCubic(elapsed / LAUNCH_DURATION);
+          const targetA = (p.startAngle * Math.PI) / 180;
+          const targetX = Math.cos(targetA) * r - half;
+          const targetY = Math.sin(targetA) * r - half - labelH / 2;
+          x = targetX * t;
+          y = targetY * t;
         } else {
-          // Normal orbiting after Big Bang burst
-          const r = (p.rPct / 100) * sceneSize;
-          const a = ((p.startAngle + (frame - 180) * p.speed) * Math.PI) / 180;
+          const orbitTime = (elapsed - LAUNCH_DURATION) / 1000; // seconds
+          const a = ((p.startAngle + orbitTime * p.speed * 60) * Math.PI) / 180;
           x = Math.cos(a) * r - half;
           y = Math.sin(a) * r - half - labelH / 2;
         }
 
         if (elements[i]) {
-          elements[i].style.transform = `translate(${x}px, ${y}px)`;
+          (elements[i] as HTMLElement).style.transform =
+            `translate(${x}px, ${y}px)`;
         }
       });
 
-      animationRef.current = requestAnimationFrame(orbitLoop);
+      orbitAnimRef.current = requestAnimationFrame(loop);
     };
 
-    orbitLoop();
-
+    orbitAnimRef.current = requestAnimationFrame(loop);
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      if (orbitAnimRef.current) cancelAnimationFrame(orbitAnimRef.current);
     };
-  }, [sceneSize, iconsLaunched]);
+  }, [sceneSize]);
 
-  // Canvas background animation
+  // Galaxy canvas background — deep space with nebula, stars, shooting stars
   useEffect(() => {
-    if (!canvasRef.current) return;
-
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d")!;
+    let animId: number;
 
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      drawStaticNebula();
     };
 
-    resize();
-    window.addEventListener("resize", resize);
+    // Static nebula clouds drawn once onto an offscreen canvas
+    const nebulaCanvas = document.createElement("canvas");
+    const nCtx = nebulaCanvas.getContext("2d")!;
 
-    const CX = () => canvas.width / 2;
-    const CY = () => canvas.height / 2;
+    const drawStaticNebula = () => {
+      nebulaCanvas.width = canvas.width;
+      nebulaCanvas.height = canvas.height;
+      nCtx.clearRect(0, 0, nebulaCanvas.width, nebulaCanvas.height);
 
-    const PCOLS: [string, string][] = [
-      ["rgba(120,80,255,", "rgba(190,140,255,"],
-      ["rgba(0,215,255,", "rgba(100,255,255,"],
-      ["rgba(255,50,50,", "rgba(255,130,130,"],
-      ["rgba(0,120,255,", "rgba(80,200,255,"],
-      ["rgba(220,30,30,", "rgba(255,100,100,"],
-      ["rgba(255,200,0,", "rgba(255,245,100,"],
-      ["rgba(40,100,230,", "rgba(100,170,255,"],
-      ["rgba(0,165,255,", "rgba(80,230,255,"],
-      ["rgba(0,200,230,", "rgba(80,245,255,"],
-      ["rgba(180,70,255,", "rgba(220,150,255,"],
-    ];
+      // Deep space background
+      const bgGrad = nCtx.createRadialGradient(
+        canvas.width / 2,
+        canvas.height / 2,
+        0,
+        canvas.width / 2,
+        canvas.height / 2,
+        Math.max(canvas.width, canvas.height) * 0.8,
+      );
+      bgGrad.addColorStop(0, "rgba(3,8,25,1)");
+      bgGrad.addColorStop(0.4, "rgba(1,4,18,1)");
+      bgGrad.addColorStop(1, "rgba(0,0,8,1)");
+      nCtx.fillStyle = bgGrad;
+      nCtx.fillRect(0, 0, nebulaCanvas.width, nebulaCanvas.height);
 
-    class Particle {
+      // Nebula blobs
+      const nebulae = [
+        { x: 0.15, y: 0.2, r: 0.35, c: "rgba(30,10,80," },
+        { x: 0.8, y: 0.15, r: 0.28, c: "rgba(0,20,70," },
+        { x: 0.6, y: 0.75, r: 0.32, c: "rgba(0,35,90," },
+        { x: 0.1, y: 0.7, r: 0.25, c: "rgba(20,5,60," },
+        { x: 0.5, y: 0.45, r: 0.4, c: "rgba(0,15,50," },
+        { x: 0.9, y: 0.55, r: 0.22, c: "rgba(15,0,55," },
+      ];
+
+      nebulae.forEach(({ x, y, r, c }) => {
+        const cx = x * canvas.width;
+        const cy = y * canvas.height;
+        const rad = r * Math.min(canvas.width, canvas.height);
+        const g = nCtx.createRadialGradient(cx, cy, 0, cx, cy, rad);
+        g.addColorStop(0, c + "0.18)");
+        g.addColorStop(0.5, c + "0.07)");
+        g.addColorStop(1, c + "0)");
+        nCtx.beginPath();
+        nCtx.ellipse(
+          cx,
+          cy,
+          rad,
+          rad * 0.65,
+          Math.random() * Math.PI,
+          0,
+          Math.PI * 2,
+        );
+        nCtx.fillStyle = g;
+        nCtx.fill();
+      });
+
+      // Milky way band
+      const mwGrad = nCtx.createLinearGradient(
+        0,
+        canvas.height * 0.3,
+        canvas.width,
+        canvas.height * 0.7,
+      );
+      mwGrad.addColorStop(0, "rgba(0,0,0,0)");
+      mwGrad.addColorStop(0.3, "rgba(20,30,80,0.06)");
+      mwGrad.addColorStop(0.5, "rgba(30,50,120,0.09)");
+      mwGrad.addColorStop(0.7, "rgba(20,30,80,0.06)");
+      mwGrad.addColorStop(1, "rgba(0,0,0,0)");
+      nCtx.fillStyle = mwGrad;
+      nCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Static stars (many sizes, realistic distribution)
+      const starCount = Math.floor((canvas.width * canvas.height) / 1800);
+      for (let i = 0; i < starCount; i++) {
+        const sx = Math.random() * canvas.width;
+        const sy = Math.random() * canvas.height;
+        const sz = Math.random();
+        let radius: number, opacity: number, color: string;
+
+        if (sz < 0.7) {
+          // dim tiny stars
+          radius = Math.random() * 0.5 + 0.2;
+          opacity = Math.random() * 0.4 + 0.1;
+          color = `rgba(200,210,255,${opacity})`;
+        } else if (sz < 0.92) {
+          // medium stars
+          radius = Math.random() * 0.8 + 0.5;
+          opacity = Math.random() * 0.5 + 0.3;
+          const hue = Math.random();
+          color =
+            hue < 0.3
+              ? `rgba(180,200,255,${opacity})`
+              : hue < 0.6
+                ? `rgba(255,250,240,${opacity})`
+                : `rgba(255,220,180,${opacity})`;
+        } else {
+          // bright stars with glow
+          radius = Math.random() * 1.2 + 0.8;
+          opacity = Math.random() * 0.4 + 0.6;
+          const g2 = nCtx.createRadialGradient(sx, sy, 0, sx, sy, radius * 5);
+          g2.addColorStop(0, `rgba(255,255,255,${opacity})`);
+          g2.addColorStop(0.3, `rgba(200,220,255,${opacity * 0.4})`);
+          g2.addColorStop(1, "rgba(0,0,0,0)");
+          nCtx.beginPath();
+          nCtx.arc(sx, sy, radius * 5, 0, Math.PI * 2);
+          nCtx.fillStyle = g2;
+          nCtx.fill();
+          color = `rgba(255,255,255,${opacity})`;
+        }
+
+        nCtx.beginPath();
+        nCtx.arc(sx, sy, radius, 0, Math.PI * 2);
+        nCtx.fillStyle = color;
+        nCtx.fill();
+      }
+    };
+
+    // Twinkling stars (animated layer)
+    interface TwinkleStar {
+      x: number;
+      y: number;
+      r: number;
+      phase: number;
+      speed: number;
+      baseAlpha: number;
+    }
+    const twinkleStars: TwinkleStar[] = [];
+    const initTwinklers = () => {
+      twinkleStars.length = 0;
+      const count = Math.floor((canvas.width * canvas.height) / 6000);
+      for (let i = 0; i < count; i++) {
+        twinkleStars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.5 + 0.5,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.3 + Math.random() * 1.2,
+          baseAlpha: 0.2 + Math.random() * 0.5,
+        });
+      }
+    };
+
+    // Shooting stars
+    interface ShootingStar {
       x: number;
       y: number;
       vx: number;
       vy: number;
-      sz: number;
-      maxL: number;
-      life: number;
-      col: string;
-      tail: boolean;
-      tailL: number;
-      dec: number;
-      grav: number;
-      twk: boolean;
-      twkP: number;
-
-      constructor(burst: boolean) {
-        const a = Math.random() * Math.PI * 2;
-        const spd = burst ? 1.2 + Math.random() * 5.8 : 0.1 + Math.random() * 1;
-        this.x = CX() + (Math.random() - 0.5) * 30;
-        this.y = CY() + (Math.random() - 0.5) * 30;
-        this.vx = Math.cos(a) * spd;
-        this.vy = Math.sin(a) * spd;
-        this.sz = burst ? Math.random() * 3.5 + 0.5 : Math.random() * 1.8 + 0.3;
-        this.maxL = burst
-          ? 80 + Math.random() * 110
-          : 110 + Math.random() * 150;
-        this.life = this.maxL;
-        const sec = Math.floor((a / (Math.PI * 2)) * 10);
-        const cp = PCOLS[sec % 10];
-        this.col = Math.random() > 0.5 ? cp[0] : cp[1];
-        this.tail = burst && Math.random() > 0.35;
-        this.tailL = 5 + Math.random() * 12;
-        this.dec = 0.977 + Math.random() * 0.018;
-        this.grav = burst ? 0 : 0.005;
-        this.twk = !burst && Math.random() > 0.5;
-        this.twkP = Math.random() * Math.PI * 2;
-      }
-
-      step() {
-        this.life--;
-        this.vx *= this.dec;
-        this.vy *= this.dec;
-        this.vy += this.grav;
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.twk) this.twkP += 0.07;
-      }
-
-      draw() {
-        let al = Math.max(0, this.life / this.maxL);
-        if (this.twk) al *= 0.5 + 0.5 * Math.sin(this.twkP);
-
-        if (this.tail) {
-          ctx!.beginPath();
-          ctx!.moveTo(this.x, this.y);
-          ctx!.lineTo(
-            this.x - this.vx * this.tailL,
-            this.y - this.vy * this.tailL,
-          );
-          ctx!.strokeStyle = this.col + al * 0.5 + ")";
-          ctx!.lineWidth = this.sz * 0.55;
-          ctx!.stroke();
-        }
-
-        if (this.sz > 1.3) {
-          const g = ctx!.createRadialGradient(
-            this.x,
-            this.y,
-            0,
-            this.x,
-            this.y,
-            this.sz * 4,
-          );
-          g.addColorStop(0, this.col + al * 0.55 + ")");
-          g.addColorStop(1, this.col + "0)");
-          ctx!.beginPath();
-          ctx!.arc(this.x, this.y, this.sz * 4, 0, Math.PI * 2);
-          ctx!.fillStyle = g;
-          ctx!.fill();
-        }
-
-        ctx!.beginPath();
-        ctx!.arc(this.x, this.y, this.sz * (0.4 + al * 0.6), 0, Math.PI * 2);
-        ctx!.fillStyle = this.col + al + ")";
-        ctx!.fill();
-      }
-
-      dead() {
-        return this.life <= 0;
-      }
+      len: number;
+      alpha: number;
+      active: boolean;
+      timer: number;
     }
+    const shootingStars: ShootingStar[] = Array(6)
+      .fill(null)
+      .map(() => ({
+        x: 0,
+        y: 0,
+        vx: 0,
+        vy: 0,
+        len: 0,
+        alpha: 0,
+        active: false,
+        timer: Math.random() * 300,
+      }));
 
-    class Wave {
-      r: number;
-      maxR: number;
-      life: number;
-      maxL: number;
-      cp: [string, string];
-
-      constructor(ci: number) {
-        this.r = 5;
-        this.maxR = Math.max(canvas.width, canvas.height) * 0.78;
-        this.life = 65;
-        this.maxL = 65;
-        this.cp = PCOLS[ci % 10];
+    const spawnShootingStar = (s: ShootingStar) => {
+      const side = Math.floor(Math.random() * 2);
+      if (side === 0) {
+        s.x = Math.random() * canvas.width;
+        s.y = -10;
+      } else {
+        s.x = -10;
+        s.y = Math.random() * canvas.height * 0.5;
       }
-
-      step() {
-        this.r += this.maxR / this.maxL;
-        this.life--;
-      }
-
-      draw() {
-        const al = (this.life / this.maxL) * 0.5;
-        const w = 2.5 + (1 - this.life / this.maxL) * 4;
-        ctx!.beginPath();
-        ctx!.arc(CX(), CY(), this.r, 0, Math.PI * 2);
-        ctx!.strokeStyle = this.cp[0] + al + ")";
-        ctx!.lineWidth = w;
-        ctx!.stroke();
-        ctx!.beginPath();
-        ctx!.arc(CX(), CY(), this.r * 0.82, 0, Math.PI * 2);
-        ctx!.strokeStyle = this.cp[1] + al * 0.4 + ")";
-        ctx!.lineWidth = w * 0.5;
-        ctx!.stroke();
-      }
-
-      dead() {
-        return this.life <= 0;
-      }
-    }
-
-    let pts: Particle[] = [],
-      waves: Wave[] = [],
-      fr2 = 0,
-      bc = 0;
-
-    const burst = (ci: number) => {
-      for (let i = 0; i < 350; i++) pts.push(new Particle(true));
-      for (let w = 0; w < 3; w++)
-        setTimeout(() => waves.push(new Wave(ci + w)), w * 160);
+      const angle = ((Math.random() * 30 + 20) * Math.PI) / 180;
+      const speed = 8 + Math.random() * 14;
+      s.vx = Math.cos(angle) * speed;
+      s.vy = Math.sin(angle) * speed;
+      s.len = 60 + Math.random() * 120;
+      s.alpha = 1;
+      s.active = true;
+      s.timer = 200 + Math.random() * 400;
     };
 
-    // Big Bang effect only on initial page load
-    burst(0);
+    resize();
+    initTwinklers();
+    window.addEventListener("resize", () => {
+      resize();
+      initTwinklers();
+    });
 
-    // Launch icons immediately with Big Bang
-    setIconsLaunched(true);
+    let frame = 0;
+    const render = (timestamp: number) => {
+      frame++;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const render = () => {
-      fr2++;
-      ctx!.fillStyle = "rgba(2,8,16,0.15)";
-      ctx!.fillRect(0, 0, canvas.width, canvas.height);
+      // Draw static nebula layer
+      ctx.drawImage(nebulaCanvas, 0, 0);
 
-      if (fr2 % 2 === 0 && pts.length < 900) {
-        const p = new Particle(false);
-        p.col =
-          PCOLS[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 2)];
-        pts.push(p);
-      }
-
-      waves = waves.filter((w) => {
-        w.step();
-        w.draw();
-        return !w.dead();
+      // Twinkling stars
+      const t = timestamp / 1000;
+      twinkleStars.forEach((s) => {
+        const alpha =
+          s.baseAlpha * (0.4 + 0.6 * Math.abs(Math.sin(t * s.speed + s.phase)));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        ctx.fill();
       });
 
-      pts = pts.filter((p) => {
-        p.step();
-        p.draw();
-        return !p.dead();
+      // Shooting stars
+      shootingStars.forEach((s) => {
+        if (!s.active) {
+          s.timer--;
+          if (s.timer <= 0) spawnShootingStar(s);
+          return;
+        }
+        s.x += s.vx;
+        s.y += s.vy;
+        s.alpha -= 0.018;
+
+        if (
+          s.alpha <= 0 ||
+          s.x > canvas.width + 50 ||
+          s.y > canvas.height + 50
+        ) {
+          s.active = false;
+          s.timer = 180 + Math.random() * 300;
+          return;
+        }
+
+        const tailX =
+          s.x - s.vx * (s.len / Math.sqrt(s.vx * s.vx + s.vy * s.vy));
+        const tailY =
+          s.y - s.vy * (s.len / Math.sqrt(s.vx * s.vx + s.vy * s.vy));
+        const grad = ctx.createLinearGradient(tailX, tailY, s.x, s.y);
+        grad.addColorStop(0, `rgba(255,255,255,0)`);
+        grad.addColorStop(0.7, `rgba(180,220,255,${s.alpha * 0.4})`);
+        grad.addColorStop(1, `rgba(255,255,255,${s.alpha})`);
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(s.x, s.y);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Tip glow
+        const glow = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, 4);
+        glow.addColorStop(0, `rgba(255,255,255,${s.alpha})`);
+        glow.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
       });
 
-      const r = 100 + Math.sin(fr2 * 0.04) * 12;
-      const g = ctx!.createRadialGradient(CX(), CY(), 0, CX(), CY(), r);
-      g.addColorStop(0, `rgba(0,155,255,${0.1 + Math.sin(fr2 * 0.05) * 0.05})`);
-      g.addColorStop(0.5, `rgba(0,85,220,0.06)`);
-      g.addColorStop(1, "rgba(0,0,0,0)");
-      ctx!.beginPath();
-      ctx!.arc(CX(), CY(), r, 0, Math.PI * 2);
-      ctx!.fillStyle = g;
-      ctx!.fill();
+      // Center glow (behind the solar system scene)
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      const pr = 120 + Math.sin(t * 0.5) * 15;
+      const pGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, pr);
+      pGrad.addColorStop(
+        0,
+        `rgba(0,140,255,${0.08 + Math.sin(t * 0.7) * 0.03})`,
+      );
+      pGrad.addColorStop(0.5, `rgba(0,80,200,0.04)`);
+      pGrad.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.beginPath();
+      ctx.arc(cx, cy, pr, 0, Math.PI * 2);
+      ctx.fillStyle = pGrad;
+      ctx.fill();
 
-      requestAnimationFrame(render);
+      animId = requestAnimationFrame(render);
     };
 
-    render();
-
+    animId = requestAnimationFrame(render);
     return () => {
+      cancelAnimationFrame(animId);
       window.removeEventListener("resize", resize);
     };
   }, []);
 
   return (
-    <section className="min-h-screen bg-gray-900 relative overflow-hidden">
-      {/* Canvas Background */}
-      <canvas
-        ref={canvasRef}
-        className="fixed inset-0 z-0 pointer-events-none"
-      />
-
-      {/* Stars */}
-      <div className="fixed inset-0 pointer-events-none z-10">
-        {[...Array(130)].map((_, i) => (
-          <div
-            key={i}
-            className="star"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 2.4 + 0.3}px`,
-              height: `${Math.random() * 2.4 + 0.3}px`,
-              animationDuration: `${1.5 + Math.random() * 5}s`,
-              animationDelay: `${Math.random() * 7}s`,
-            }}
-          />
-        ))}
-      </div>
+    <section className="home-section">
+      {/* Galaxy Canvas */}
+      <canvas ref={canvasRef} className="galaxy-canvas" />
 
       {/* Main Scene */}
-      <div
-        ref={sceneRef}
-        className="relative z-20 flex items-center justify-center min-h-screen"
-        style={{
-          width: "100vmin",
-          height: "100vmin",
-          maxWidth: "760px",
-          maxHeight: "760px",
-          margin: "0 auto",
-        }}>
+      <div ref={sceneRef} className="solar-scene">
         {/* Orbit Rings */}
         {[29, 38, 47, 56, 65, 74, 83, 93].map((radius, index) => (
           <div
@@ -826,7 +584,7 @@ const Home = () => {
             className="orbit-ring"
             style={
               {
-                "--rp": radius as any,
+                "--rp": radius,
                 animationDelay: `${index * 0.4}s`,
               } as React.CSSProperties
             }
@@ -841,33 +599,12 @@ const Home = () => {
           <div className="photo-circle">
             {!imageError ? (
               <img
-                src="/public/cropped_circle_image.png"
+                src="/cropped_circle_image.png"
                 alt="Kumaresh - Microsoft Stack Developer"
                 onError={() => setImageError(true)}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  borderRadius: "inherit",
-                }}
               />
             ) : (
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: "linear-gradient(145deg, #0a1929, #1e3a5f)",
-                  borderRadius: "inherit",
-                  fontSize: "clamp(48px, 8vmin, 72px)",
-                  fontWeight: "bold",
-                  color: "white",
-                }}>
-                K
-              </div>
+              <div className="photo-fallback">K</div>
             )}
           </div>
           <div className="nametag">
@@ -878,17 +615,7 @@ const Home = () => {
 
         {/* Orbiting Icons */}
         {PLANET_DATA.map((planet, index) => (
-          <div
-            key={planet.id}
-            id={planet.id}
-            className="icon-pill"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              pointerEvents: "none",
-              willChange: "transform",
-            }}>
+          <div key={planet.id} id={planet.id} className="icon-wrapper">
             <TechIcon
               name={planet.name}
               color={planet.color}
@@ -899,6 +626,35 @@ const Home = () => {
       </div>
 
       <style>{`
+        .home-section {
+          min-height: 100vh;
+          background: #000508;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .galaxy-canvas {
+          position: fixed;
+          inset: 0;
+          z-index: 0;
+          pointer-events: none;
+        }
+
+        /* Main solar scene */
+        .solar-scene {
+          position: relative;
+          z-index: 20;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+          width: 100vmin;
+          height: 100vmin;
+          max-width: 760px;
+          max-height: 760px;
+          margin: 0 auto;
+        }
+
         /* Orbit Rings */
         .orbit-ring {
           position: absolute;
@@ -911,8 +667,8 @@ const Home = () => {
         }
 
         @keyframes ring-breathe {
-          0%, 100% { border-color: rgba(0, 150, 255, 0.08); }
-          50% { border-color: rgba(0, 200, 255, 0.2); }
+          0%, 100% { border-color: rgba(0, 150, 255, 0.07); }
+          50% { border-color: rgba(0, 200, 255, 0.18); }
         }
 
         /* Aura */
@@ -921,7 +677,7 @@ const Home = () => {
           width: 36%;
           height: 36%;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(0, 145, 255, 0.22) 0%, rgba(0, 65, 200, 0.07) 52%, transparent 72%);
+          background: radial-gradient(circle, rgba(0,145,255,0.2) 0%, rgba(0,65,200,0.06) 52%, transparent 72%);
           animation: aura-pulse 3s ease-in-out infinite;
           z-index: 2;
         }
@@ -946,31 +702,14 @@ const Home = () => {
           height: clamp(120px, 26vmin, 195px);
           border-radius: 50%;
           overflow: hidden;
-          border: clamp(3px, 0.6vmin, 5px) solid rgba(0, 195, 255, 0.9);
-          box-shadow: 
-            0 0 0 clamp(4px, 1vmin, 8px) rgba(0, 120, 255, 0.15),
-            0 0 clamp(25px, 5vmin, 50px) rgba(0, 170, 255, 0.6),
-            0 0 clamp(55px, 10vmin, 110px) rgba(0, 95, 230, 0.3),
-            inset 0 0 clamp(14px, 3vmin, 28px) rgba(0, 0, 0, 0.2);
+          border: clamp(3px, 0.6vmin, 5px) solid rgba(0,195,255,0.9);
+          box-shadow:
+            0 0 0 clamp(4px, 1vmin, 8px) rgba(0,120,255,0.15),
+            0 0 clamp(25px, 5vmin, 50px) rgba(0,170,255,0.6),
+            0 0 clamp(55px, 10vmin, 110px) rgba(0,95,230,0.3),
+            inset 0 0 clamp(14px, 3vmin, 28px) rgba(0,0,0,0.2);
           animation: photo-glow 3.5s ease-in-out infinite;
-          position: relative;
           background: linear-gradient(145deg, #0a1929, #1e3a5f);
-        }
-
-        @keyframes photo-glow {
-          0%, 100% { 
-            border-color: rgba(0, 195, 255, 0.9); 
-            transform: scale(1);
-          }
-          50% { 
-            border-color: rgba(0, 240, 255, 1); 
-            transform: scale(1.02);
-            box-shadow: 
-              0 0 0 clamp(6px, 1.5vmin, 12px) rgba(0, 140, 255, 0.25),
-              0 0 clamp(40px, 7vmin, 78px) rgba(0, 225, 255, 0.8),
-              0 0 clamp(80px, 14vmin, 155px) rgba(0, 115, 248, 0.5),
-              inset 0 0 clamp(14px, 3vmin, 28px) rgba(0, 0, 0, 0.15); 
-          }
         }
 
         .photo-circle img {
@@ -978,6 +717,34 @@ const Home = () => {
           height: 100%;
           object-fit: cover;
           object-position: center 8%;
+        }
+
+        .photo-fallback {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(145deg, #0a1929, #1e3a5f);
+          font-size: clamp(48px, 8vmin, 72px);
+          font-weight: bold;
+          color: white;
+        }
+
+        @keyframes photo-glow {
+          0%, 100% {
+            border-color: rgba(0,195,255,0.9);
+            transform: scale(1);
+          }
+          50% {
+            border-color: rgba(0,240,255,1);
+            transform: scale(1.02);
+            box-shadow:
+              0 0 0 clamp(6px, 1.5vmin, 12px) rgba(0,140,255,0.25),
+              0 0 clamp(40px, 7vmin, 78px) rgba(0,225,255,0.8),
+              0 0 clamp(80px, 14vmin, 155px) rgba(0,115,248,0.5),
+              inset 0 0 clamp(14px, 3vmin, 28px) rgba(0,0,0,0.15);
+          }
         }
 
         .nametag {
@@ -991,58 +758,68 @@ const Home = () => {
           font-weight: 900;
           color: #fff;
           letter-spacing: clamp(1px, 0.6vmin, 4px);
-          text-shadow: 0 0 20px rgba(0, 185, 255, 0.95), 0 0 50px rgba(0, 115, 255, 0.5);
+          text-shadow: 0 0 20px rgba(0,185,255,0.95), 0 0 50px rgba(0,115,255,0.5);
           white-space: nowrap;
         }
 
         .nametag p {
           font-size: clamp(7px, 1.5vmin, 11px);
-          color: rgba(100, 205, 255, 0.6);
+          color: rgba(100,205,255,0.6);
           letter-spacing: clamp(0.5px, 0.4vmin, 2.5px);
           margin-top: clamp(3px, 0.6vmin, 6px);
           font-weight: 300;
         }
 
-        /* Icon Pills */
-        .icon-pill {
+        /* Icon wrapper — GPU compositing layer */
+        .icon-wrapper {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          pointer-events: none;
+          will-change: transform;
+          transform: translate(0, 0); /* initial so browser pre-composites */
+          contain: layout style;
+        }
+
+        .icon-pill-inner {
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: clamp(3px, 0.8vmin, 6px);
           pointer-events: none;
-          will-change: transform;
         }
 
         .ibox {
           width: clamp(36px, 7.5vmin, 54px);
           height: clamp(36px, 7.5vmin, 54px);
           border-radius: clamp(8px, 1.8vmin, 14px);
-          background: rgba(4, 14, 42, 0.93);
-          border: 1.5px solid rgba(0, 165, 255, 0.38);
+          background: rgba(4,14,42,0.93);
+          border: 1.5px solid rgba(0,165,255,0.38);
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 
-            0 4px 20px rgba(0, 0, 0, 0.65),
-            inset 0 1px 0 rgba(255, 255, 255, 0.07),
-            0 0 var(--gsize, 14px) var(--gc, rgba(0, 130, 255, 0.25));
+          box-shadow:
+            0 4px 20px rgba(0,0,0,0.65),
+            inset 0 1px 0 rgba(255,255,255,0.07),
+            0 0 var(--gsize, 14px) var(--gc, rgba(0,130,255,0.25));
           position: relative;
           overflow: hidden;
           animation: icon-pulse var(--pd, 3s) ease-in-out infinite var(--poff, 0s);
+          will-change: box-shadow;
         }
 
         @keyframes icon-pulse {
           0%, 100% {
-            box-shadow: 
-              0 4px 20px rgba(0, 0, 0, 0.65),
-              inset 0 1px 0 rgba(255, 255, 255, 0.07),
-              0 0 var(--gsize, 14px) var(--gc, rgba(0, 130, 255, 0.25));
+            box-shadow:
+              0 4px 20px rgba(0,0,0,0.65),
+              inset 0 1px 0 rgba(255,255,255,0.07),
+              0 0 var(--gsize, 14px) var(--gc, rgba(0,130,255,0.25));
           }
           50% {
-            box-shadow: 
-              0 4px 20px rgba(0, 0, 0, 0.65),
-              inset 0 1px 0 rgba(255, 255, 255, 0.07),
-              0 0 calc(var(--gsize, 14px) * 2.2) var(--gc, rgba(0, 130, 255, 0.5));
+            box-shadow:
+              0 4px 20px rgba(0,0,0,0.65),
+              inset 0 1px 0 rgba(255,255,255,0.07),
+              0 0 calc(var(--gsize, 14px) * 2.2) var(--gc, rgba(0,130,255,0.5));
           }
         }
 
@@ -1051,38 +828,43 @@ const Home = () => {
           position: absolute;
           inset: 0;
           border-radius: inherit;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, transparent 55%);
+          background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 55%);
         }
 
-        .ibox svg {
-          width: 65%;
-          height: 65%;
+        .ibox img {
           position: relative;
           z-index: 1;
         }
 
         .ilabel {
           font-size: clamp(6px, 1.1vmin, 9px);
-          color: rgba(170, 225, 255, 0.88);
+          color: rgba(170,225,255,0.88);
           font-family: 'Rajdhani', sans-serif;
           font-weight: 700;
           letter-spacing: 0.6px;
           text-transform: uppercase;
           white-space: nowrap;
-          text-shadow: 0 0 8px rgba(0, 175, 255, 0.75);
+          text-shadow: 0 0 8px rgba(0,175,255,0.75);
         }
 
-        /* Stars */
-        .star {
-          position: absolute;
-          border-radius: 50%;
-          background: white;
-          animation: twinkle linear infinite;
+        /* Mobile performance — reduce effects on low-power devices */
+        @media (max-width: 480px) {
+          .orbit-ring {
+            animation: none;
+            border-color: rgba(0,150,255,0.08);
+          }
+          .aura {
+            animation: none;
+          }
         }
 
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.04; }
-          50% { opacity: 0.75; }
+        @media (prefers-reduced-motion: reduce) {
+          .orbit-ring,
+          .aura,
+          .photo-circle,
+          .ibox {
+            animation: none !important;
+          }
         }
       `}</style>
     </section>

@@ -2,8 +2,6 @@
 
 ## Demo
 
-![Portfolio Demo](protfolio.client/public/DemoPortfolio.gif)
-
 A modern, interactive portfolio showcasing Microsoft Stack technologies with stunning animations.
 
 ## Features
