@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom"; // Essential for no-reload navigation
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Home,
@@ -7,13 +7,10 @@ import {
   Code,
   Briefcase,
   Mail,
-  Sun,
-  Moon,
   Menu,
   X,
   Award,
 } from "lucide-react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 const navigationItems = [
   { id: "home", name: "Home", icon: Home, href: "/" },
@@ -36,28 +33,26 @@ const navigationItems = [
 ];
 
 const Navbar = () => {
-  const [theme, toggleTheme] = useDarkMode();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation(); // This detects which page you are on
+  const location = useLocation();
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50">
+    <div className="fixed top-0 left-0 right-0 z-50 flex flex-col">
       {/* 1. NEWS BANNER */}
       <div className="h-7 w-full bg-black/40 backdrop-blur-md border-b border-white/5 flex items-center overflow-hidden whitespace-nowrap">
         <motion.div
-          className="flex gap-12 items-center"
+          className="flex gap-12 items-center leading-none"
           animate={{ x: [0, -1000] }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}>
           {[...Array(6)].map((_, i) => (
             <div
               key={i}
               className="flex gap-12 items-center text-[10px] tracking-[0.2em] font-bold text-[#47ccff]">
-              <span>WORK MODE: HYBRID</span> <span>•</span>
+              <span>WORK MODE: REMOTE</span> <span>•</span>
               <span>EXP: 3+ YEARS</span> <span>•</span>
               <span>LOCATION: CHENNAI</span> <span>•</span>
               <span>WORK STATUS: OPEN TO WORK</span> <span>•</span>
@@ -66,11 +61,11 @@ const Navbar = () => {
         </motion.div>
       </div>
 
-      {/* NAV BAR */}
-      <nav className="bg-surface/80 backdrop-blur-md border-b border-outline-variant transition-colors duration-300">
+      {/* 2. NAV BAR */}
+      <nav className="relative -mt-[1px] bg-surface/80 backdrop-blur-md border-b border-outline-variant transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-12">
-            {/* LOGO - Fixed with Link */}
+            {/* LOGO */}
             <Link to="/">
               <div className="flex-shrink-0 flex items-center gap-2.5">
                 <img
@@ -84,7 +79,7 @@ const Navbar = () => {
               </div>
             </Link>
 
-            {/* Desktop Navigation - No Reload & Icons Included */}
+            {/* Desktop Navigation */}
             <div className="hidden md:block">
               <div className="flex items-center space-x-6">
                 {navigationItems.map((item) => {
@@ -108,7 +103,6 @@ const Navbar = () => {
                       />
                       <span>{item.name}</span>
 
-                      {/* Dynamic Underline Animation based on URL path */}
                       {isActive && (
                         <motion.div
                           layoutId="nav-underline"
@@ -126,17 +120,8 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Theme & Mobile Menu Actions */}
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={toggleTheme}
-                className="p-1.5 rounded-md hover:bg-white/10">
-                {theme === "dark" ? (
-                  <Sun size={16} className="text-yellow-500" />
-                ) : (
-                  <Moon size={16} className="text-blue-400" />
-                )}
-              </button>
+            {/* Mobile Menu Toggle - Theme Toggle Removed */}
+            <div className="flex items-center">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="md:hidden p-1.5 text-white">
@@ -146,7 +131,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu - Fixed with Link */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div

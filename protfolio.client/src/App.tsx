@@ -12,10 +12,11 @@ import { About } from "./pages/About";
 import { Projects } from "./pages/Projects";
 import { Experience } from "./pages/Experience";
 import { Accomplishments } from "./pages/Accomplishments";
-import { Contact } from "./pages/Contact";
+import Contact from "./pages/Contact";
 import { Skills } from "./pages/Skills";
-import { News } from "./pages/News";
 import { useEffect } from "react";
+import { VisitorTelemetry } from "./components/VisitorTelemetry";
+import { ExperienceDetail } from "./pages/ExperienceDetail";
 
 export default function App() {
   const location = useLocation();
@@ -29,10 +30,9 @@ export default function App() {
     // Added overflow-x-hidden to prevent the horizontal scrollbar during animations
     <div className="min-h-screen bg-nebula-base flex flex-col overflow-x-hidden">
       <header className="fixed top-0 left-0 w-full z-50">
-        <News />
-        <Navbar />
+        <Navbar /> {/* This now contains the news bar inside it */}
       </header>
-
+      <VisitorTelemetry />
       {/* Added w-full and overflow-x-hidden here as well for safety */}
       <main className="relative pt-[1px] flex-grow w-full overflow-x-hidden">
         <AnimatePresence mode="wait">
@@ -51,6 +51,7 @@ export default function App() {
               <Route path="/experience" element={<Experience />} />
               <Route path="/accomplishments" element={<Accomplishments />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/experience/:id" element={<ExperienceDetail />} />
             </Routes>
           </motion.div>
         </AnimatePresence>

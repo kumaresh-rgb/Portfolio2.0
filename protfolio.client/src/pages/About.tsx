@@ -1,26 +1,43 @@
-import { motion } from "motion/react";
-import { Cpu, Cloud, Layers } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  Cpu,
+  Cloud,
+  Layers,
+  Monitor,
+  Keyboard,
+  MousePointer2,
+  Smartphone,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export const About = () => {
   const navigate = useNavigate();
 
+  const techGear = [
+    {
+      icon: Monitor,
+      name: "Dual 4K Setup",
+      detail: "Color-accurate precision",
+    },
+    { icon: Keyboard, name: "Mechanical Deck", detail: "MX Brown Tactile" },
+    {
+      icon: MousePointer2,
+      name: "Precision Pointer",
+      detail: "High-DPI Productivity",
+    },
+    { icon: Smartphone, name: "Mobile Testing", detail: "iOS & Android Lab" },
+  ];
+
   return (
-    /* MAIN WRAPPER: 
-      - min-h-screen ensures it stretches to fit all content.
-      - w-full + bg-background ensures the dark color covers the entire monitor width.
-    */
     <div className="relative min-h-screen w-full bg-background overflow-x-hidden">
-      {/* BACKGROUND DECORATIONS (Absolute positioned) */}
+      {/* BACKGROUND DECORATIONS */}
       <div className="absolute inset-0 grid-lines opacity-10 pointer-events-none z-0" />
       <div className="absolute top-[-10%] right-[-5%] w-[60%] h-[60%] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[10%] left-[-10%] w-[50%] h-[50%] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
 
-      {/* CONTENT CONTAINER (Centered and Constrained) */}
       <div className="relative z-10 pt-32 pb-20 px-6 max-w-7xl mx-auto">
-        {/* HERO SECTION */}
+        {/* ─── HERO SECTION ─── */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-40">
-          {/* Avatar Column */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -37,7 +54,6 @@ export const About = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
             </div>
 
-            {/* Floating Chip */}
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
@@ -53,7 +69,6 @@ export const About = () => {
             </motion.div>
           </motion.div>
 
-          {/* Bio Column */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -79,9 +94,9 @@ export const About = () => {
                 software to understand the logic beneath the UI. What began as
                 late-night experimentation evolved into a deep-seated passion
                 for building{" "}
-                <span className="text-on-surface font-semibold">
+                <strong className="text-on-surface font-semibold">
                   robust, scalable digital ecosystems.
-                </span>
+                </strong>
               </p>
               <p>
                 Today, I navigate the Microsoft ecosystem, bridging the gap
@@ -96,8 +111,8 @@ export const About = () => {
           </motion.div>
         </section>
 
-        {/* TECH PHILOSOPHY SECTION */}
-        <section className="mb-32">
+        {/* ─── STACK PHILOSOPHY ─── */}
+        <section className="mb-40">
           <div className="flex items-center gap-4 mb-16">
             <h2 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface">
               Stack Philosophy
@@ -110,19 +125,19 @@ export const About = () => {
               {
                 icon: Cpu,
                 title: ".NET Ecosystem",
-                accent: "var(--color-secondary)",
+                accent: "#c392fc",
                 label: "The Powerhouse",
               },
               {
                 icon: Cloud,
                 title: "Azure Cloud",
-                accent: "var(--color-tertiary)",
+                accent: "#47ccff",
                 label: "The Infinite Canvas",
               },
               {
                 icon: Layers,
                 title: "React Architecture",
-                accent: "var(--color-primary)",
+                accent: "#73b1ff",
                 label: "The Human Interface",
               },
             ].map((item, i) => (
@@ -135,7 +150,8 @@ export const About = () => {
                 className="group p-10 bg-surface-container/40 rounded-2xl border border-outline-variant hover:border-on-surface/20 transition-all duration-500 relative overflow-hidden backdrop-blur-md">
                 <div
                   className="absolute -right-8 -top-8 w-32 h-32 rounded-full blur-3xl opacity-10 group-hover:opacity-20 transition-opacity"
-                  style={{ backgroundColor: item.accent }}></div>
+                  style={{ backgroundColor: item.accent }}
+                />
                 <div className="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 mb-8">
                   <item.icon size={28} style={{ color: item.accent }} />
                 </div>
@@ -152,12 +168,12 @@ export const About = () => {
           </div>
         </section>
 
-        {/* STATS SECTION */}
+        {/* ─── STATS SECTION ─── */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col md:flex-row items-center justify-between gap-12 py-16 px-12 rounded-3xl bg-surface-container border border-outline-variant relative overflow-hidden">
+          className="flex flex-col md:flex-row items-center justify-between gap-12 py-16 px-12 rounded-3xl bg-surface-container border border-outline-variant relative overflow-hidden mb-40">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 pointer-events-none"></div>
 
           <div className="flex flex-col md:flex-row gap-12 md:gap-24">
@@ -187,12 +203,85 @@ export const About = () => {
             View Experience
           </motion.button>
         </motion.section>
+
+        {/* ─── COMMAND CENTER SECTION (NOW BELOW STATS) ─── */}
+        <section className="pb-20">
+          <div className="flex items-center gap-4 mb-16">
+            <h2 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface">
+              The Command Center
+            </h2>
+            <div className="h-[1px] flex-1 bg-gradient-to-r from-outline-variant to-transparent"></div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7 grid grid-cols-2 gap-6">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="rounded-2xl overflow-hidden border border-outline-variant aspect-square lg:aspect-video relative group">
+                <img
+                  src="/worksetup.jpg"
+                  alt="Primary Workspace"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  style={{ imageRendering: "crisp-edges" as any }}
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="rounded-2xl overflow-hidden border border-outline-variant aspect-square relative group mt-12">
+                <img
+                  src="/Workstup2.jpg"
+                  alt="Alternate Workspace View"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  style={{ imageRendering: "crisp-edges" as any }}
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+              </motion.div>
+            </div>
+
+            <div className="lg:col-span-5 space-y-8">
+              <h3 className="text-xl font-bold text-on-surface flex items-center gap-3">
+                <span className="w-8 h-[2px] bg-primary"></span>
+                The Tools of the Trade
+              </h3>
+              <p className="text-on-surface-variant leading-relaxed font-body">
+                A clean space leads to clean code. My environment is optimized
+                for deep focus and cross-platform development, featuring
+                high-refresh hardware and ergonomic peripherals.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {techGear.map((item, i) => (
+                  <div
+                    key={i}
+                    className="p-4 bg-surface-container/50 border border-outline-variant rounded-xl flex gap-4 items-center">
+                    <item.icon className="text-primary" size={20} />
+                    <div>
+                      <div className="text-sm font-bold text-on-surface">
+                        {item.name}
+                      </div>
+                      <div className="text-[10px] text-on-surface-variant uppercase tracking-wider">
+                        {item.detail}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
 
       <style>{`
         .grid-lines {
-          background-image: linear-gradient(to right, var(--color-outline) 1px, transparent 1px),
-                            linear-gradient(to bottom, var(--color-outline) 1px, transparent 1px);
+          background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                            linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
           background-size: 50px 50px;
         }
       `}</style>

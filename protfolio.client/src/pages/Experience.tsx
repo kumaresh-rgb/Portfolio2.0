@@ -16,6 +16,7 @@ import {
   Cpu,
   CheckCircle2,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -256,6 +257,18 @@ function ExpCard({ entry }: { entry: ExperienceEntry }) {
           </li>
         ))}
       </ul>
+      <div className="mt-8 pt-6 border-t border-outline-variant/10">
+        <Link
+          to={`/experience/${entry.company.toLowerCase().replace(/\s+/g, "-")}`}
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg text-sm font-semibold transition-all group/btn">
+          View Mission Brief
+          <motion.span
+            animate={{ x: [0, 5, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}>
+            <Rocket size={14} />
+          </motion.span>
+        </Link>
+      </div>
     </div>
   );
 
@@ -266,20 +279,20 @@ function ExpCard({ entry }: { entry: ExperienceEntry }) {
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6 }}
       className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
-      {/* Dot on the central line */}
+      {/* Central Dot - Only visible on Desktop */}
       <div className="absolute left-4 md:left-1/2 top-3 w-3 h-3 -translate-x-1/2 rounded-full bg-primary border-2 border-background hidden md:block z-10" />
 
-      {entry.reversed ? (
-        <>
-          <div className="md:order-1">{cardBlock}</div>
-          <div className="md:order-2 pt-2">{metaBlock}</div>
-        </>
-      ) : (
-        <>
-          <div className="pt-2">{metaBlock}</div>
-          <div>{cardBlock}</div>
-        </>
-      )}
+      {/* 
+       We use 'md:order' to handle desktop swapping, 
+       but leave them in the natural order for mobile (Meta then Card).
+    */}
+      <div className={`${entry.reversed ? "md:order-2" : "md:order-1"} pt-2`}>
+        {metaBlock}
+      </div>
+
+      <div className={entry.reversed ? "md:order-1" : "md:order-2"}>
+        {cardBlock}
+      </div>
     </motion.div>
   );
 }
