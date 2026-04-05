@@ -41,7 +41,7 @@ function GlassCard({
 
 // ── Asset Path Helper (relative to src/pages) ────────────────────────────────
 
-const asset = (name: string) => `/src/assets/games files/${name}`;
+const asset = (name: string) => `/assets/games files/${name}`;
 
 // ── SECTION DATA ────────────────────────────────────────────────────────────
 
@@ -89,7 +89,7 @@ const gamingSetup = {
       image: asset("soundcoreq10offical.jpg"),
     },
     {
-      name: "OnePlus Nord Buds 2 Pro",
+      name: "OnePlus Nord Buds 3 Pro",
       type: "Earbuds",
       specs: "Active Noise Cancellation | Deep Bass | Fast Charge",
       image: asset("oneplusnordimg2.avif"),
