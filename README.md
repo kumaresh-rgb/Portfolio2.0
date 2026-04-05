@@ -1,73 +1,84 @@
-# React + TypeScript + Vite
+# 🌌 Microsoft Stack Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to my professional portfolio, a digital showcase architected for the Microsoft ecosystem. This project combines high-performance cloud-native patterns with fluid, space-themed front-end aesthetics.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ The Technical Arsenal
 
-## React Compiler
+The project is built around the **Microsoft Stack**, bridging the gap between enterprise logic and modern UI.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), [Tailwind CSS](https://tailwindcss.com/)
+- **Animation**: [Motion (Framer Motion 12)](https://motion.dev/)
+- **State & Routing**: [React Router 7](https://reactrouter.com/)
+- **Backend Ready**: Specialization in [.NET 8](https://dotnet.microsoft.com/) / [C#](https://learn.microsoft.com/en-us/dotnet/csharp/)
+- **Infrastructure**: [Azure Cloud](https://azure.microsoft.com/), [Docker](https://www.docker.com/), [Kubernetes (AKS)](https://azure.microsoft.com/en-us/products/kubernetes-service/)
+- **Database**: [SQL Server](https://www.microsoft.com/en-us/sql-server), [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Key Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🏢 Core Technical Orbit
+A dynamic "Solar System" visualization on the home page, representing my proficiency in the Microsoft ecosystem. Each "planet" is a core technology, with orbital paths and interactive tech icons.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 🧩 Enterprise Architecture Cards
+Features production-grade UI components like the **Enterprise Lifecycle** card, focusing on high-availability, 99.9% SLI, and modular microservices.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 📦 Mission Briefs
+Detailed mission-style project breakdowns for:
+- **Nebula Analytics Engine**: Real-time telemetry platform.
+- **Fluent UI Toolkit**: Open-source Microsoft-inspired React components.
+- **OmniGateway**: High-performance API Gateway with .NET YARP.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 🛰️ Live Visitor Telemetry
+A real-time synchronization component tracking professional engagement via the Counter API.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ⚡ Setup and Installation
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (Project uses React 19)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+### Installation
+
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/kumaresh-rgb/Portfolio2.0.git
+    ```
+
+2.  **Navigate to the project**:
+    ```bash
+    cd protfolio.client
+    ```
+
+3.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+
+4.  **Launch the development server**:
+    ```bash
+    npm run dev
+    ```
+
+---
+
+## ☁️ Deployment
+
+The project is optimized for modern CI/CD:
+- **Build Tool**: [Vite](https://vite.dev/)
+- **Post-CSS**: Tailwind integration for zero-runtime CSS weight.
+- **HMR**: Fast Refresh enabled for rapid development.
+
+---
+
+## 👨‍💻 Author: Kumaresh
+*Microsoft Stack Developer | .NET · Azure · React · SQL · DevOps*
+
+---
+
+> [!TIP]
+> This portfolio is designed to behave like a resilient Azure service—minimal downtime, high interaction, and scalable design patterns.
