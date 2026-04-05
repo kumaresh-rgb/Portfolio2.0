@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Rocket, Zap, Cloud, Cpu, ExternalLink, Github } from "lucide-react";
 
 export const Projects = () => {

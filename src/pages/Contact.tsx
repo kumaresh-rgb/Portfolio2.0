@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Github, Linkedin, Send, CheckCircle2, Loader2 } from "lucide-react";
 import { sendEmail } from "../Actions/sendEmail";
 import { useState } from "react";

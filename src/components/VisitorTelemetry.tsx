@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Users } from "lucide-react";
 
 const COUNTER_BASE =

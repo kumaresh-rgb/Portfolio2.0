@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ArrowLeft, Shield, Zap, Terminal } from "lucide-react";
 
 export const ExperienceDetail = () => {
