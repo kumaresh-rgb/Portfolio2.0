@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from "react";
-import { VisitorTelemetry } from "./VisitorTelemetry";
+import { useEffect, useRef, useState } from "react";
 
 interface PlanetData {
   id: string;
@@ -19,11 +18,9 @@ interface TechIconProps {
 const Home = () => {
   const sceneRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number | null>(null);
   const orbitAnimRef = useRef<number | null>(null);
   const [sceneSize, setSceneSize] = useState(0);
   const [imageError, setImageError] = useState(false);
-  const frameRef = useRef(0);
   const startTimeRef = useRef<number | null>(null);
 
   const PLANET_DATA: PlanetData[] = [

@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './TopSection.css';
-
+import React, { useState, useEffect, useRef } from "react";
 interface PlanetData {
   id: string;
   rPct: number;
@@ -481,15 +479,15 @@ const TopSection = () => {
     };
 
     updateSceneSize();
-    window.addEventListener('resize', updateSceneSize);
-    return () => window.removeEventListener('resize', updateSceneSize);
+    window.addEventListener("resize", updateSceneSize);
+    return () => window.removeEventListener("resize", updateSceneSize);
   }, []);
 
   // Orbit animation
   useEffect(() => {
     if (!sceneRef.current || sceneSize === 0) return;
 
-    const elements = sceneRef.current.querySelectorAll('.icon-pill');
+    const elements = sceneRef.current.querySelectorAll(".icon-pill");
     let frame = 0;
 
     const getIconHalf = () => 30; // Half of icon size
@@ -524,7 +522,8 @@ const TopSection = () => {
         }
 
         if (elements[i]) {
-          (elements[i] as HTMLElement).style.transform = `translate(${x}px, ${y}px)`;
+          (elements[i] as HTMLElement).style.transform =
+            `translate(${x}px, ${y}px)`;
         }
       });
 
@@ -545,7 +544,7 @@ const TopSection = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     canvas.width = window.innerWidth;
@@ -581,7 +580,7 @@ const TopSection = () => {
         this.isBurst = isBurst;
         this.x = CX();
         this.y = CY();
-        
+
         if (isBurst) {
           const angle = Math.random() * Math.PI * 2;
           const speed = 2 + Math.random() * 6;
@@ -591,9 +590,11 @@ const TopSection = () => {
           this.vx = (Math.random() - 0.5) * 0.5;
           this.vy = (Math.random() - 0.5) * 0.5;
         }
-        
+
         this.life = 1;
-        this.maxLife = isBurst ? 60 + Math.random() * 60 : 100 + Math.random() * 100;
+        this.maxLife = isBurst
+          ? 60 + Math.random() * 60
+          : 100 + Math.random() * 100;
         const colSet = PCOLS[Math.floor(Math.random() * PCOLS.length)];
         this.col = colSet[Math.floor(Math.random() * colSet.length)];
       }
@@ -602,7 +603,7 @@ const TopSection = () => {
         this.x += this.vx;
         this.y += this.vy;
         this.life -= 1 / this.maxLife;
-        
+
         if (this.isBurst) {
           this.vx *= 0.98;
           this.vy *= 0.98;
@@ -721,12 +722,16 @@ const TopSection = () => {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen bg-white dark:bg-black overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-screen bg-white dark:bg-black overflow-hidden">
       {/* Canvas Background */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
-        style={{ background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%)' }}
+        style={{
+          background: "linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%)",
+        }}
       />
 
       {/* Main Content */}
@@ -738,11 +743,10 @@ const TopSection = () => {
           style={{
             width: `${sceneSize}px`,
             height: `${sceneSize}px`,
-            left: '50%',
-            top: '50%',
-            transform: 'translate(-50%, -50%)',
-          }}
-        >
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+          }}>
           {/* Orbit Rings */}
           {PLANET_DATA.map((planet) => (
             <div
@@ -776,9 +780,7 @@ const TopSection = () => {
             {/* Profile Photo */}
             <div className="photo-circle">
               {imageError ? (
-                <div className="fallback-avatar">
-                  K
-                </div>
+                <div className="fallback-avatar">K</div>
               ) : (
                 <img
                   src="/Perfect Linkedlin.png"
@@ -791,9 +793,7 @@ const TopSection = () => {
 
             {/* Name and Title */}
             <div className="text-center">
-              <h1 className="name-title">
-                Kumaresh R
-              </h1>
+              <h1 className="name-title">Kumaresh R</h1>
               <p className="subtitle">
                 Full Stack Developer | Microsoft Stack Specialist
               </p>
@@ -801,8 +801,7 @@ const TopSection = () => {
           </div>
         </div>
       </div>
-
-      </section>
+    </section>
   );
 };
 
