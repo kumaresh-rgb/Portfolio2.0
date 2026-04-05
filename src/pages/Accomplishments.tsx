@@ -54,22 +54,6 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ─── Pill chip ────────────────────────────────────────────────────────────────
-
-function Chip({
-  label,
-  color = "text-primary",
-}: {
-  label: string;
-  color?: string;
-}) {
-  return (
-    <span
-      className={`px-3 py-1 bg-surface-container-highest rounded-full text-xs font-label ${color}`}>
-      {label}
-    </span>
-  );
-}
 
 
 // ─── Timeline milestone ───────────────────────────────────────────────────────
@@ -277,14 +261,29 @@ export const Accomplishments = () => (
             <h3 className="font-headline text-2xl font-bold text-on-surface mb-2">
               The End of Feminist (Sci-Fi)
             </h3>
-            <p className="text-on-surface-variant text-sm leading-relaxed mb-4">
+            <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
               Author of the techno-thriller series <strong>"THE END OF FEMINIST"</strong>. A morally complex exploration of biological engineering, identity, and the unintended consequences of technology on humanity's future.
             </p>
-            <div className="flex gap-2 flex-wrap mb-6">
-              <Chip label="Tech Architect" color="text-primary" />
-              <Chip label="Sci-Fi Fantasy" color="text-primary" />
-              <Chip label="Azure Mastery" color="text-primary" />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8 border-y border-outline-variant/10 py-6">
+              <div>
+                <h4 className="text-xs uppercase tracking-[0.2em] font-black text-primary mb-3">Volume 1: Genesis</h4>
+                <ul className="space-y-2 text-[11px] text-on-surface-variant font-medium">
+                  <li>• Male evolution & invention of the Catalyst</li>
+                  <li>• International spread & global disruption</li>
+                  <li>• Misuse of biological patents</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-xs uppercase tracking-[0.2em] font-black text-tertiary mb-3">Volume 2: Consequences</h4>
+                <ul className="space-y-2 text-[11px] text-on-surface-variant font-medium">
+                  <li>• WWW III & The Treaty of BWBM</li>
+                  <li>• AI Integration & Human Mankind Preservation</li>
+                  <li>• The Global Peace Accords (UNIDO)</li>
+                </ul>
+              </div>
             </div>
+
             <div className="flex flex-col sm:flex-row gap-4">
               <motion.a
                 whileHover={{ scale: 1.05 }}

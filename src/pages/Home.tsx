@@ -536,7 +536,10 @@ const Home = () => {
         
         /* Preserved Solar System styles */
         .orbit-ring {
-          position:absolute; border-radius:50%;
+          position:absolute; 
+          top: 50%; left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius:50%;
           border:1px solid rgba(0,150,255,0.09); pointer-events:none;
           animation:ring-breathe 6s ease-in-out infinite;
           width:calc(var(--rp)*1%); height:calc(var(--rp)*1%);
@@ -548,22 +551,30 @@ const Home = () => {
 
         .aura {
           position:absolute; width:36%; height:36%; border-radius:50%;
+          top: 50%; left: 50%;
+          transform: translate(-50%, -50%);
           background:radial-gradient(circle,rgba(0,145,255,0.2) 0%,rgba(0,65,200,0.06) 52%,transparent 72%);
           animation:aura-pulse 3s ease-in-out infinite; z-index:2;
         }
         @keyframes aura-pulse {
-          0%,100% { transform:scale(1);   opacity:0.8; }
-          50%      { transform:scale(1.1); opacity:1;   }
+          0%,100% { transform: translate(-50%, -50%) scale(1);   opacity:0.8; }
+          50%      { transform: translate(-50%, -50%) scale(1.1); opacity:1;   }
         }
 
         .center {
-          position:relative; z-index:10;
+          position:absolute;
+          top: 50%; left: 50%;
+          /* Translate vertically by half the photo height to make it the true center */
+          transform: translate(-50%, calc(-1 * clamp(50px, 11vmin, 80px)));
+          z-index:10;
           display:flex; flex-direction:column; align-items:center;
           gap:clamp(10px,2.5vmin,24px);
+          pointer-events: none;
         }
+        .center > * { pointer-events: auto; }
 
         .photo-circle {
-          width:clamp(120px,26vmin,195px); height:clamp(120px,26vmin,195px);
+          width:clamp(100px, 22vmin, 160px); height:clamp(100px, 22vmin, 160px);
           border-radius:50%; overflow:hidden;
           border:clamp(3px,0.6vmin,5px) solid rgba(0,195,255,0.9);
           box-shadow:
@@ -573,6 +584,7 @@ const Home = () => {
             inset 0 0 clamp(14px,3vmin,28px) rgba(0,0,0,0.2);
           animation:photo-glow 3.5s ease-in-out infinite;
           background:linear-gradient(145deg,#0a1929,#1e3a5f);
+          flex-shrink: 0;
         }
         @keyframes photo-glow {
           0%,100% { border-color:rgba(0,195,255,0.9); transform:scale(1); }
@@ -586,18 +598,29 @@ const Home = () => {
           }
         }
 
-        .nametag { text-align:center; padding:0 clamp(8px,2vmin,20px); }
+        .nametag { text-align:center; padding:0 clamp(12px,3vmin,32px); margin-top: 4px; }
         .nametag h1 {
-          font-family:'Orbitron',monospace;
-          font-size:clamp(8px,2.2vmin,17px); font-weight:900; color:#fff;
-          letter-spacing:clamp(1px,0.6vmin,4px);
-          text-shadow:0 0 20px rgba(0,185,255,0.95),0 0 50px rgba(0,115,255,0.5);
-          white-space:nowrap;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: clamp(22px, 4.2vmin, 38px); 
+          font-weight: 800; 
+          color: #fff;
+          letter-spacing: -0.02em;
+          line-height: 1.1;
+          margin-bottom: 8px;
+          background: linear-gradient(to right, #fff 20%, #47ccff 50%, #bb86fc 80%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          filter: drop-shadow(0 0 12px rgba(71, 204, 255, 0.3));
+          white-space: nowrap;
         }
         .nametag p {
-          font-size:clamp(7px,1.5vmin,11px); color:rgba(100,205,255,0.6);
-          letter-spacing:clamp(0.5px,0.4vmin,2.5px);
-          margin-top:clamp(3px,0.6vmin,6px); font-weight:300;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: clamp(10px, 1.8vmin, 14px); 
+          color: rgba(255, 255, 255, 0.5);
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          font-weight: 600;
+          margin-top: 4px;
         }
 
         .icon-pill-inner {
