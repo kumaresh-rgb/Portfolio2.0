@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from "motion/react";
 import { Github, Linkedin, Send, CheckCircle2, Loader2 } from "lucide-react";
-import { sendEmail } from "../Actions/sendEmail";
 import { useState } from "react";
 
 export default function ContactPage() {
@@ -11,16 +10,44 @@ export default function ContactPage() {
 
   async function handleSubmit(formData: FormData) {
     setIsPending(true);
-    const result = await sendEmail(formData);
-    setIsPending(false);
+    setSuccess(false);
 
-    if (result?.error) {
-      alert("Transmission failed: " + result.error);
-      return;
+    try {
+      const senderName = formData.get("senderName");
+      const senderEmail = formData.get("senderEmail");
+      const message = formData.get("message");
+
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          senderName,
+          senderEmail,
+          message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Transmission failed");
+      }
+
+      setSuccess(true);
+    } catch (error: any) {
+      alert("Transmission failed: " + (error.message || "Unknown error"));
+    } finally {
+      setIsPending(false);
     }
-
-    setSuccess(true);
   }
+
+  const getStatusText = () => {
+    if (isPending) return <span className="text-yellow-400 animate-pulse">Transmitting signal...</span>;
+    if (success) return <span className="text-blue-400">Connection Stable / Sync Complete</span>;
+    return <span className="text-green-400">Listening for signals...</span>;
+  };
 
   return (
     <div className="min-h-screen bg-background text-on-surface font-body overflow-x-hidden relative">
@@ -151,10 +178,7 @@ export default function ContactPage() {
                 </div>
                 <div className="pl-6 text-on-surface-variant">
                   Latency: 14ms <br />
-                  Status:{" "}
-                  <span className="text-green-400">
-                    Listening for signals...
-                  </span>
+                  Status: {getStatusText()}
                 </div>
                 <div className="flex gap-3 text-primary pt-4">
                   <span>&gt;</span>
@@ -167,24 +191,38 @@ export default function ContactPage() {
             </div>
 
             {/* Social Connects */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <a
-                href="#"
-                className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-primary/50 transition-all group">
+                href="https://github.com/kumaresh-rgb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card p-4 rounded-2xl flex items-center justify-center gap-3 hover:border-primary/50 transition-all group">
                 <Github
-                  size={24}
+                  size={20}
                   className="text-primary group-hover:scale-110 transition-transform"
                 />
-                <span className="font-bold">Source</span>
+                <span className="font-bold text-sm">GitHub</span>
               </a>
               <a
-                href="#"
-                className="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-tertiary/50 transition-all group">
+                href="https://www.linkedin.com/in/mkumaresh/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card p-4 rounded-2xl flex items-center justify-center gap-3 hover:border-tertiary/50 transition-all group">
                 <Linkedin
-                  size={24}
+                  size={20}
                   className="text-tertiary group-hover:scale-110 transition-transform"
                 />
-                <span className="font-bold">Network</span>
+                <span className="font-bold text-sm">LinkedIn</span>
+              </a>
+              <a
+                href="https://x.com/KumareshLovable"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card p-4 rounded-2xl flex items-center justify-center gap-3 hover:border-white/30 transition-all group">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-white group-hover:scale-110 transition-transform">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+                <span className="font-bold text-sm">X</span>
               </a>
             </div>
           </div>

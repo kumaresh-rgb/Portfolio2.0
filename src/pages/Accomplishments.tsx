@@ -229,13 +229,16 @@ export const Accomplishments = () => (
           </div>
           
           <div className="mt-6">
-            <motion.button
+            <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              href={import.meta.env.VITE_CERTIFICATE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 bg-primary text-on-primary px-6 py-2.5 rounded-full font-headline font-bold text-sm transition-transform active:scale-95 shadow-lg shadow-primary/20">
               <Download className="w-4 h-4" />
               Download Certificate
-            </motion.button>
+            </motion.a>
           </div>
         </GlassCard>
 
@@ -285,13 +288,16 @@ export const Accomplishments = () => (
               <Chip label="Cloud Native" color="text-primary" />
               <Chip label="Azure Mastery" color="text-primary" />
             </div>
-            <motion.button
+            <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              href={import.meta.env.VITE_BOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 bg-primary text-on-primary px-6 py-2.5 rounded-full font-headline font-bold text-sm transition-transform active:scale-95 shadow-lg shadow-primary/20">
               <Download className="w-4 h-4" />
               Download Book
-            </motion.button>
+            </motion.a>
           </div>
         </GlassCard>
 

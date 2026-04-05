@@ -1,9 +1,25 @@
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  { 
+    icon: Github, 
+    href: "https://github.com/kumaresh-rgb", 
+    label: "GitHub" 
+  },
+  { 
+    icon: Linkedin, 
+    href: "https://www.linkedin.com/in/mkumaresh/", 
+    label: "LinkedIn" 
+  },
+  { 
+    icon: () => (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    ), 
+    href: "https://x.com/KumareshLovable", 
+    label: "X (Twitter)" 
+  },
 ];
 
 const footerLinks = [
@@ -23,10 +39,10 @@ export const Footer = () => {
           {/* Logo & Copyright */}
           <div className="text-center md:text-left">
             <a href="#" className="text-xl font-bold tracking-tight text-[#e6ebf4]">
-              PM<span className="text-[#73b1ff]">.</span>
+              MK<span className="text-[#73b1ff]">.</span>
             </a>
             <p className="text-sm text-[#94a3b8] mt-2">
-              {currentYear} Pedro Machado. All rights reserved.
+              {currentYear} MKumaresh. All rights reserved.
             </p>
           </div>
 
@@ -52,7 +68,7 @@ export const Footer = () => {
                 aria-label={social.label}
                 className="p-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:text-[#73b1ff] transition-all"
               >
-                <social.icon className="w-5 h-5 text-[#94a3b8]" />
+                <social.icon />
               </a>
             ))}
           </div>
@@ -60,4 +76,4 @@ export const Footer = () => {
       </div>
     </footer>
   );
-};
+};

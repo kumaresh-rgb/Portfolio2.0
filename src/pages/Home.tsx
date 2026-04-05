@@ -1,4 +1,4 @@
-import { Cloud, Cpu, Database, Layers, ShieldCheck, Zap } from "lucide-react";
+import { Cloud, Cpu, Database, Layers, ShieldCheck, Zap, Send, Download } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -634,12 +634,70 @@ const Home = () => {
           text-shadow:0 0 8px rgba(0,175,255,0.75);
         }
 
+        .cta-group {
+          display: flex; gap: 15px; margin-top: 25px;
+          flex-wrap: wrap; justify-content: center;
+          z-index: 20; position: relative;
+        }
+        .cta-btn {
+          display: flex; align-items: center; gap: 8px;
+          padding: 12px 28px; border-radius: 50px;
+          font-family: 'Rajdhani', sans-serif; font-weight: 700;
+          text-transform: uppercase; font-size: 13px;
+          letter-spacing: 1.2px; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: pointer; text-decoration: none;
+          position: relative; overflow: hidden;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+        }
+        
+        .cta-primary {
+          background: rgba(0, 145, 255, 0.12);
+          border: 1.5px solid rgba(0, 195, 255, 0.65);
+          color: #fff;
+          box-shadow: 0 0 25px rgba(0, 140, 255, 0.25);
+        }
+        .cta-primary::after {
+          content: ''; position: absolute; top: -50%; left: -60%;
+          width: 40%; height: 200%; background: linear-gradient(
+            to right, transparent, rgba(255, 255, 255, 0.15), transparent
+          );
+          transform: rotate(35deg); transition: 0.7s;
+        }
+        .cta-primary:hover::after {
+          left: 120%;
+        }
+        .cta-primary:hover {
+          background: rgba(0, 145, 255, 0.25);
+          border-color: #fff;
+          box-shadow: 0 0 45px rgba(0, 195, 255, 0.6);
+          transform: translateY(-2px) scale(1.03);
+          text-shadow: 0 0 10px #fff;
+        }
+
+        .cta-secondary {
+          background: rgba(195, 146, 252, 0.08);
+          border: 1.5px solid rgba(195, 146, 252, 0.45);
+          color: #d1a9ff;
+          box-shadow: 0 0 20px rgba(195, 146, 252, 0.15);
+        }
+        .cta-secondary:hover {
+          background: rgba(195, 146, 252, 0.18);
+          border-color: #fff;
+          color: #fff;
+          box-shadow: 0 0 35px rgba(195, 146, 252, 0.4);
+          transform: translateY(-2px) scale(1.03);
+        }
+
         @media (max-width:480px) {
           .orbit-ring { animation:none; border-color:rgba(0,150,255,0.07); }
           .aura        { animation:none; }
+          .cta-btn { padding: 10px 20px; font-size: 11px; }
+          .cta-group { margin-top: 15px; }
         }
         @media (prefers-reduced-motion:reduce) {
           .orbit-ring,.aura,.photo-circle,.ibox { animation:none !important; }
+          .cta-primary::after { display: none; }
         }
       `}</style>
       {/* Galaxy Background Canvas — fixed, z:0, behind ALL content */}
@@ -732,6 +790,21 @@ const Home = () => {
             <div className="nametag">
               <h1>Microsoft Stack Developer</h1>
               <p>.NET · Azure · React · SQL · DevOps</p>
+            </div>
+
+            <div className="cta-group">
+              <Link to="/contact" className="cta-btn cta-primary">
+                <Send size={16} />
+                Get in Touch
+              </Link>
+              <a
+                href={import.meta.env.VITE_RESUME_URL}
+                className="cta-btn cta-secondary"
+                target="_blank"
+                rel="noopener noreferrer">
+                <Download size={16} />
+                Resume
+              </a>
             </div>
           </div>
 
