@@ -42,8 +42,12 @@
 }
 
 @keyframes orbit-rotate {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 .icon-pill {
@@ -63,7 +67,6 @@
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
   border-radius: 50%;
   border: 2px solid var(--gc);
   box-shadow: 0 0 20px var(--gc);
@@ -71,8 +74,15 @@
 }
 
 @keyframes icon-glow {
-  0%, 100% { box-shadow: 0 0 20px var(--gc); }
-  50% { box-shadow: 0 0 30px var(--gc), 0 0 40px var(--gc); }
+  0%,
+  100% {
+    box-shadow: 0 0 20px var(--gc);
+  }
+  50% {
+    box-shadow:
+      0 0 30px var(--gc),
+      0 0 40px var(--gc);
+  }
 }
 
 .icon-container {
@@ -96,7 +106,7 @@
   color: white;
   text-align: center;
   white-space: nowrap;
-  text-shadow: 0 0 5px rgba(0,0,0,0.8);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 }
 
 .aura {
@@ -104,14 +114,26 @@
   width: 36%;
   height: 36%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 145, 255, 0.22) 0%, rgba(0, 65, 200, 0.07) 52%, transparent 72%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 145, 255, 0.22) 0%,
+    rgba(0, 65, 200, 0.07) 52%,
+    transparent 72%
+  );
   animation: aura-pulse 3s ease-in-out infinite;
   z-index: 2;
 }
 
 @keyframes aura-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.1); opacity: 1; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
 }
 
 .center {
@@ -129,7 +151,7 @@
   border-radius: 50%;
   overflow: hidden;
   border: clamp(3px, 0.6vmin, 5px) solid rgba(0, 195, 255, 0.9);
-  box-shadow: 
+  box-shadow:
     0 0 0 clamp(4px, 1vmin, 8px) rgba(0, 120, 255, 0.15),
     0 0 clamp(20px, 4vmin, 40px) rgba(0, 195, 255, 0.3),
     inset 0 0 clamp(15px, 3vmin, 30px) rgba(0, 120, 255, 0.2);
@@ -156,16 +178,17 @@
 }
 
 @keyframes photo-glow {
-  0%, 100% { 
+  0%,
+  100% {
     border-color: rgba(0, 195, 255, 0.9);
-    box-shadow: 
+    box-shadow:
       0 0 0 clamp(4px, 1vmin, 8px) rgba(0, 120, 255, 0.15),
       0 0 clamp(20px, 4vmin, 40px) rgba(0, 195, 255, 0.3),
       inset 0 0 clamp(15px, 3vmin, 30px) rgba(0, 120, 255, 0.2);
   }
-  50% { 
+  50% {
     border-color: rgba(0, 230, 255, 1);
-    box-shadow: 
+    box-shadow:
       0 0 0 clamp(6px, 1.2vmin, 10px) rgba(0, 150, 255, 0.25),
       0 0 clamp(30px, 5vmin, 50px) rgba(0, 230, 255, 0.4),
       inset 0 0 clamp(20px, 4vmin, 35px) rgba(0, 150, 255, 0.3);
@@ -173,8 +196,15 @@
 }
 
 @keyframes icon-pulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
-  50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
 }
 
 .text-center {

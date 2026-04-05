@@ -3,7 +3,7 @@
 import { Resend } from "resend";
 
 // Next.js uses process.env to access environment variables
-const resend = new Resend("re_dvnhj2tu_KtcNiB7vmNG1A72uuHdSRCin");
+const resend = new Resend(import.meta.env.VITE_RESEND_API_KEY);
 
 export const sendEmail = async (formData: FormData) => {
   const senderEmail = formData.get("senderEmail") as string;
