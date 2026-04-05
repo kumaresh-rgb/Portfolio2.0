@@ -1,22 +1,19 @@
 import React from "react";
 import { motion } from "motion/react";
+import { Link } from "react-router-dom";
 import {
   Award,
-  ShieldCheck,
   BookOpen,
   Gamepad2,
   Users,
   MapPin,
   Video,
   Star,
-  CheckCircle2,
   RefreshCw,
   TrendingUp,
-  Code2,
-  Infinity,
-  Lock,
-  Database,
   Download,
+  ExternalLink,
+  Rocket,
 } from "lucide-react";
 
 // ─── Shared glass card style ──────────────────────────────────────────────────
@@ -74,41 +71,6 @@ function Chip({
   );
 }
 
-// ─── Certification card ───────────────────────────────────────────────────────
-
-interface CertCardProps {
-  code: string;
-  title: string;
-  icon: React.ElementType;
-  ongoing?: boolean;
-}
-
-function CertCard({ code, title, icon: Icon, ongoing = false }: CertCardProps) {
-  if (ongoing) {
-    return (
-      <div className="p-6 rounded-xl bg-surface-container-low border border-dashed border-tertiary/40 flex flex-col items-center text-center group relative overflow-hidden">
-        <div className="absolute top-0 right-0 px-2 py-0.5 bg-tertiary/20 text-[10px] font-label text-tertiary uppercase tracking-tighter rounded-bl-lg">
-          On-going
-        </div>
-        <div className="w-16 h-16 mb-4 rounded-full bg-surface-container-highest flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-          <RefreshCw className="w-6 h-6 text-tertiary animate-spin [animation-duration:3s]" />
-        </div>
-        <span className="font-label text-xs text-outline mb-1">{code}</span>
-        <h5 className="font-bold text-sm text-on-surface">{title}</h5>
-      </div>
-    );
-  }
-
-  return (
-    <div className="p-6 rounded-xl bg-surface-container-low border border-outline-variant/10 flex flex-col items-center text-center group hover:border-primary/40 transition-all duration-300">
-      <div className="w-16 h-16 mb-4 rounded-full bg-surface-container-highest flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-        <Icon className="w-6 h-6 text-primary" />
-      </div>
-      <span className="font-label text-xs text-outline mb-1">{code}</span>
-      <h5 className="font-bold text-sm text-on-surface">{title}</h5>
-    </div>
-  );
-}
 
 // ─── Timeline milestone ───────────────────────────────────────────────────────
 
@@ -176,7 +138,7 @@ export const Accomplishments = () => (
           Beyond the Code:
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary">
-            Milestones &amp; Recognition
+            Milestones & Recognition
           </span>
         </h1>
 
@@ -187,78 +149,113 @@ export const Accomplishments = () => (
         </p>
       </motion.header>
 
-      {/* ── Section 1: Top Bento — Cert + MVP ── */}
+      {/* ── Section 1: Top Bento — Certs Roadmap ── */}
       <motion.section
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
         className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
-        {/* Major Certification — spans 2 cols */}
+        {/* ─── Verified Certifications Stack (Left/Large Card) ─── */}
         <GlassCard
-          className="md:col-span-2 p-8 flex flex-col justify-between relative overflow-hidden"
+          className="md:col-span-2 p-8 flex flex-col justify-between relative overflow-hidden group"
           style={{
             boxShadow: "0 0 40px -10px rgba(115,177,255,0.2)",
           }}>
-          {/* Background glow blob */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
 
           <div>
-            <Award className="text-primary w-10 h-10 mb-6" />
-            <h3 className="font-headline text-3xl font-bold text-on-surface mb-4">
-              Solutions Architect Expert
+            <div className="flex items-center gap-3 mb-6">
+              <Award className="text-primary w-10 h-10" />
+              <span className="px-3 py-1 bg-primary/20 text-primary text-[10px] font-bold rounded-full uppercase tracking-tighter">
+                Verified Expert
+              </span>
+            </div>
+            <h3 className="font-headline text-3xl font-bold text-on-surface mb-6">
+              Verified Certifications
             </h3>
-            <p className="text-on-surface-variant text-base leading-relaxed max-w-md">
-              Microsoft Certified: Azure Solutions Architect Expert. Validating
-              expertise in compute, network, storage, and security.
-            </p>
-          </div>
 
-          <div className="mt-12 flex items-center gap-4">
-            <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVzznTk7HTp70Dod_y2G_kBpecaxAxafcRmCAJo9VWgY58wl2_hOH9wR5jcdrcq2a7Afd5Pv-biLbyMo_qt0TAlKIfPyG585t7KkiS_U-RnGheZxEwmbA_bnN90NxNGstqleZD1yNK3b309RhDiJKRbs2qPzKooLD95l57MHGbTsVvF44fcxgb9F7Hjo1K-mb6Tp4lcmtUzh1w3s6LYzmI9Cp7xUsAY8OZH1NhxfM4W_4SV8L_xyzkTAqxjvwJRSAPBe4Iq_0ToAvt"
-              alt="Azure Solutions Architect Badge"
-              className="w-16 h-16 rounded-lg object-contain"
-            />
-            <div className="font-label text-sm">
-              <div className="text-on-surface font-semibold">
-                Issued Jan 2024
+            <div className="space-y-6">
+              {/* AZ-900 */}
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors">
+                <img
+                  src="https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg"
+                  alt="AZ-900"
+                  className="w-10 h-10 object-contain"
+                />
+                <div>
+                  <div className="text-primary font-bold text-sm tracking-tighter">AZ-900</div>
+                  <div className="text-on-surface font-semibold text-base">Azure Fundamentals</div>
+                  <div className="text-on-surface-variant text-xs">Standardized baseline for Microsoft Cloud architectures.</div>
+                </div>
               </div>
-              <div className="text-tertiary">ID: MS-700-ARCH</div>
             </div>
           </div>
-          
-          <div className="mt-6">
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={import.meta.env.VITE_CERTIFICATE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-primary text-on-primary px-6 py-2.5 rounded-full font-headline font-bold text-sm transition-transform active:scale-95 shadow-lg shadow-primary/20">
-              <Download className="w-4 h-4" />
-              Download Certificate
-            </motion.a>
+
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+             <div className="font-label text-sm flex gap-6">
+                <div>
+                  <div className="text-on-surface-variant text-[10px] uppercase tracking-widest mb-1">Status</div>
+                  <div className="text-primary-light font-bold">ACTIVE</div>
+                </div>
+                <div>
+                  <div className="text-on-surface-variant text-[10px] uppercase tracking-widest mb-1">Last Update</div>
+                  <div className="text-white font-bold">JAN 2024</div>
+                </div>
+             </div>
+             <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href={import.meta.env.VITE_CERTIFICATE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-tertiary text-white px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide transition-all shadow-xl shadow-primary/20 hover:shadow-primary/40 group">
+                <ExternalLink className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                View Certificate
+             </motion.a>
           </div>
         </GlassCard>
 
-        {/* MVP Nominee */}
-        <GlassCard className="p-8 flex flex-col justify-between border-tertiary/20">
-          <div>
-            <div className="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center mb-6">
-              <ShieldCheck className="w-6 h-6 text-tertiary" />
+        {/* ─── Learning Roadmap / Ongoing (Right/Small Card) ─── */}
+        <GlassCard className="p-8 flex flex-col items-start border-tertiary/20 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-tertiary/10 rounded-full blur-3xl -mr-16 -mt-16" />
+          
+          <div className="relative z-10 w-full mb-6">
+            <div className="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center mb-6">
+              <RefreshCw className="w-7 h-7 text-tertiary animate-spin-slow" />
             </div>
-            <h3 className="font-headline text-2xl font-bold text-on-surface mb-3">
-              MVP Nominee
+            <h3 className="font-headline text-2xl font-bold text-on-surface mb-2">
+              On-going / Future
             </h3>
-            <p className="text-on-surface-variant text-sm leading-relaxed">
-              Recognized for significant contributions to the .NET community and
-              open-source cloud patterns.
+            <p className="text-on-surface-variant text-xs leading-relaxed">
+              Actively mastering advanced specialties and renewing core associate credentials.
             </p>
           </div>
-          <div className="pt-6 border-t border-outline-variant/10 mt-6">
-            <span className="font-label text-xs text-outline tracking-widest uppercase">
-              Community Excellence 2023
+
+          <div className="relative z-10 w-full space-y-3">
+             {[
+               { id: "AZ-204", name: "Developer Associate", sub: "Learning" },
+               { id: "PL-300", name: "Power BI Data Analyst", sub: "Planning" },
+               { id: "DP-600", name: "Fabric Analytics Engineer", sub: "Planning" },
+               { id: "AZ-500", name: "Security Engineer", sub: "Planning" },
+               { id: "DP-203", name: "Data Engineer", sub: "Planning" },
+               { id: "AZ-400", name: "DevOps Engineer Expert", sub: "Planning" }
+             ].map((item, idx) => (
+               <div key={idx} className="flex justify-between items-center p-3 py-2 rounded-lg bg-surface-container/50 border border-white/5 hover:bg-tertiary/5 transition-colors">
+                 <div>
+                   <div className="text-[10px] font-black text-tertiary tracking-tighter leading-none mb-1">{item.id}</div>
+                   <div className="text-[12px] font-bold text-on-surface leading-tight">{item.name}</div>
+                 </div>
+                 <span className={`text-[9px] font-bold py-1 px-2 rounded-md uppercase ${item.sub === 'Learning' ? 'bg-tertiary/20 text-tertiary animate-pulse' : 'bg-white/5 text-white/40'}`}>
+                   {item.sub}
+                 </span>
+               </div>
+             ))}
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-outline-variant/10 w-full relative z-10 text-left">
+            <span className="font-label text-[10px] text-on-surface/50 tracking-widest uppercase">
+              NEXT GOAL: DEVOPS EXPERT
             </span>
           </div>
         </GlassCard>
@@ -278,26 +275,38 @@ export const Accomplishments = () => (
           </div>
           <div>
             <h3 className="font-headline text-2xl font-bold text-on-surface mb-2">
-              Author
+              The End of Feminist (Sci-Fi)
             </h3>
             <p className="text-on-surface-variant text-sm leading-relaxed mb-4">
-              Written 2 technical books focusing on cloud-native patterns and
-              Azure architecture for modern enterprises.
+              Author of the techno-thriller series <strong>"THE END OF FEMINIST"</strong>. A morally complex exploration of biological engineering, identity, and the unintended consequences of technology on humanity's future.
             </p>
-            <div className="flex gap-2 flex-wrap mb-4">
-              <Chip label="Cloud Native" color="text-primary" />
+            <div className="flex gap-2 flex-wrap mb-6">
+              <Chip label="Tech Architect" color="text-primary" />
+              <Chip label="Sci-Fi Fantasy" color="text-primary" />
               <Chip label="Azure Mastery" color="text-primary" />
             </div>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={import.meta.env.VITE_BOOK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-primary text-on-primary px-6 py-2.5 rounded-full font-headline font-bold text-sm transition-transform active:scale-95 shadow-lg shadow-primary/20">
-              <Download className="w-4 h-4" />
-              Download Book
-            </motion.a>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href={import.meta.env.VITE_BOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-primary to-tertiary text-white px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide transition-all shadow-xl shadow-primary/20 hover:shadow-primary/40 group">
+                <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                Download Vol 1
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href={import.meta.env.VITE_BOOK_VOL2_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-tertiary to-secondary text-white px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide transition-all shadow-xl shadow-tertiary/20 hover:shadow-tertiary/40 group">
+                <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                Download Vol 2
+              </motion.a>
+            </div>
           </div>
         </GlassCard>
 
@@ -308,15 +317,24 @@ export const Accomplishments = () => (
           </div>
           <div>
             <h3 className="font-headline text-2xl font-bold text-on-surface mb-2">
-              Gamer
+              Level Up: Gamer Profile
             </h3>
             <p className="text-on-surface-variant text-sm leading-relaxed mb-4">
-              Passionate about gaming and esports. Active competitor in strategy
-              titles and advocate for tech-gaming synergy.
+              Exploring the convergence of high-performance engineering and digital storytelling. From competitive FPS field-ops to immersive PC narrative epics.
             </p>
-            <div className="flex gap-2 flex-wrap">
-              <Chip label="Strategy" color="text-secondary" />
-              <Chip label="Competitive" color="text-secondary" />
+            <div className="flex gap-4 flex-wrap mt-6">
+              <Link
+                to="/gamer"
+                className="inline-flex items-center gap-2 bg-secondary/10 hover:bg-secondary/20 text-secondary border border-secondary/20 px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide transition-all group overflow-hidden relative">
+                <motion.div 
+                  className="flex items-center gap-2"
+                  whileHover={{ x: [0, 5, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5 }}>
+                  <span>View Mission Brief</span>
+                  <Rocket className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              </Link>
             </div>
           </div>
         </GlassCard>
@@ -396,45 +414,8 @@ export const Accomplishments = () => (
         </div>
       </motion.section>
 
-      {/* ── Section 4: Verified Certifications ── */}
-      <motion.section
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-24">
-        <h2 className="font-headline text-3xl font-bold text-on-surface mb-12">
-          Verified Certifications
-        </h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          <CertCard
-            code="AZ-900"
-            title="Azure Fundamentals"
-            icon={CheckCircle2}
-          />
-          <CertCard
-            code="AZ-204"
-            title="Azure Developer Associate"
-            icon={Code2}
-          />
-          <CertCard
-            code="AZ-204 (Renew)"
-            title="Azure Developer Associate"
-            icon={RefreshCw}
-            ongoing
-          />
-          <CertCard code="AZ-500" title="Azure Security Engineer" icon={Lock} />
-          <CertCard code="DP-203" title="Azure Data Engineer" icon={Database} />
-          <CertCard
-            code="AZ-400"
-            title="DevOps Engineer Expert"
-            icon={Infinity}
-          />
-        </div>
-      </motion.section>
-
-      {/* ── Section 5: Career Highlights Timeline ── */}
+      {/* ── Section 4: Career Highlights Timeline ── */}
       <motion.section
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -456,8 +437,8 @@ export const Accomplishments = () => (
 
           <Milestone
             year="2022 — PRESENT"
-            title="Principal Cloud Architect at Nexa Systems"
-            desc="Led the migration of a legacy retail platform to Azure, reducing operational costs by 40% and increasing deployment frequency from monthly to daily using GitHub Actions and AKS."
+            title="Backend Developer & R&D at Lumel Technologies"
+            desc="Leading R&D for Power BI Semantic Models and metadata automation. Architecting high-performance data analytics tools using C#, XMLA endpoints, DAX, and Azure ecosystem for a premier Microsoft ISV partner."
             dotColor="bg-primary"
             dotGlow="0 0 15px rgba(115,177,255,0.5)"
             yearColor="text-primary"

@@ -14,6 +14,7 @@ import { Experience } from "./pages/Experience";
 import { Accomplishments } from "./pages/Accomplishments";
 import Contact from "./pages/Contact";
 import { Skills } from "./pages/Skills";
+import Gamer from "./pages/Gamer";
 import { useEffect } from "react";
 import { VisitorTelemetry } from "./components/VisitorTelemetry";
 import { ExperienceDetail } from "./pages/ExperienceDetail";
@@ -51,6 +52,7 @@ export default function App() {
               <Route path="/experience" element={<Experience />} />
               <Route path="/accomplishments" element={<Accomplishments />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/gamer" element={<Gamer />} />
               <Route path="/experience/:id" element={<ExperienceDetail />} />
             </Routes>
           </motion.div>

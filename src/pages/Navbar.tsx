@@ -26,7 +26,7 @@ const navigationItems = [
   { id: "contact", name: "Contact", icon: Mail, href: "/contact" },
   {
     id: "accomplishments",
-    name: "Awards",
+    name: "Milestones",
     icon: Award,
     href: "/accomplishments",
   },
