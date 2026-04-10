@@ -1,4 +1,13 @@
-import { Cloud, Cpu, Database, Layers, ShieldCheck, Zap, Send, Download } from "lucide-react";
+import {
+  Cloud,
+  Cpu,
+  Database,
+  Layers,
+  ShieldCheck,
+  Zap,
+  Send,
+  Download,
+} from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
