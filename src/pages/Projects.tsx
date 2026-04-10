@@ -1,14 +1,10 @@
 import { motion } from "motion/react";
 import {
-  Zap,
-  Cloud,
-  Cpu,
   ExternalLink,
   Github,
   Layout,
   Wallet,
   SparkleIcon,
-  ShieldAlert,
   ShieldAlertIcon,
 } from "lucide-react";
 

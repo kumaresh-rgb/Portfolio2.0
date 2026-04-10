@@ -5,7 +5,6 @@ import {
   Layers,
   Monitor,
   Keyboard,
-  MousePointer2,
   Smartphone,
   Watch,
 } from "lucide-react";

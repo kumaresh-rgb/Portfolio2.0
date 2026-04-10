@@ -1,5 +1,4 @@
 import {
-  Cloud,
   Cpu,
   Database,
   Layers,
