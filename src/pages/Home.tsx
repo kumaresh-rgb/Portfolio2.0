@@ -889,22 +889,22 @@ const Home = () => {
 
                   <div className="text-right">
                     <span className="block text-[10px] tracking-[0.3em] text-[#a6abb4] uppercase mb-1 font-semibold group-hover:text-white transition-colors">
-                      Infrastructure
+                      SERVICE STATUS
                     </span>
                     <span className="text-2xl font-mono font-bold text-white group-hover:text-[#47ccff] transition-colors duration-300">
-                      99.9% SLI
+                      Always-On Support
                     </span>
                   </div>
                 </div>
 
                 <div className="relative z-10">
                   <h3 className="text-3xl md:text-4xl font-bold mb-5 italic text-white tracking-tight group-hover:text-[#47ccff] transition-colors duration-300">
-                    Production Grade.
+                    Enterprise-Grade Solutions.
                   </h3>
                   <p className="text-[#a6abb4] text-sm md:text-base leading-relaxed max-w-md group-hover:text-white transition-colors duration-300">
-                    Deploying high-availability systems where downtime isn't an
-                    option. Built on the Microsoft Stack, hardened for global
-                    scale.
+                    Specializing in the implementation of high-performance
+                    features within the Microsoft ecosystem, engineered for
+                    global scalability and mission-critical reliability.
                   </p>
                 </div>
 
@@ -922,9 +922,9 @@ const Home = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className="text-4xl md:text-5xl font-bold mb-12 leading-tight text-white">
-              Engineering <br />
+              .Net Ecosystem <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#47ccff] via-[#7e93ff] to-[#a259ff] drop-shadow-[0_0_15px_rgba(71,204,255,0.3)]">
-                End-to-End.
+                Developer.
               </span>
             </motion.h2>
 
@@ -940,16 +940,16 @@ const Home = () => {
 
               {[
                 {
-                  label: "Discovery",
-                  text: "Translating business logic into technical requirements.",
+                  label: "Strategic Discovery",
+                  text: "Translating complex business logic into high-precision technical specifications.",
                 },
                 {
-                  label: "Architect",
-                  text: "Designing scalable microservices and cloud infrastructure.",
+                  label: "Scalable Architecture",
+                  text: "Designing robust, future-proof infrastructures using industry-standard design patterns.",
                 },
                 {
-                  label: "Develop",
-                  text: "Clean code with strict type safety and automated testing.",
+                  label: "Precision Engineering",
+                  text: "Delivering clean, strictly-typed code reinforced by comprehensive unit and integration testing.",
                 },
               ].map((s, idx) => (
                 <motion.div
@@ -976,72 +976,116 @@ const Home = () => {
       </section>
       {/* Section C: The Data Intelligence Layer (Refined with Transparency) */}
       <section className="py-24 px-8 relative overflow-hidden bg-transparent">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-14">
-            <span className="text-[#47ccff] font-mono text-[10px] tracking-[0.5em] uppercase">
-              .Net Ecosystem
+        {/* Realistic Ambient Glow Background */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#47ccff]/5 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Section Header */}
+          <div className="mb-14 relative">
+            <div className="absolute -left-6 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#47ccff] to-transparent opacity-50 hidden md:block" />
+
+            <span className="text-[#47ccff] font-mono text-[11px] tracking-[0.4em] uppercase font-bold">
+              Technical Ecosystem
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-3 text-white">
-              Worked with Mostly <br />
-              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-[#47ccff] to-[#a259ff]">
-                Semantic Intelligence.
+
+            <h2 className="text-4xl md:text-6xl font-extrabold mt-4 text-white tracking-tighter leading-[1.1]">
+              Specializing in <br />
+              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-[#47ccff] via-[#7e93ff] to-[#a259ff] drop-shadow-[0_0_15px_rgba(71,204,255,0.3)]">
+                Full-Stack .NET & Analytics.
               </span>
             </h2>
+
+            <p className="mt-6 text-[#a6abb4] text-sm md:text-lg max-w-3xl leading-relaxed font-light tracking-wide">
+              Leveraging{" "}
+              <span className="text-white font-semibold">
+                3+ years of experience
+              </span>{" "}
+              in{" "}
+              <span className="text-white font-medium">
+                C#, ASP.NET Core, EF Core, and SQL
+              </span>{" "}
+              to architect scalable{" "}
+              <span className="text-white font-semibold italic border-b border-[#47ccff]/30">
+                Microservices
+              </span>
+              . Specialized in high-scale data modeling with{" "}
+              <span className="text-[#47ccff] font-bold drop-shadow-[0_0_8px_rgba(71,204,255,0.4)]">
+                Power BI
+              </span>{" "}
+              and optimized Azure infrastructure.
+            </p>
           </div>
 
+          {/* Expertise Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               {
-                title: "Power BI Analyst",
-                skills: ["DAX Optimization", "Semantic Modeling"],
+                title: "Power BI & Analytics",
+                skills: [
+                  "DAX Development",
+                  "DAX Optimization",
+                  "Report Matrixing",
+                ],
                 icon: <Zap size={18} />,
                 accent: "#f29111",
                 glow: "group-hover:shadow-[0_0_20px_rgba(242,145,17,0.2)]",
               },
               {
                 title: "High-Perf Querying",
-                skills: ["DuckDB", "Analytical SQL"],
+                skills: [
+                  "DuckDB & Analytical SQL",
+                  "LINQ Optimization",
+                  "Schema Evolution",
+                ],
                 icon: <Database size={18} />,
                 accent: "#ffde59",
                 glow: "group-hover:shadow-[0_0_20px_rgba(255,222,89,0.2)]",
               },
               {
                 title: "Tabular Services",
-                skills: ["ADOMD.NET", "Metadata Management"],
+                skills: [
+                  "ADOMD.NET",
+                  "Tabular Object Model",
+                  "Metadata Management",
+                ],
                 icon: <Layers size={18} />,
                 accent: "#47ccff",
                 glow: "group-hover:shadow-[0_0_20px_rgba(71,204,255,0.2)]",
               },
               {
-                title: "Modern Storage",
-                skills: ["Parquet", "CSV/Delta"],
-                icon: <Cloud size={18} />,
+                title: "Data Architecture",
+                skills: [
+                  "Redis / Azure Cache",
+                  "Azure SQL / T-SQL",
+                  "Delta Lake / Parquet",
+                  "In-Memory Persistence",
+                ],
+                icon: <ShieldCheck size={18} />,
                 accent: "#a259ff",
                 glow: "group-hover:shadow-[0_0_20px_rgba(162,89,255,0.2)]",
               },
             ].map((item, i) => (
               <div
                 key={i}
-                /* CHANGED: Swapped solid bg for transparent glass with backdrop blur */
-                className={`group relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 
-            hover:border-white/20 hover:bg-white/10 transition-all duration-300 cursor-default ${item.glow}`}>
-                {/* Accent Line - Slimmer */}
+                className={`group relative p-8 rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/10 
+          hover:border-white/20 hover:bg-white/[0.07] transition-all duration-500 cursor-default ${item.glow}`}>
+                {/* Decorative Top Accent */}
                 <div
                   className="absolute top-0 left-0 w-full h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl"
                   style={{ backgroundColor: item.accent }}
                 />
 
                 <div
-                  className="mb-4 transition-transform duration-300 group-hover:-translate-y-1"
+                  className="mb-6 transition-transform duration-500 group-hover:-translate-y-2"
                   style={{ color: item.accent }}>
                   {item.icon}
                 </div>
 
-                <h3 className="font-bold text-lg mb-3 text-white group-hover:text-[#47ccff] transition-colors">
+                <h3 className="font-bold text-lg mb-4 text-white group-hover:text-[#47ccff] transition-colors">
                   {item.title}
                 </h3>
 
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {item.skills.map((skill) => (
                     <li
                       key={skill}
@@ -1055,30 +1099,19 @@ const Home = () => {
                   ))}
                 </ul>
 
-                {/* Bottom detail - Slimmer */}
-                <div className="mt-6 pt-4 border-t border-white/5">
-                  <div className="w-6 h-0.5 bg-white/5 group-hover:w-full group-hover:bg-white/10 transition-all duration-500" />
+                <div className="mt-8 pt-4 border-t border-white/5">
+                  <div className="w-8 h-1 bg-white/5 group-hover:w-full group-hover:bg-white/10 transition-all duration-700 rounded-full" />
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Floating Badge - Transparent Glass Update */}
-          <div className="mt-8 p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-dashed border-white/10 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-1">
-                {[".CSV", ".PARQUET", ".JSON"].map((ext) => (
-                  <div
-                    key={ext}
-                    className="px-2 py-0.5 bg-black/60 text-[9px] font-mono border border-white/10 rounded backdrop-blur-sm">
-                    {ext}
-                  </div>
-                ))}
-              </div>
-              <p className="text-xs text-[#a6abb4]">
-                Expertise in large-scale metadata & tabular structures.
-              </p>
+          {/* Bottom Status Metadata */}
+          <div className="mt-12 flex items-center gap-4">
+            <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] font-mono text-white/40 uppercase tracking-widest">
+              Enterprise Focus: Scalable Metadata & Tabular Modeling
             </div>
+            <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
           </div>
         </div>
       </section>
@@ -1162,7 +1195,7 @@ const Home = () => {
                       [SUCCESS] Microsoft.Extensions.Caching initialized.
                     </div>
                     <div className="text-white/40">
-                      [METRIC] Response time:{" "}
+                      [METRIC] Response time:
                       <span className="text-[#47ccff]">12ms</span> (was 120ms)
                     </div>
                     <motion.div
@@ -1224,7 +1257,7 @@ const Home = () => {
                       <div className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.6)] group-hover:bg-[#47ccff] group-hover:shadow-[#47ccff]/60 transition-all" />
                     </div>
                     <span className="text-[10px] text-white/70 font-mono font-medium tracking-[0.15em] uppercase">
-                      Status:{" "}
+                      Status:
                       <span className="text-white group-hover:text-[#47ccff]">
                         Engine_Optimized
                       </span>

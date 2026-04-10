@@ -43,8 +43,8 @@ interface ExperienceEntry {
 const EXPERIENCES: ExperienceEntry[] = [
   {
     year: "2022 — PRESENT",
-    role: "Senior Cloud Architect",
-    company: "Nebula Systems Corp",
+    role: "Product Developer",
+    company: "Lumel Technologies Solutions",
     cardTitle: "Enterprise Data Orchestration",
     accentColor: "text-primary",
     glowClass: "glow-azure",

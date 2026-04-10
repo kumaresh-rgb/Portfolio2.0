@@ -132,8 +132,15 @@ export const Skills = () => (
               "Entity Framework Core",
               "LINQ",
               "Microservices",
-              "gRPC",
               "SignalR",
+              "Python",
+              "Unit of Work",
+              "Repository Pattern",
+              "OOPS",
+              "Data Structures & Algorithms",
+              "xUnit",
+              "Unit Testing",
+              "Integration Testing",
             ].map((s) => (
               <SkillPill key={s} label={s} />
             ))}
@@ -155,8 +162,7 @@ export const Skills = () => (
               "Tailwind CSS",
               "Redux",
               "Framer Motion",
-              "Next.js",
-              "Vite",
+              "PrimeNG",
             ].map((s) => (
               <SkillPill key={s} label={s} />
             ))}
@@ -167,7 +173,7 @@ export const Skills = () => (
         <Card className="lg:col-span-4">
           <SectionHeader
             icon={Database}
-            title="Data & Storage"
+            title="Data & Storage"  
             iconColor="text-secondary"
             iconBorder="border-secondary/20"
           />

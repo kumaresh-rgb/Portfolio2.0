@@ -7,6 +7,7 @@ import {
   Keyboard,
   MousePointer2,
   Smartphone,
+  Watch,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,16 +17,24 @@ export const About = () => {
   const techGear = [
     {
       icon: Monitor,
-      name: "Dual 4K Setup",
-      detail: "Color-accurate precision",
+      name: "MSI Modern MD272 Series",
+      detail: "reddot Winner 2021",
     },
-    { icon: Keyboard, name: "Mechanical Deck", detail: "MX Brown Tactile" },
     {
-      icon: MousePointer2,
-      name: "Precision Pointer",
-      detail: "High-DPI Productivity",
+      icon: Keyboard,
+      name: "Rapoo 9010M Combo",
+      detail: "Multi-Device Wireless Keypad & Mouse (4 Devices)",
     },
-    { icon: Smartphone, name: "Mobile Testing", detail: "iOS & Android Lab" },
+    {
+      icon: Watch,
+      name: "AmazFit Active 2",
+      detail: "Less Wieght, Accurete Health Tracking",
+    },
+    {
+      icon: Smartphone,
+      name: "I Phone 14 && IQOO 12 5G",
+      detail: "iOS & Android",
+    },
   ];
 
   return (
@@ -48,7 +57,7 @@ export const About = () => {
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-outline-variant bg-surface-container shadow-2xl backdrop-blur-sm">
               <img
                 src="/Tokyo.png"
-                alt="Kumaresh Profile"
+                alt="Profile"
                 className="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100 opacity-80 group-hover:opacity-100"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
@@ -64,7 +73,7 @@ export const About = () => {
                 Current Focus
               </p>
               <p className="font-headline font-extrabold text-on-surface">
-                Cloud Native Architectures
+                Azure Cloud & Scalable Solutions
               </p>
             </motion.div>
           </motion.div>
@@ -84,28 +93,38 @@ export const About = () => {
             <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-on-surface mb-8 leading-[1.1]">
               From Tinkerer to <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-tertiary">
-                Architect.
+                Solutions Developer.
               </span>
             </h1>
 
             <div className="space-y-6 text-on-surface-variant text-lg leading-relaxed max-w-2xl font-body">
               <p>
-                It started with a curiosity for how things work—dismantling
-                software to understand the logic beneath the UI. What began as
-                late-night experimentation evolved into a deep-seated passion
-                for building{" "}
+                My journey evolved from a{" "}
+                <span className="text-white font-medium">
+                  Standard Developer
+                </span>{" "}
+                into a specialist mastering the core principles of the{" "}
+                <span className="text-white font-medium">.NET Ecosystem</span>.
+                What started as a drive to understand complex frameworks has
+                transformed into a career dedicated to engineering{" "}
                 <strong className="text-on-surface font-semibold">
-                  robust, scalable digital ecosystems.
+                  high-performance, scalable infrastructures.
                 </strong>
               </p>
               <p>
-                Today, I navigate the Microsoft ecosystem, bridging the gap
-                between elegant frontend interfaces and high-performance backend
-                infrastructure.
+                Today, I specialize in the .NET and Azure landscapes, bridging
+                the gap between{" "}
+                <span className="text-white">complex requirements</span> and{" "}
+                <span className="text-white">
+                  robust, high-availability solutions
+                </span>
+                . I build with a strict focus on type-safety, performance
+                optimization, and enterprise-grade scalability.
               </p>
               <p className="border-l-2 border-secondary pl-6 py-2 italic text-on-surface/90">
-                "Technology should solve complex problems with invisible
-                elegance."
+                "In an AI-driven world, anyone can Write code. But the engineers
+                who truly stand out are those who master the requirements,
+                bridge the architectural gaps, and solve the right problems.
               </p>
             </div>
           </motion.div>
@@ -115,7 +134,7 @@ export const About = () => {
         <section className="mb-40">
           <div className="flex items-center gap-4 mb-16">
             <h2 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface">
-              Stack Philosophy
+              Core Stack Philosophy
             </h2>
             <div className="h-[1px] flex-1 bg-gradient-to-r from-outline-variant to-transparent"></div>
           </div>
@@ -126,17 +145,17 @@ export const About = () => {
                 icon: Cpu,
                 title: ".NET Ecosystem",
                 accent: "#c392fc",
-                label: "The Powerhouse",
+                label: "Backend Foundation",
               },
               {
                 icon: Cloud,
-                title: "Azure Cloud",
+                title: "Azure Infrastructure",
                 accent: "#47ccff",
-                label: "The Infinite Canvas",
+                label: "The Cloud Canvas",
               },
               {
                 icon: Layers,
-                title: "React Architecture",
+                title: "Scalable UI Architecture",
                 accent: "#73b1ff",
                 label: "The Human Interface",
               },
@@ -179,18 +198,26 @@ export const About = () => {
           <div className="flex flex-col md:flex-row gap-12 md:gap-24">
             <div>
               <div className="font-headline text-6xl font-black text-on-surface mb-2 tracking-tighter">
-                12+
+                3+
               </div>
               <div className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant font-bold">
-                Years Tinkering
+                Professional Years
               </div>
             </div>
             <div>
               <div className="font-headline text-6xl font-black text-on-surface mb-2 tracking-tighter">
-                40+
+                30+
               </div>
               <div className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant font-bold">
-                Cloud Deployments
+                Features Delivered
+              </div>
+            </div>
+            <div>
+              <div className="font-headline text-6xl font-black text-on-surface mb-2 tracking-tighter">
+                200+
+              </div>
+              <div className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant font-bold">
+                Bugs Solved
               </div>
             </div>
           </div>
@@ -200,15 +227,15 @@ export const About = () => {
             whileTap={{ scale: 0.98 }}
             onClick={() => navigate("/experience")}
             className="bg-gradient-to-br from-primary to-primary-container text-white px-10 py-4 rounded-full font-headline font-extrabold text-sm shadow-lg hover:shadow-primary/40 transition-all">
-            View Experience
+            Review Technical Career
           </motion.button>
         </motion.section>
 
-        {/* ─── COMMAND CENTER SECTION (NOW BELOW STATS) ─── */}
+        {/* ─── COMMAND CENTER SECTION ─── */}
         <section className="pb-20">
           <div className="flex items-center gap-4 mb-16">
             <h2 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface">
-              The Command Center
+              Hardware Environment
             </h2>
             <div className="h-[1px] flex-1 bg-gradient-to-r from-outline-variant to-transparent"></div>
           </div>
@@ -222,7 +249,7 @@ export const About = () => {
                 className="rounded-2xl overflow-hidden border border-outline-variant aspect-square lg:aspect-video relative group">
                 <img
                   src="/worksetup.jpg"
-                  alt="Primary Workspace"
+                  alt="Architecture Hub"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   style={{ imageRendering: "crisp-edges" as any }}
                 />
@@ -237,7 +264,7 @@ export const About = () => {
                 className="rounded-2xl overflow-hidden border border-outline-variant aspect-square relative group mt-12">
                 <img
                   src="/Workstup2.jpg"
-                  alt="Alternate Workspace View"
+                  alt="Development Node"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   style={{ imageRendering: "crisp-edges" as any }}
                 />
@@ -248,12 +275,11 @@ export const About = () => {
             <div className="lg:col-span-5 space-y-8">
               <h3 className="text-xl font-bold text-on-surface flex items-center gap-3">
                 <span className="w-8 h-[2px] bg-primary"></span>
-                The Tools of the Trade
+                The Engineering Console
               </h3>
               <p className="text-on-surface-variant leading-relaxed font-body">
                 A clean space leads to clean code. My environment is optimized
-                for deep focus and cross-platform development, featuring
-                high-refresh hardware and ergonomic peripherals.
+                for deep focus
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
