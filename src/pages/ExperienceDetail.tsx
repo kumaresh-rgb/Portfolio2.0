@@ -1,66 +1,230 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "motion/react";
-import { ArrowLeft, Shield, Zap, Terminal } from "lucide-react";
+import {
+  ArrowLeft,
+  Shield,
+  Zap,
+  Terminal,
+  CheckCircle2,
+  Cpu,
+  Layers,
+  BookOpen,
+} from "lucide-react";
+
+// ─── Detailed Data Structure ─────────────────────────────────────────────────
+
+const DETAILED_DATA: Record<string, any> = {
+  "lumel-technologies": {
+    company: "Lumel Technologies",
+    role: "Product Developer",
+    location: "Chennai, India",
+    period: "07/2025 — Present",
+    challenge:
+      "Handling massive semantic models (5M+ cells) and providing Power BI-parity features in a custom XMLA environment.",
+    solution:
+      "Leveraged .NET 10, TOM, and ADOMD.NET to architect advanced DAX orchestration and high-performance query engines.",
+    result:
+      "50% faster filter loading and successful delivery of core analytical features (Split Measure/Implicit Measures).",
+    stack: [
+      ".NET 10",
+      "DAX",
+      "ADOMD.NET",
+      "Tabular Object Model (TOM)",
+      "Redis",
+      "Azure Services",
+      "Podman",
+    ],
+    milestones: [
+      {
+        title: "Analytical Feature Engineering",
+        points: [
+          "Developed 'Split By Measure' functionality, enabling automated measure generation by category without manual DAX writing.",
+          "Implemented 'Show Items with No Data' parity, supporting multi-category hierarchies and complex filter interactions.",
+          "Engineered 'Discourage Implicit Measures' to enforce data model integrity, mirroring Power BI's core governance behavior.",
+        ],
+      },
+      {
+        title: "Performance & Infrastructure",
+        points: [
+          "Optimized Batch Filter Pane loading by 40-50%, enabling efficient handling of 5+ million cells for enterprise-scale analysis.",
+          "Resolved critical TOPN/TOPNSKIP pagination bugs, ensuring 100% accuracy in large-data retrieval.",
+          "Proactively identified and fixed .NET dependency conflicts across all environments to prevent CI/CD bottlenecks.",
+        ],
+      },
+      {
+        title: "Knowledge Management",
+        points: [
+          "Authored comprehensive technical documentation (LOOP) for complex stories, accelerating team onboarding.",
+          "Actively utilized Semantic Model DMV queries and Redis caching for system-wide performance profiling.",
+        ],
+      },
+    ],
+  },
+  "boston-harbor-consulting": {
+    company: "Boston Harbor Consulting",
+    role: "Associate Software Developer",
+    location: "Chennai, India",
+    period: "10/2023 — 06/2025",
+    challenge:
+      "A monolithic low-code platform suffering from stability issues and legacy architectural bottlenecks.",
+    solution:
+      "Transitioned to a .NET Core Microservices architecture while implementing a zero-trust debugging and testing culture.",
+    result:
+      "30% stability increase and successful migration of 30% of back-end modules.",
+    stack: [
+      ".NET Core",
+      "Microservices",
+      "GraphQL",
+      "Roslyn",
+      "Monaco Editor",
+      "Jira",
+      "Unit Testing",
+    ],
+    milestones: [
+      {
+        title: "Microservices & Migration",
+        points: [
+          "Owned the back-end conversion of 30% of total modules during the monolithic-to-microservices transition.",
+          "Built multiple reusable components for the object module microservices, standardizing the low-code engine.",
+          "Implemented advanced version control using GraphQL queries and the Roslyn compiler platform.",
+        ],
+      },
+      {
+        title: "Quality Assurance & Stability",
+        points: [
+          "Resolved 200+ critical bugs within a single year, tracked via Jira, significantly improving product reliability.",
+          "Achieved a 20–30% reduction in recurring bugs per module through rigorous refactoring and unit testing.",
+          "Maintained a consistent '8 hours of focused development' standard, providing weekend support for critical releases.",
+        ],
+      },
+      {
+        title: "Developer Experience (DX)",
+        points: [
+          "Integrated Monaco Editor with custom compiler logic to provide a seamless low-code development experience.",
+          "Wrote clean, maintainable, and reusable code focused on high-performance execution and timely delivery.",
+        ],
+      },
+    ],
+  },
+};
+
+// ─── Main Component ───────────────────────────────────────────────────────────
 
 export const ExperienceDetail = () => {
   const { id } = useParams();
+  const data = id ? DETAILED_DATA[id] : null;
+
+  if (!data) {
+    return <div className="pt-40 text-center">Project not found.</div>;
+  }
 
   return (
     <div className="min-h-screen bg-background text-on-surface pt-32 pb-20 px-6">
       <div className="max-w-4xl mx-auto">
         <Link
           to="/experience"
-          className="flex items-center gap-2 text-primary hover:underline mb-8">
-          <ArrowLeft size={16} /> Back to Experience
+          className="flex items-center gap-2 text-primary hover:underline mb-8 transition-all">
+          <ArrowLeft size={16} /> Back to Timeline
         </Link>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="space-y-12">
+          {/* Header */}
           <header>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tighter">
-              Project Detail:{" "}
-              <span className="text-primary">{id?.replace("-", " ")}</span>
-            </h1>
-            <p className="text-xl text-on-surface-variant">
-              A deep dive into the architecture, challenges, and outcomes of
-              this mission.
-            </p>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+              <div>
+                <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-2">
+                  {data.company}
+                </h1>
+                <p className="text-xl text-primary font-medium">{data.role}</p>
+              </div>
+              <div className="text-md md:text-right text-on-surface-variant font-label">
+                <p>{data.location}</p>
+                <p>{data.period}</p>
+              </div>
+            </div>
+            <div className="h-1 w-20 bg-primary rounded-full" />
           </header>
 
+          {/* Quick Stats Grid */}
           <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-surface-container p-6 rounded-xl border border-outline-variant/10">
-              <Shield className="text-tertiary mb-3" />
-              <h3 className="font-bold">Challenge</h3>
-              <p className="text-sm text-on-surface-variant">
-                Legacy bottlenecks and security vulnerabilities.
+              <Shield className="text-tertiary mb-3" size={24} />
+              <h3 className="font-bold mb-2">Challenge</h3>
+              <p className="text-sm text-on-surface-variant leading-relaxed">
+                {data.challenge}
               </p>
             </div>
             <div className="bg-surface-container p-6 rounded-xl border border-outline-variant/10">
-              <Zap className="text-primary mb-3" />
-              <h3 className="font-bold">Solution</h3>
-              <p className="text-sm text-on-surface-variant">
-                Microservices orchestration using Dapr and .NET.
+              <Zap className="text-primary mb-3" size={24} />
+              <h3 className="font-bold mb-2">Solution</h3>
+              <p className="text-sm text-on-surface-variant leading-relaxed">
+                {data.solution}
               </p>
             </div>
             <div className="bg-surface-container p-6 rounded-xl border border-outline-variant/10">
-              <Terminal className="text-secondary mb-3" />
-              <h3 className="font-bold">Result</h3>
-              <p className="text-sm text-on-surface-variant">
-                99.9% uptime and 40% cost reduction.
+              <Terminal className="text-secondary mb-3" size={24} />
+              <h3 className="font-bold mb-2">Outcome</h3>
+              <p className="text-sm text-on-surface-variant leading-relaxed">
+                {data.result}
               </p>
             </div>
           </section>
 
-          <article className="prose prose-invert max-w-none">
-            <h2 className="text-2xl font-bold">The Technical Stack</h2>
-            <p className="text-on-surface-variant">
-              Detailed breakdown of how I utilized Azure Kubernetes Service
-              (AKS) and Entity Framework Core to handle high-concurrency
-              financial transactions...
-            </p>
-          </article>
+          {/* Technical Deep Dive */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+            {/* Sidebar: Tech Stack */}
+            <aside className="lg:col-span-1">
+              <h4 className="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-6">
+                Technical Stack
+              </h4>
+              <div className="flex flex-wrap lg:flex-col gap-2">
+                {data.stack.map((tech: string) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 bg-surface-container-high rounded-md text-sm border border-outline-variant/10 text-on-surface">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </aside>
+
+            {/* Main Content: Milestones */}
+            <div className="lg:col-span-3 space-y-10">
+              {data.milestones.map((milestone: any, idx: number) => (
+                <section
+                  key={idx}
+                  className="relative pl-8 border-l-2 border-outline-variant/20">
+                  <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-background border-2 border-primary" />
+                  <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                    {idx === 0 ? (
+                      <Cpu size={20} className="text-primary" />
+                    ) : idx === 1 ? (
+                      <Layers size={20} className="text-tertiary" />
+                    ) : (
+                      <BookOpen size={20} className="text-secondary" />
+                    )}
+                    {milestone.title}
+                  </h3>
+                  <ul className="space-y-4">
+                    {milestone.points.map((point: string, pIdx: number) => (
+                      <li
+                        key={pIdx}
+                        className="flex gap-3 text-on-surface-variant leading-relaxed">
+                        <CheckCircle2
+                          size={16}
+                          className="mt-1.5 text-primary flex-shrink-0"
+                        />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
     </div>

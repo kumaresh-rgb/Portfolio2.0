@@ -1,19 +1,17 @@
 import React from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion"; // Note: Changed to framer-motion for standard compatibility
 import { Link } from "react-router-dom";
 import {
   Award,
   BookOpen,
   Gamepad2,
-  Users,
-  MapPin,
-  Video,
-  Star,
   RefreshCw,
   TrendingUp,
   Download,
   ExternalLink,
   Rocket,
+  Database,
+  LayoutList,
 } from "lucide-react";
 
 // ─── Shared glass card style ──────────────────────────────────────────────────
@@ -31,9 +29,9 @@ function GlassCard({
     <div
       className={`glass-card rounded-xl ${className}`}
       style={{
-        background: "rgba(30, 39, 47, 0.4)",
+        background: "rgba(10, 15, 20, 0.6)",
         backdropFilter: "blur(12px)",
-        border: "1px solid rgba(112, 118, 126, 0.15)",
+        border: "1px solid rgba(255, 255, 255, 0.08)",
         ...style,
       }}>
       {children}
@@ -49,12 +47,10 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
       <h2 className="font-headline text-3xl font-bold text-on-surface whitespace-nowrap">
         {children}
       </h2>
-      <div className="h-px flex-1 bg-gradient-to-r from-outline-variant/30 to-transparent" />
+      <div className="h-px flex-1 bg-gradient-to-r from-[#73b1ff]/30 to-transparent" />
     </div>
   );
 }
-
-
 
 // ─── Timeline milestone ───────────────────────────────────────────────────────
 
@@ -82,9 +78,8 @@ function Milestone({
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
       className="relative pl-12">
-      {/* Dot */}
       <div
-        className={`absolute left-0 top-1.5 w-6 h-6 rounded-full border-4 border-background ${dotColor}`}
+        className={`absolute left-0 top-1.5 w-6 h-6 rounded-full border-4 border-[#0a0f14] ${dotColor}`}
         style={{ boxShadow: dotGlow }}
       />
       <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2">
@@ -100,10 +95,8 @@ function Milestone({
   );
 }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
-
 export const Accomplishments = () => (
-  <div className="min-h-screen bg-background text-on-surface font-body">
+  <div className="min-h-screen bg-[#050505] text-white font-body">
     <main className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
       {/* ── Hero Header ── */}
       <motion.header
@@ -111,136 +104,144 @@ export const Accomplishments = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="mb-24 space-y-6">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-highest border border-outline-variant/20 mb-4">
-          <span className="w-2 h-2 rounded-full bg-tertiary animate-pulse" />
-          <span className="font-label text-xs uppercase tracking-widest text-tertiary">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-4">
+          <span className="w-2 h-2 rounded-full bg-[#c392fc] animate-pulse" />
+          <span className="font-label text-xs uppercase tracking-widest text-[#c392fc]">
             Portfolio Milestones
           </span>
         </div>
 
-        <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-on-surface leading-tight">
+        <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter leading-tight">
           Beyond the Code:
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d1fffc] via-[#c392fc] to-[#ff7e6c]">
             Milestones & Recognition
           </span>
         </h1>
 
-        <p className="max-w-2xl text-lg text-on-surface-variant leading-relaxed">
-          A curated timeline of technical excellence, architectural mastery, and
-          contributions to the Microsoft ecosystem. This is where innovation
+        <p className="max-w-2xl text-lg text-white/60 leading-relaxed">
+          A curated timeline of technical excellence and architectural mastery
+          within the Microsoft ecosystem. This is where high-scale engineering
           meets validation.
         </p>
       </motion.header>
 
-      {/* ── Section 1: Top Bento — Certs Roadmap ── */}
+      {/* ── Section 1: Certs Roadmap ── */}
       <motion.section
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
         className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
-        {/* ─── Verified Certifications Stack (Left/Large Card) ─── */}
         <GlassCard
           className="md:col-span-2 p-8 flex flex-col justify-between relative overflow-hidden group"
-          style={{
-            boxShadow: "0 0 40px -10px rgba(115,177,255,0.2)",
-          }}>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
+          style={{ boxShadow: "0 0 40px -10px rgba(115,177,255,0.15)" }}>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#73b1ff]/5 rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
 
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <Award className="text-primary w-10 h-10" />
-              <span className="px-3 py-1 bg-primary/20 text-primary text-[10px] font-bold rounded-full uppercase tracking-tighter">
+              <Award className="text-[#73b1ff] w-10 h-10" />
+              <span className="px-3 py-1 bg-[#73b1ff]/20 text-[#73b1ff] text-[10px] font-bold rounded-full uppercase tracking-tighter">
                 Verified Expert
               </span>
             </div>
-            <h3 className="font-headline text-3xl font-bold text-on-surface mb-6">
+            <h3 className="font-headline text-3xl font-bold mb-6">
               Verified Certifications
             </h3>
 
             <div className="space-y-6">
-              {/* AZ-900 */}
-              <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors">
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:border-[#73b1ff]/30 transition-colors">
                 <img
                   src="https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg"
                   alt="AZ-900"
                   className="w-10 h-10 object-contain"
                 />
                 <div>
-                  <div className="text-primary font-bold text-sm tracking-tighter">AZ-900</div>
-                  <div className="text-on-surface font-semibold text-base">Azure Fundamentals</div>
-                  <div className="text-on-surface-variant text-xs">Standardized baseline for Microsoft Cloud architectures.</div>
+                  <div className="text-[#73b1ff] font-bold text-sm tracking-tighter">
+                    AZ-900
+                  </div>
+                  <div className="text-white font-semibold text-base">
+                    Azure Fundamentals
+                  </div>
+                  <div className="text-white/50 text-xs">
+                    Standardized baseline for Microsoft Cloud architectures.
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-             <div className="font-label text-sm flex gap-6">
-                <div>
-                  <div className="text-on-surface-variant text-[10px] uppercase tracking-widest mb-1">Status</div>
-                  <div className="text-primary-light font-bold">ACTIVE</div>
+            <div className="font-label text-sm flex gap-6">
+              <div>
+                <div className="text-white/40 text-[10px] uppercase tracking-widest mb-1">
+                  Status
                 </div>
-                <div>
-                  <div className="text-on-surface-variant text-[10px] uppercase tracking-widest mb-1">Last Update</div>
-                  <div className="text-white font-bold">JAN 2024</div>
+                <div className="text-[#73b1ff] font-bold">ACTIVE</div>
+              </div>
+              <div>
+                <div className="text-white/40 text-[10px] uppercase tracking-widest mb-1">
+                  Last Update
                 </div>
-             </div>
-             <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href={import.meta.env.VITE_CERTIFICATE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-tertiary text-white px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide transition-all shadow-xl shadow-primary/20 hover:shadow-primary/40 group">
-                <ExternalLink className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-                View Certificate
-             </motion.a>
+                <div className="text-white font-bold">JAN 2024</div>
+              </div>
+            </div>
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="#"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-tertiary text-white px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide transition-all shadow-xl shadow-primary/20 hover:shadow-primary/40 group">
+              <ExternalLink className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+              View Certificate
+            </motion.a>
           </div>
         </GlassCard>
 
-        {/* ─── Learning Roadmap / Ongoing (Right/Small Card) ─── */}
-        <GlassCard className="p-8 flex flex-col items-start border-tertiary/20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-tertiary/10 rounded-full blur-3xl -mr-16 -mt-16" />
-          
+        <GlassCard className="p-8 flex flex-col items-start border-[#c392fc]/20 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#c392fc]/5 rounded-full blur-3xl -mr-16 -mt-16" />
+
           <div className="relative z-10 w-full mb-6">
-            <div className="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center mb-6">
-              <RefreshCw className="w-7 h-7 text-tertiary animate-spin-slow" />
+            <div className="w-12 h-12 rounded-xl bg-[#c392fc]/10 flex items-center justify-center mb-6">
+              <RefreshCw className="w-7 h-7 text-[#c392fc] animate-spin-slow" />
             </div>
-            <h3 className="font-headline text-2xl font-bold text-on-surface mb-2">
+            <h3 className="font-headline text-2xl font-bold mb-2">
               On-going / Future
             </h3>
-            <p className="text-on-surface-variant text-xs leading-relaxed">
-              Actively mastering advanced specialties and renewing core associate credentials.
+            <p className="text-white/50 text-xs leading-relaxed">
+              Actively mastering advanced specialties in DevOps and Data
+              Engineering.
             </p>
           </div>
 
           <div className="relative z-10 w-full space-y-3">
-             {[
-               { id: "AZ-204", name: "Developer Associate", sub: "Learning" },
-               { id: "PL-300", name: "Power BI Data Analyst", sub: "Planning" },
-               { id: "DP-600", name: "Fabric Analytics Engineer", sub: "Planning" },
-               { id: "AZ-500", name: "Security Engineer", sub: "Planning" },
-               { id: "DP-203", name: "Data Engineer", sub: "Planning" },
-               { id: "AZ-400", name: "DevOps Engineer Expert", sub: "Planning" }
-             ].map((item, idx) => (
-               <div key={idx} className="flex justify-between items-center p-3 py-2 rounded-lg bg-surface-container/50 border border-white/5 hover:bg-tertiary/5 transition-colors">
-                 <div>
-                   <div className="text-[10px] font-black text-tertiary tracking-tighter leading-none mb-1">{item.id}</div>
-                   <div className="text-[12px] font-bold text-on-surface leading-tight">{item.name}</div>
-                 </div>
-                 <span className={`text-[9px] font-bold py-1 px-2 rounded-md uppercase ${item.sub === 'Learning' ? 'bg-tertiary/20 text-tertiary animate-pulse' : 'bg-white/5 text-white/40'}`}>
-                   {item.sub}
-                 </span>
-               </div>
-             ))}
-          </div>
+            {[
+              { id: "AZ-204", name: "Developer Associate", sub: "Learning" },
+              {
+                id: "DP-600",
+                name: "Fabric Analytics Engineer",
+                sub: "Planning",
+              },
+              { id: "AZ-400", name: "DevOps Engineer Expert", sub: "Planning" },
 
-          <div className="mt-8 pt-6 border-t border-outline-variant/10 w-full relative z-10 text-left">
-            <span className="font-label text-[10px] text-on-surface/50 tracking-widest uppercase">
-              NEXT GOAL: DEVOPS EXPERT
-            </span>
+              // { id: "AZ-500", name: "Security Engineer", sub: "Planning" },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="flex justify-between items-center p-3 py-2 rounded-lg bg-white/5 border border-white/5 hover:bg-[#c392fc]/5 transition-colors">
+                <div>
+                  <div className="text-[10px] font-black text-[#c392fc] tracking-tighter leading-none mb-1">
+                    {item.id}
+                  </div>
+                  <div className="text-[12px] font-bold text-white leading-tight">
+                    {item.name}
+                  </div>
+                </div>
+                <span
+                  className={`text-[9px] font-bold py-1 px-2 rounded-md uppercase ${item.sub === "Learning" ? "bg-[#c392fc]/20 text-[#c392fc] animate-pulse" : "bg-white/5 text-white/40"}`}>
+                  {item.sub}
+                </span>
+              </div>
+            ))}
           </div>
         </GlassCard>
       </motion.section>
@@ -252,31 +253,38 @@ export const Accomplishments = () => (
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
         className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24">
-        {/* Author */}
         <GlassCard className="p-8 flex items-start gap-6">
-          <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-            <BookOpen className="w-7 h-7 text-primary" />
+          <div className="w-14 h-14 rounded-xl bg-[#73b1ff]/10 flex items-center justify-center flex-shrink-0">
+            <BookOpen className="w-7 h-7 text-[#73b1ff]" />
           </div>
           <div>
-            <h3 className="font-headline text-2xl font-bold text-on-surface mb-2">
+            <h3 className="font-headline text-2xl font-bold mb-2">
               The End of Feminist (Sci-Fi)
             </h3>
-            <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-              Author of the techno-thriller series <strong>"THE END OF FEMINIST"</strong>. A morally complex exploration of biological engineering, identity, and the unintended consequences of technology on humanity's future.
+            <p className="text-white/60 text-sm leading-relaxed mb-6">
+              Author of the techno-thriller series **"THE END OF FEMINIST"**. A
+              morally complex exploration of biological engineering, identity,
+              and the unintended consequences of technology on humanity's
+              future.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8 border-y border-outline-variant/10 py-6">
+            {/* Volume details based on your design specs */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8 border-y border-white/10 py-6">
               <div>
-                <h4 className="text-xs uppercase tracking-[0.2em] font-black text-primary mb-3">Volume 1: Genesis</h4>
-                <ul className="space-y-2 text-[11px] text-on-surface-variant font-medium">
+                <h4 className="text-xs uppercase tracking-[0.2em] font-black text-[#73b1ff] mb-3">
+                  Volume 1: Genesis
+                </h4>
+                <ul className="space-y-2 text-[11px] text-white/50 font-medium">
                   <li>• Male evolution & invention of the Catalyst</li>
                   <li>• International spread & global disruption</li>
                   <li>• Misuse of biological patents</li>
                 </ul>
               </div>
               <div>
-                <h4 className="text-xs uppercase tracking-[0.2em] font-black text-tertiary mb-3">Volume 2: Consequences</h4>
-                <ul className="space-y-2 text-[11px] text-on-surface-variant font-medium">
+                <h4 className="text-xs uppercase tracking-[0.2em] font-black text-[#c392fc] mb-3">
+                  Volume 2: Consequences
+                </h4>
+                <ul className="space-y-2 text-[11px] text-white/50 font-medium">
                   <li>• WWW III & The Treaty of BWBM</li>
                   <li>• AI Integration & Human Mankind Preservation</li>
                   <li>• The Global Peace Accords (UNIDO)</li>
@@ -288,20 +296,18 @@ export const Accomplishments = () => (
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href={import.meta.env.VITE_BOOK_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-primary to-tertiary text-white px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide transition-all shadow-xl shadow-primary/20 hover:shadow-primary/40 group">
+                href="#"
+                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-primary to-tertiary text-white px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide shadow-xl shadow-primary/20 group">
                 <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
                 Download Vol 1
               </motion.a>
+
+              {/* Second Volume Button added to match your request */}
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href={import.meta.env.VITE_BOOK_VOL2_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-tertiary to-secondary text-white px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide transition-all shadow-xl shadow-tertiary/20 hover:shadow-tertiary/40 group">
+                href="#"
+                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-tertiary to-secondary text-white px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide shadow-xl shadow-tertiary/20 group">
                 <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
                 Download Vol 2
               </motion.a>
@@ -309,110 +315,79 @@ export const Accomplishments = () => (
           </div>
         </GlassCard>
 
-        {/* Gamer */}
         <GlassCard className="p-8 flex items-start gap-6">
           <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center flex-shrink-0">
             <Gamepad2 className="w-7 h-7 text-secondary" />
           </div>
           <div>
-            <h3 className="font-headline text-2xl font-bold text-on-surface mb-2">
+            <h3 className="font-headline text-2xl font-bold mb-2">
               Level Up: Gamer Profile
             </h3>
-            <p className="text-on-surface-variant text-sm leading-relaxed mb-4">
-              Exploring the convergence of high-performance engineering and digital storytelling. From competitive FPS field-ops to immersive PC narrative epics.
+            <p className="text-white/60 text-sm leading-relaxed mb-4">
+              Exploring high-performance digital storytelling. From competitive
+              field-ops to immersive PC narrative epics.
             </p>
             <div className="flex gap-4 flex-wrap mt-6">
               <Link
                 to="/gamer"
                 className="inline-flex items-center gap-2 bg-secondary/10 hover:bg-secondary/20 text-secondary border border-secondary/20 px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide transition-all group overflow-hidden relative">
-                <motion.div 
-                  className="flex items-center gap-2"
-                  whileHover={{ x: [0, 5, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}>
-                  <span>View Mission Brief</span>
-                  <Rocket className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-                </motion.div>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                <span>View Mission Brief</span>
+                <Rocket className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
           </div>
         </GlassCard>
       </motion.section>
-
-      {/* ── Section 3: Speaking Engagements ── */}
+      {/* ── Section 3: Open Source & Research ── */}
       <motion.section
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
         className="mb-24">
-        <SectionTitle>Speaking Engagements</SectionTitle>
+        <SectionTitle>Open Source & Ecosystem Research</SectionTitle>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Talk 1 */}
-          <div className="flex gap-6 p-6 rounded-xl hover:bg-surface-container-high transition-all duration-300 border border-transparent hover:border-outline-variant/20">
-            <div className="flex-shrink-0 w-24 h-24 rounded-lg bg-surface-container-highest overflow-hidden">
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC57kZrYDE5y_b4nRIZLFUbSrSysRCKZVViyN6lk-oyVebLbJNpVVD-FpWQqpt7PnFsKgamgpTZnj4QRNsiULqArZ3Ihh0YNdWLyaCLeRmAGzlVX4DyBR7etidVmb2HyiYlYcZttFwrTLDsJacRQr39ILYCjesxN4rNjO8fyAXXR3Xiu3JCEoJO87rzMvB8_79jWmIFPl1SyB-jOD83t6LpqxRJsjXASLT4Hmbi276HiwsvIIGcnbW9XfsiBXdg-d_HctKw7JWRyHPS"
-                alt="Microsoft Build Talk"
-                className="w-full h-full object-cover opacity-60"
-              />
+          {/* Replaced with Timeline TODO Project */}
+          <div className="flex gap-6 p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-white/10">
+            <div className="flex-shrink-0 w-16 h-16 rounded-lg bg-[#c392fc]/10 flex items-center justify-center">
+              <LayoutList className="text-[#c392fc] w-8 h-8" />
             </div>
             <div>
-              <span className="font-label text-xs text-tertiary uppercase tracking-widest mb-2 block">
-                Microsoft Build '23
+              <span className="font-label text-xs text-[#c392fc] uppercase tracking-widest mb-2 block">
+                Productivity Tools
               </span>
-              <h4 className="font-headline text-xl font-bold text-on-surface mb-2">
-                Architecting for Global Scale on Azure
+              <h4 className="font-headline text-xl font-bold mb-2">
+                Modern Timeline TODO
               </h4>
-              <p className="text-on-surface-variant text-sm mb-4 leading-relaxed">
-                A deep dive into multi-region failover and Cosmos DB consistency
-                levels for enterprise apps.
+              <p className="text-white/60 text-sm mb-4 leading-relaxed">
+                Developed a student-oriented task management system using .NET
+                10 and React to track complex deadlines through a modern
+                timeline interface.
               </p>
-              <div className="flex items-center gap-4 text-xs font-label text-outline">
-                <span className="flex items-center gap-1">
-                  <Users className="w-3.5 h-3.5" /> 500+ Attendees
-                </span>
-                <span className="flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5" /> Seattle, WA
-                </span>
-              </div>
             </div>
           </div>
 
-          {/* Talk 2 */}
-          <div className="flex gap-6 p-6 rounded-xl hover:bg-surface-container-high transition-all duration-300 border border-transparent hover:border-outline-variant/20">
-            <div className="flex-shrink-0 w-24 h-24 rounded-lg bg-surface-container-highest overflow-hidden">
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRMAHaOEZu4PSkRP8cNJLBvSIP_uS8hKboHmMGWwv61mlqh_LMLtzQIqhhfNOXb1YXSvVSzyKr3N96cZfrPSKiN74vVBM6Uo9hD1PEcUakTyC2ZZ01vXpVbKPWhMJDaiQYlaLtRf4oXrtRqZpFcWB2L6OdeDRAhQITv6_vCim6zadYXTYKkDLuBIucUtYYf5FHFUEx0p6Yf3MtLPVzokYQOO3USznXk0SBx_xoJmaaTLj84pUojouj3kqmhFu6h2a5_l6Ihet29zai"
-                alt=".NET Conf Talk"
-                className="w-full h-full object-cover opacity-60"
-              />
+          {/* Research Section Grammar Fix */}
+          <div className="flex gap-6 p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-white/10">
+            <div className="flex-shrink-0 w-16 h-16 rounded-lg bg-[#d1fffc]/10 flex items-center justify-center">
+              <Database className="text-[#d1fffc] w-8 h-8" />
             </div>
             <div>
-              <span className="font-label text-xs text-tertiary uppercase tracking-widest mb-2 block">
-                .NET Conf 2023
+              <span className="font-label text-xs text-[#d1fffc] uppercase tracking-widest mb-2 block">
+                R&D Mastery
               </span>
-              <h4 className="font-headline text-xl font-bold text-on-surface mb-2">
-                Modernizing Legacy Monoliths
+              <h4 className="font-headline text-xl font-bold mb-2">
+                XMLA & Semantic Analytics
               </h4>
-              <p className="text-on-surface-variant text-sm mb-4 leading-relaxed">
-                Strategies for incremental migration to microservices using Dapr
-                and Container Apps.
+              <p className="text-white/60 text-sm mb-4 leading-relaxed">
+                Conducted advanced research into Power BI metadata automation
+                and high-scale data modeling performance optimization.
               </p>
-              <div className="flex items-center gap-4 text-xs font-label text-outline">
-                <span className="flex items-center gap-1">
-                  <Video className="w-3.5 h-3.5" /> Virtual Session
-                </span>
-                <span className="flex items-center gap-1">
-                  <Star className="w-3.5 h-3.5" /> Rated 4.9/5
-                </span>
-              </div>
             </div>
           </div>
         </div>
       </motion.section>
-
 
       {/* ── Section 4: Career Highlights Timeline ── */}
       <motion.section
@@ -420,45 +395,43 @@ export const Accomplishments = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="bg-surface-container-low rounded-3xl p-12 overflow-hidden relative">
-        {/* Decorative watermark icon */}
+        className="bg-white/[0.02] border border-white/5 rounded-3xl p-12 overflow-hidden relative">
         <div className="absolute top-0 right-0 p-12 opacity-[0.04] pointer-events-none select-none">
-          <TrendingUp className="w-48 h-48 text-on-surface" />
+          <TrendingUp className="w-48 h-48 text-white" />
         </div>
 
-        <h2 className="font-headline text-3xl font-bold text-on-surface mb-16">
+        <h2 className="font-headline text-3xl font-bold mb-16">
           Career Highlights
         </h2>
 
         <div className="space-y-12 relative">
-          {/* Vertical gradient line */}
-          <div className="absolute left-[11px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary via-tertiary to-transparent opacity-20" />
+          <div className="absolute left-[11px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-[#73b1ff] via-[#c392fc] to-transparent opacity-20" />
 
           <Milestone
             year="2022 — PRESENT"
-            title="Backend Developer & R&D at Lumel Technologies"
-            desc="Leading R&D for Power BI Semantic Models and metadata automation. Architecting high-performance data analytics tools using C#, XMLA endpoints, DAX, and Azure ecosystem for a premier Microsoft ISV partner."
-            dotColor="bg-primary"
-            dotGlow="0 0 15px rgba(115,177,255,0.5)"
-            yearColor="text-primary"
+            title="Product Developer at Lumel Technologies"
+            desc="Architecting high-scale data orchestration systems and high-throughput API gateways processing 50k+ requests/sec using .NET 8/10 and React."
+            dotColor="bg-[#73b1ff]"
+            dotGlow="0 0 15px rgba(115,177,255,0.4)"
+            yearColor="text-[#73b1ff]"
           />
 
           <Milestone
-            year="2020 — 2022"
-            title="Open Source Core Contributor"
-            desc="Authored 'Azure-Ready-Templates' — a library of Bicep modules used by over 5,000 developers worldwide for standardized cloud provisioning."
-            dotColor="bg-tertiary"
-            dotGlow="0 0 15px rgba(71,204,255,0.5)"
-            yearColor="text-tertiary"
+            year="CURRENT PROJECTS"
+            title="AI & Matrimonial Platform Architect"
+            desc="Engineered ZEN-C MATRIMONY using Python and GPT-4, delivering personalized matchmaking and automated relationship advice through advanced AI integration."
+            dotColor="bg-[#c392fc]"
+            dotGlow="0 0 15px rgba(195, 146, 252, 0.4)"
+            yearColor="text-[#c392fc]"
           />
 
           <Milestone
-            year="2018 — 2020"
-            title="Senior Full-Stack Developer"
-            desc="Architected a real-time analytics dashboard using SignalR and Azure Functions, supporting 50k+ concurrent users during peak sports events."
-            dotColor="bg-outline-variant"
+            year="FOUNDATIONS"
+            title="Full-Stack Developer (Microsoft Stack)"
+            desc="Developed a modern timeline-based productivity ecosystem and financial trackers, optimizing student workflows through sleek UI and automated Azure deployment."
+            dotColor="bg-white/20"
             dotGlow="none"
-            yearColor="text-outline"
+            yearColor="text-white/40"
           />
         </div>
       </motion.section>

@@ -67,7 +67,7 @@ export const Projects = () => {
           </div>
           <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-[#e6ebf4] mb-6">
             Forging the Future: <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#73b1ff] via-[#c392fc] to-[#47ccff]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d1fffc] via-[#c392fc] to-[#ff7e6c]">
               Featured Projects
             </span>
           </h1>

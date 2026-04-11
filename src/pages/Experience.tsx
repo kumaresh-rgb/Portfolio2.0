@@ -3,11 +3,8 @@ import { motion } from "motion/react";
 import {
   Cloud,
   Database,
-  Terminal,
   Code2,
   LayoutGrid,
-  Network,
-  HardDrive,
   Rocket,
   Gauge,
   ShieldCheck,
@@ -15,7 +12,7 @@ import {
   BarChart2,
   Layers,
   Cpu,
-  CheckCircle2,
+  Sparkles,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -33,41 +30,42 @@ interface ExperienceEntry {
   cardTitle: string;
   icons: { icon: React.ElementType; color: string; border: string }[];
   bullets: BulletItem[];
-  accentColor: string; // Tailwind text color for year / company
-  glowClass: string; // CSS class for card glow
-  reversed: boolean; // card left, meta right
+  accentColor: string;
+  glowClass: string;
+  reversed: boolean;
 }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const EXPERIENCES: ExperienceEntry[] = [
   {
-    year: "2022 — PRESENT",
+    year: "2025 — PRESENT",
     role: "Product Developer",
-    company: "Lumel Technologies Solutions",
-    cardTitle: "Enterprise Data Orchestration",
+    company: "Lumel Technologies",
+    cardTitle: "XMLA & Analytics Orchestration",
     accentColor: "text-primary",
     glowClass: "glow-azure",
     reversed: false,
     icons: [
-      { icon: Cloud, color: "text-primary", border: "border-primary/20" },
-      { icon: Database, color: "text-tertiary", border: "border-tertiary/20" },
+      { icon: Cpu, color: "text-primary", border: "border-primary/20" },
+      { icon: BarChart2, color: "text-tertiary", border: "border-tertiary/20" },
       {
-        icon: Terminal,
+        icon: Database,
         color: "text-secondary",
         border: "border-secondary/20",
       },
     ],
     bullets: [
       {
-        icon: Rocket,
+        icon: Sparkles,
         text: (
           <>
-            Reduced deployment time by 60% with{" "}
+            Engineered core{" "}
             <strong className="text-on-surface font-semibold">
-              Azure Container Apps
+              XMLA server features
             </strong>{" "}
-            and GitHub Actions.
+            like "Split By Measure" and "Implicit Measure" handling with custom
+            DAX.
           </>
         ),
       },
@@ -75,9 +73,11 @@ const EXPERIENCES: ExperienceEntry[] = [
         icon: Gauge,
         text: (
           <>
-            Engineered a high-throughput API gateway processing 50k+
-            requests/sec using{" "}
-            <strong className="text-on-surface font-semibold">.NET 8</strong>.
+            Optimized{" "}
+            <strong className="text-on-surface font-semibold">
+              Batch Filter Pane
+            </strong>{" "}
+            performance by 50%, enabling efficient analysis of 5M+ cells.
           </>
         ),
       },
@@ -85,24 +85,26 @@ const EXPERIENCES: ExperienceEntry[] = [
         icon: ShieldCheck,
         text: (
           <>
-            Implemented zero-trust security architecture across multi-region{" "}
-            <strong className="text-on-surface font-semibold">Azure SQL</strong>{" "}
-            clusters.
+            Proactively resolved{" "}
+            <strong className="text-on-surface font-semibold">
+              .NET build errors
+            </strong>{" "}
+            across environments, maintaining 100% deployment stability.
           </>
         ),
       },
     ],
   },
   {
-    year: "2019 — 2022",
-    role: "Full Stack Developer",
-    company: "Lumina Digital Finance",
-    cardTitle: "FinTech Microservices Migration",
+    year: "2023 — 2025",
+    role: "Associate Software Developer",
+    company: "Boston Harbor Consulting",
+    cardTitle: "Low-Code Platform Migration",
     accentColor: "text-secondary",
     glowClass: "glow-secondary",
-    reversed: true, // card on LEFT, meta on RIGHT
+    reversed: true,
     icons: [
-      { icon: Code2, color: "text-secondary", border: "border-secondary/20" },
+      { icon: Layers, color: "text-secondary", border: "border-secondary/20" },
       { icon: LayoutGrid, color: "text-primary", border: "border-primary/20" },
     ],
     bullets: [
@@ -110,11 +112,12 @@ const EXPERIENCES: ExperienceEntry[] = [
         icon: Zap,
         text: (
           <>
-            Led migration from monolithic architecture to{" "}
+            Architected{" "}
             <strong className="text-on-surface font-semibold">
-              Dapr-based microservices
+              Microservices
             </strong>{" "}
-            on Kubernetes.
+            conversion for 30% of backend modules from a monolithic
+            architecture.
           </>
         ),
       },
@@ -122,60 +125,21 @@ const EXPERIENCES: ExperienceEntry[] = [
         icon: BarChart2,
         text: (
           <>
-            Optimized SQL queries reducing report generation latency by 85% for{" "}
-            <strong className="text-on-surface font-semibold">Power BI</strong>{" "}
-            integration.
+            Improved stability by{" "}
+            <strong className="text-on-surface font-semibold">30%</strong>{" "}
+            through resolving 200+ bugs and implementing unit testing.
           </>
         ),
       },
       {
-        icon: Layers,
+        icon: Code2,
         text: (
           <>
-            Developed a unified design system using{" "}
+            Integrated{" "}
             <strong className="text-on-surface font-semibold">
-              Blazor WebAssembly
+              GraphQL & Roslyn
             </strong>{" "}
-            for internal tooling.
-          </>
-        ),
-      },
-    ],
-  },
-  {
-    year: "2017 — 2019",
-    role: "Backend Engineer",
-    company: "CoreLink Infrastructure",
-    cardTitle: "Legacy Infrastructure Overhaul",
-    accentColor: "text-tertiary",
-    glowClass: "glow-tertiary",
-    reversed: false,
-    icons: [
-      { icon: Network, color: "text-tertiary", border: "border-tertiary/20" },
-      { icon: HardDrive, color: "text-primary", border: "border-primary/20" },
-    ],
-    bullets: [
-      {
-        icon: CheckCircle2,
-        text: (
-          <>
-            Modernized .NET Framework 4.5 applications to{" "}
-            <strong className="text-on-surface font-semibold">
-              .NET Core 2.1
-            </strong>
-            .
-          </>
-        ),
-      },
-      {
-        icon: CheckCircle2,
-        text: (
-          <>
-            Managed on-premise to{" "}
-            <strong className="text-on-surface font-semibold">
-              Azure Hybrid Benefit
-            </strong>{" "}
-            transition for 40+ servers.
+            within Monaco Editor for advanced version control features.
           </>
         ),
       },
@@ -188,25 +152,25 @@ const TECH_ORBIT = [
     icon: Cpu,
     color: "text-primary",
     border: "hover:border-primary/50",
-    label: ".NET 8 / C#",
+    label: ".NET 10 / C#",
+  },
+  {
+    icon: BarChart2,
+    color: "text-tertiary",
+    border: "hover:border-tertiary/50",
+    label: "DAX / BI",
   },
   {
     icon: Cloud,
-    color: "text-tertiary",
-    border: "hover:border-tertiary/50",
+    color: "text-secondary",
+    border: "hover:border-secondary/50",
     label: "Azure",
   },
   {
-    icon: Database,
-    color: "text-secondary",
-    border: "hover:border-secondary/50",
-    label: "SQL Server",
-  },
-  {
-    icon: HardDrive,
-    color: "text-error",
-    border: "hover:border-error/50",
-    label: "Docker",
+    icon: Layers,
+    color: "text-primary",
+    border: "hover:border-primary/50",
+    label: "React TS",
   },
 ];
 
@@ -231,7 +195,6 @@ function ExpCard({ entry }: { entry: ExperienceEntry }) {
   const cardBlock = (
     <div
       className={`group relative bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 ${entry.glowClass} hover:bg-surface-container transition-all duration-500`}>
-      {/* Icon row */}
       <div className="flex gap-3 mb-6">
         {entry.icons.map(({ icon: Icon, color, border }, idx) => (
           <div
@@ -242,12 +205,10 @@ function ExpCard({ entry }: { entry: ExperienceEntry }) {
         ))}
       </div>
 
-      {/* Title */}
       <h4 className="font-headline text-xl font-semibold mb-4 text-on-surface">
         {entry.cardTitle}
       </h4>
 
-      {/* Bullets */}
       <ul className="space-y-4 font-body text-on-surface-variant">
         {entry.bullets.map(({ icon: BulletIcon, text }, idx) => (
           <li key={idx} className="flex gap-3 text-sm leading-relaxed">
@@ -280,17 +241,10 @@ function ExpCard({ entry }: { entry: ExperienceEntry }) {
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6 }}
       className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
-      {/* Central Dot - Only visible on Desktop */}
       <div className="absolute left-4 md:left-1/2 top-3 w-3 h-3 -translate-x-1/2 rounded-full bg-primary border-2 border-background hidden md:block z-10" />
-
-      {/* 
-       We use 'md:order' to handle desktop swapping, 
-       but leave them in the natural order for mobile (Meta then Card).
-    */}
       <div className={`${entry.reversed ? "md:order-2" : "md:order-1"} pt-2`}>
         {metaBlock}
       </div>
-
       <div className={entry.reversed ? "md:order-1" : "md:order-2"}>
         {cardBlock}
       </div>
@@ -303,46 +257,42 @@ function ExpCard({ entry }: { entry: ExperienceEntry }) {
 export const Experience = () => (
   <div className="min-h-screen bg-background text-on-surface font-body">
     <main className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
-      {/* ── Header ── */}
       <motion.header
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mb-20">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/20 mb-6">
+        className="mb-20 text-center">
+        <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-xl">
           <span className="w-2 h-2 rounded-full bg-tertiary animate-pulse" />
           <span className="font-label text-xs uppercase tracking-widest text-tertiary">
-            Career Architecture
+            Mission Timeline
           </span>
         </div>
 
         <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-on-surface mb-6 leading-tight">
-          Building the{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary">
+          Engineering High-Scale{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d1fffc] via-[#c392fc] to-[#ff7e6c]">
             Enterprise
           </span>{" "}
-          Nebula.
+          Foundations.
         </h1>
 
-        <p className="font-body text-lg text-on-surface-variant max-w-2xl leading-relaxed">
-          Expertise focused on the Microsoft Ecosystem. Architecting scalable
-          cloud solutions, optimizing legacy data pipelines, and pushing the
-          boundaries of .NET performance.
+        <p className="font-body text-lg text-on-surface-variant max-w-2xl leading-relaxed mx-auto relative pr-8">
+          Specializing in Full-Stack .NET & Analytics. Pushing the boundaries of
+          high-scale data modeling and Microsoft ecosystem performance.
+          <span className="absolute bottom-1 right-2 w-4 h-4 text-on-surface/50 font-sans">
+            ✦
+          </span>
         </p>
       </motion.header>
 
-      {/* ── Timeline ── */}
       <div className="relative space-y-24">
-        {/* Central vertical line */}
         <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-tertiary/20 to-transparent hidden md:block opacity-40 -translate-x-1/2" />
-
         {EXPERIENCES.map((entry, i) => (
           <ExpCard key={i} entry={entry} />
         ))}
       </div>
 
-      {/* ── Core Technical Orbit ── */}
       <motion.section
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -350,7 +300,7 @@ export const Experience = () => (
         transition={{ duration: 0.5 }}
         className="mt-40">
         <h2 className="font-headline text-4xl font-bold text-on-surface mb-12">
-          Core Technical Orbit
+          Technical Arsenal
         </h2>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -370,7 +320,6 @@ export const Experience = () => (
       </motion.section>
     </main>
 
-    {/* Scoped glow styles */}
     <style>{`
       .glow-azure     { box-shadow: 0 0 30px rgba(115, 177, 255, 0.10); }
       .glow-secondary { box-shadow: 0 0 30px rgba(195, 146, 252, 0.10); }

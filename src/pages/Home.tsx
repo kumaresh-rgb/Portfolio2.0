@@ -606,31 +606,46 @@ const Home = () => {
           }
         }
 
-        .nametag { text-align:center; padding:0 clamp(12px,3vmin,32px); margin-top: 4px; }
-        .nametag h1 {
-          font-family: 'Plus Jakarta Sans', sans-serif;
-          font-size: clamp(22px, 4.2vmin, 38px); 
-          font-weight: 800; 
-          color: #fff;
-          letter-spacing: -0.02em;
-          line-height: 1.1;
-          margin-bottom: 8px;
-          background: linear-gradient(to right, #fff 20%, #47ccff 50%, #bb86fc 80%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          filter: drop-shadow(0 0 12px rgba(71, 204, 255, 0.3));
-          white-space: nowrap;
-        }
-        .nametag p {
-          font-family: 'Plus Jakarta Sans', sans-serif;
-          font-size: clamp(10px, 1.8vmin, 14px); 
-          color: rgba(255, 255, 255, 0.5);
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          font-weight: 600;
-          margin-top: 4px;
-        }
+        .nametag { 
+  text-align: center; 
+  padding: 0 clamp(12px, 3vmin, 32px); 
+  margin-top: 4px; 
+}
 
+.nametag h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(22px, 4.2vmin, 38px); 
+  font-weight: 800; 
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  
+  /* Updated Multi-Stop Gradient Pattern */
+  background: linear-gradient(
+    to right, 
+    #fff 10%,      /* Bright start */
+    #73b1ff 35%,   /* Vibrant Blue */
+    #c392fc 65%,   /* Lavender/Purple */
+    #ff7e6c 95%    /* Coral/Pink end */
+  );
+  
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Enhanced Glow Effect */
+  filter: drop-shadow(0 0 15px rgba(195, 146, 252, 0.4));
+}
+
+.nametag p {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(10px, 1.8vmin, 14px); 
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 4px;
+}
         .icon-pill-inner {
           display:flex; flex-direction:column; align-items:center;
           gap:clamp(3px,0.8vmin,6px); pointer-events:none;

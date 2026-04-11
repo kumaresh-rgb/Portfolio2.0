@@ -114,7 +114,6 @@ export const Skills = () => (
           deployments.
         </p>
       </motion.header>
-
       {/* ── Bento Grid ── */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
         {/* 1 — Backend Development (6 cols) */}
@@ -173,7 +172,7 @@ export const Skills = () => (
         <Card className="lg:col-span-4">
           <SectionHeader
             icon={Database}
-            title="Data & Storage"  
+            title="Data & Storage"
             iconColor="text-secondary"
             iconBorder="border-secondary/20"
           />
@@ -216,11 +215,11 @@ export const Skills = () => (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
             {[
               { name: "Azure", sub: "Primary", color: "text-primary" },
-              {
-                name: "AWS",
-                sub: "Secondary",
-                color: "text-on-surface-variant",
-              },
+              // {
+              //   name: "AWS",
+              //   sub: "Secondary",
+              //   color: "text-on-surface-variant",
+              // },
               { name: "Docker", sub: "Container", color: "text-tertiary" },
               { name: "K8s", sub: "Orchestrator", color: "text-secondary" },
             ].map(({ name, sub, color }) => (
@@ -353,16 +352,15 @@ export const Skills = () => (
         </Card>
       </div>
       {/* /grid */}
-
       {/* ── Certification / Stats Bar ── */}
-      <motion.section
+      {/* <motion.section
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="mt-12 bg-surface-container-low rounded-2xl p-8 border border-outline-variant/10 flex flex-col md:flex-row items-center justify-between gap-8">
-        {/* Badge + text */}
-        <div className="flex items-center gap-6">
+        className="mt-12 bg-surface-container-low rounded-2xl p-8 border border-outline-variant/10 flex flex-col md:flex-row items-center justify-between gap-8"> */}
+      {/* Badge + text */}
+      {/* <div className="flex items-center gap-6">
           <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center p-2 border border-primary/20 flex-shrink-0">
             <img
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXo-PUCjw54potFd2yHCD7iprEi4Duz2utcL61L-b2ELLvWgDHGis3b8WXphNmvO_-WqjrUk7ZxwcmNW7-3dCXC_z6O09AN0wsiTyff3M_BjeDScRLOz3zLwP2QGTls06l0p1NSiqL12Kxt92e66HOsPbVFGJLihedOR1WmbYK5314koB1EXx8rieuW5bmcIrAXBQUYVNK9ZqYfk3WossTO2iKhcxskduuP1gFMC_gErwYLyOy4BHt8GCgJc6W20ph5_Bf-kGXDe-8"
@@ -378,10 +376,9 @@ export const Skills = () => (
               Validating expertise in compute, network, storage, and security.
             </p>
           </div>
-        </div>
-
-        {/* Stats */}
-        <div className="flex gap-12 flex-shrink-0">
+        </div> */}
+      {/* Stats */}
+      {/* <div className="flex gap-12 flex-shrink-0">
           <div className="text-center">
             <span className="block font-headline text-3xl font-extrabold text-primary">
               12+
@@ -399,7 +396,7 @@ export const Skills = () => (
             </span>
           </div>
         </div>
-      </motion.section>
+      </motion.section> */}
     </main>
 
     {/* Scoped styles */}
