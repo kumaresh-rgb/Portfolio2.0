@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { motion } from "motion/react";
 import { Users } from "lucide-react";
@@ -9,24 +9,33 @@ const COUNTER_BASE = `https://api.counterapi.dev/v2/${NAMESPACE}/${KEY}`;
 
 export const VisitorTelemetry = () => {
   const [count, setCount] = useState<number | null>(null);
+  const isTrackingRef = useRef(false);
 
   useEffect(() => {
+    if (isTrackingRef.current) return;
+
     const trackUniqueVisitor = async () => {
+      isTrackingRef.current = true;
       try {
         const PERSISTENT_KEY = "portfolio_visited_status";
         const hasVisitedLocal = localStorage.getItem(PERSISTENT_KEY);
 
         let res;
         if (!hasVisitedLocal) {
-          // 1. Get user IP to use as a second layer of verification
-          // Using a free, no-auth service like ipify
-          const ipRes = await axios.get("https://api.ipify.org?format=json");
-          const userIP = ipRes.data.ip;
+          // Immediately pre-set to prevent React strict-mode double firing
+          localStorage.setItem(PERSISTENT_KEY, "pending");
+          
+          try {
+            // 1. Get user IP to use as a second layer of verification
+            const ipRes = await axios.get("https://api.ipify.org?format=json");
+            const userIP = ipRes.data.ip;
+            localStorage.setItem(PERSISTENT_KEY, btoa(userIP));
+          } catch (ipError) {
+             localStorage.setItem(PERSISTENT_KEY, "unknown_ip");
+          }
 
           // 2. We store a hash of the IP + a flag in localStorage
-          // (You could also send the IP to a personal DB here if you had one)
           res = await axios.get(`${COUNTER_BASE}/up`);
-          localStorage.setItem(PERSISTENT_KEY, btoa(userIP));
         } else {
           res = await axios.get(COUNTER_BASE);
         }
@@ -39,8 +48,12 @@ export const VisitorTelemetry = () => {
       } catch (err) {
         console.error("Tracking failed:", err);
         // Fallback to just getting the count if IP check fails
-        const fallback = await axios.get(COUNTER_BASE);
-        setCount(fallback.data?.data?.up_count || 0);
+        try {
+            const fallback = await axios.get(COUNTER_BASE);
+            setCount(fallback.data?.data?.up_count || 0);
+        } catch (e) {
+            console.error(e);
+        }
       }
     };
 
