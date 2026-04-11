@@ -24,14 +24,14 @@ export const VisitorTelemetry = () => {
         if (!hasVisitedLocal) {
           // Immediately pre-set to prevent React strict-mode double firing
           localStorage.setItem(PERSISTENT_KEY, "pending");
-          
+
           try {
             // 1. Get user IP to use as a second layer of verification
             const ipRes = await axios.get("https://api.ipify.org?format=json");
             const userIP = ipRes.data.ip;
             localStorage.setItem(PERSISTENT_KEY, btoa(userIP));
           } catch (ipError) {
-             localStorage.setItem(PERSISTENT_KEY, "unknown_ip");
+            localStorage.setItem(PERSISTENT_KEY, "unknown_ip");
           }
 
           // 2. We store a hash of the IP + a flag in localStorage
@@ -49,10 +49,10 @@ export const VisitorTelemetry = () => {
         console.error("Tracking failed:", err);
         // Fallback to just getting the count if IP check fails
         try {
-            const fallback = await axios.get(COUNTER_BASE);
-            setCount(fallback.data?.data?.up_count || 0);
+          const fallback = await axios.get(COUNTER_BASE);
+          setCount(fallback.data?.data?.up_count || 0);
         } catch (e) {
-            console.error(e);
+          console.error(e);
         }
       }
     };
@@ -79,7 +79,7 @@ export const VisitorTelemetry = () => {
 
       <div className="flex flex-col border-l border-white/10 pl-3 leading-tight">
         <span className="text-[8px] font-mono uppercase tracking-[0.2em] text-white/40">
-          Unique Operators
+          Total Visitors
         </span>
         <span className="text-xs font-mono font-bold text-white tracking-widest">
           {displayCount}
