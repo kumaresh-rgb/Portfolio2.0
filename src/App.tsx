@@ -16,7 +16,6 @@ import Contact from "./pages/Contact";
 import { Skills } from "./pages/Skills";
 import Gamer from "./pages/Gamer";
 import { useEffect } from "react";
-import { VisitorTelemetry } from "./components/VisitorTelemetry";
 import { ExperienceDetail } from "./pages/ExperienceDetail";
 
 export default function App() {
@@ -33,7 +32,7 @@ export default function App() {
       <header className="fixed top-0 left-0 w-full z-50">
         <Navbar /> {/* This now contains the news bar inside it */}
       </header>
-      <VisitorTelemetry />
+      {/* <VisitorTelemetry /> */}
       {/* Added w-full and overflow-x-hidden here as well for safety */}
       <main className="relative pt-[1px] flex-grow w-full overflow-x-hidden">
         <AnimatePresence mode="wait">
