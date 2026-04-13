@@ -13,21 +13,25 @@ export default function ContactPage() {
     setSuccess(false);
 
     try {
-      const senderName = formData.get("senderName");
-      const senderEmail = formData.get("senderEmail");
-      const message = formData.get("message");
-
-      const response = await fetch("/api/send-email", {
+      // Formspree expects a standard POST request
+      const response = await fetch("https://formspree.io/f/xbdqjkzw", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ senderName, senderEmail, message }),
+        body: formData, // Send the FormData object directly
+        headers: {
+          Accept: "application/json",
+        },
       });
 
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "Request failed");
-
-      setSuccess(true);
+      if (response.ok) {
+        setSuccess(true);
+      } else {
+        const result = await response.json();
+        throw new Error(
+          result.errors ? result.errors[0].message : "Submission failed",
+        );
+      }
     } catch (error: any) {
+      console.error("System Protocol Error:", error.message);
       alert("Error: " + (error.message || "Unknown error occurred"));
     } finally {
       setIsPending(false);
@@ -110,7 +114,7 @@ export default function ContactPage() {
                       <input
                         name="senderName"
                         required
-                        placeholder="e.g. John Doe"
+                        placeholder="e.g. Kumaresh"
                         className="w-full bg-surface-container-low border border-outline-variant/20 rounded-xl p-4 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                       />
                     </div>
@@ -122,7 +126,7 @@ export default function ContactPage() {
                         name="senderEmail"
                         type="email"
                         required
-                        placeholder="e.g. name@company.com"
+                        placeholder="e.g. kumaresh@zendesk.com"
                         className="w-full bg-surface-container-low border border-outline-variant/20 rounded-xl p-4 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                       />
                     </div>
