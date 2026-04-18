@@ -311,13 +311,18 @@ export const Experience = () => (
           </span>
         </div>
 
-        <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-10 leading-[1.1]">
-          {/* White part of the word */}
-          <span className="text-on-surface">Engin</span>
+        <h1 className="font-headline text-[11vw] xs:text-[10vw] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-10 leading-[1.1] hyphens-none">
+          {/* Force the word to scale with the screen width */}
+          <span className="inline-block whitespace-nowrap">
+            <span className="text-on-surface">Engin</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d1fffc] via-[#c392fc] to-[#ff7e6c] drop-shadow-[0_0_25px_rgba(195,146,252,0.3)]">
+              eering
+            </span>
+          </span>
 
-          {/* Gradient starts exactly at 'ring' */}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d1fffc] via-[#c392fc] to-[#ff7e6c] drop-shadow-[0_0_25px_rgba(195,146,252,0.3)]">
-            eering High-Scale <br />
+            {" "}
+            High-Scale <br className="hidden sm:block" />
             Enterprise Foundations.
           </span>
         </h1>
