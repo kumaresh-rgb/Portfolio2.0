@@ -13,6 +13,7 @@ import {
   Layers,
   Cpu,
   Sparkles,
+  Terminal,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -27,7 +28,7 @@ interface ExperienceEntry {
   year: string;
   role: string;
   company: string;
-  cardTitle: string;
+  productTitle: string;
   icons: { icon: React.ElementType; color: string; border: string }[];
   bullets: BulletItem[];
   accentColor: string;
@@ -42,7 +43,7 @@ const EXPERIENCES: ExperienceEntry[] = [
     year: "2025 — PRESENT",
     role: "Product Developer",
     company: "Lumel Technologies",
-    cardTitle: "XMLA & Analytics Orchestration",
+    productTitle: "Lumel EPM on Microsoft Fabric",
     accentColor: "text-primary",
     glowClass: "glow-azure",
     reversed: false,
@@ -60,12 +61,25 @@ const EXPERIENCES: ExperienceEntry[] = [
         icon: Sparkles,
         text: (
           <>
-            Engineered core{" "}
+            Architected a custom{" "}
             <strong className="text-on-surface font-semibold">
-              XMLA server features
+              XMLA "Measure as Category" engine
             </strong>{" "}
-            like "Split By Measure" and "Implicit Measure" handling with custom
-            DAX.
+            to unpivot measures into dynamic hierarchies, enabling complex data
+            restructuring across rows and columns.
+          </>
+        ),
+      },
+      {
+        icon: BarChart2,
+        text: (
+          <>
+            Engineered a{" "}
+            <strong className="text-on-surface font-semibold">
+              "Split By Measure" orchestration
+            </strong>{" "}
+            logic that auto-generates virtual DAX measures, reducing data
+            preparation time for analysts by 100%.
           </>
         ),
       },
@@ -73,11 +87,12 @@ const EXPERIENCES: ExperienceEntry[] = [
         icon: Gauge,
         text: (
           <>
-            Optimized{" "}
+            Implemented{" "}
             <strong className="text-on-surface font-semibold">
-              Batch Filter Pane
+              Nested Top N logic
             </strong>{" "}
-            performance by 50%, enabling efficient analysis of 5M+ cells.
+            for Planning Sheets, allowing level-by-level hierarchical filtering
+            and "Top N + Others" grouping for both rows and columns.
           </>
         ),
       },
@@ -85,11 +100,12 @@ const EXPERIENCES: ExperienceEntry[] = [
         icon: ShieldCheck,
         text: (
           <>
-            Proactively resolved{" "}
+            Engineered contextual ranking for{" "}
             <strong className="text-on-surface font-semibold">
-              .NET build errors
+              Flat Date & Hierarchy Fields
             </strong>{" "}
-            across environments, maintaining 100% deployment stability.
+            using .NET, ensuring Top N filters respect parent-child
+            relationships and matrix positioning.
           </>
         ),
       },
@@ -99,7 +115,7 @@ const EXPERIENCES: ExperienceEntry[] = [
     year: "2023 — 2025",
     role: "Associate Software Developer",
     company: "Boston Harbor Consulting",
-    cardTitle: "Low-Code Platform Migration",
+    productTitle: "Quickly.app — Low-Code Development Platform",
     accentColor: "text-secondary",
     glowClass: "glow-secondary",
     reversed: true,
@@ -112,22 +128,12 @@ const EXPERIENCES: ExperienceEntry[] = [
         icon: Zap,
         text: (
           <>
-            Architected{" "}
+            Architected the{" "}
             <strong className="text-on-surface font-semibold">
-              Microservices
+              Microservices conversion
             </strong>{" "}
-            conversion for 30% of backend modules from a monolithic
-            architecture.
-          </>
-        ),
-      },
-      {
-        icon: BarChart2,
-        text: (
-          <>
-            Improved stability by{" "}
-            <strong className="text-on-surface font-semibold">30%</strong>{" "}
-            through resolving 200+ bugs and implementing unit testing.
+            for 30% of backend modules, scaling the platform's ability to build
+            and deploy apps quickly.
           </>
         ),
       },
@@ -139,7 +145,19 @@ const EXPERIENCES: ExperienceEntry[] = [
             <strong className="text-on-surface font-semibold">
               GraphQL & Roslyn
             </strong>{" "}
-            within Monaco Editor for advanced version control features.
+            within Monaco Editor to power advanced version control and
+            third-party app integrations.
+          </>
+        ),
+      },
+      {
+        icon: BarChart2,
+        text: (
+          <>
+            Improved system stability by{" "}
+            <strong className="text-on-surface font-semibold">30%</strong> by
+            resolving 200+ critical bugs within the drag-and-drop visual
+            interface engine.
           </>
         ),
       },
@@ -155,6 +173,12 @@ const TECH_ORBIT = [
     label: ".NET 10 / C#",
   },
   {
+    icon: Database,
+    color: "text-tertiary",
+    border: "hover:border-tertiary/50",
+    label: "SQL / T-SQL",
+  },
+  {
     icon: BarChart2,
     color: "text-tertiary",
     border: "hover:border-tertiary/50",
@@ -167,10 +191,28 @@ const TECH_ORBIT = [
     label: "Azure",
   },
   {
+    icon: Code2,
+    color: "text-primary",
+    border: "hover:border-primary/50",
+    label: "GraphQL / APIs",
+  },
+  {
     icon: Layers,
     color: "text-primary",
     border: "hover:border-primary/50",
-    label: "React TS",
+    label: "React / Angular",
+  },
+  {
+    icon: Terminal,
+    color: "text-secondary",
+    border: "hover:border-secondary/50",
+    label: "Node.js",
+  },
+  {
+    icon: ShieldCheck,
+    color: "text-tertiary",
+    border: "hover:border-tertiary/50",
+    label: "SOLID / xUnit",
   },
 ];
 
@@ -206,7 +248,7 @@ function ExpCard({ entry }: { entry: ExperienceEntry }) {
       </div>
 
       <h4 className="font-headline text-xl font-semibold mb-4 text-on-surface">
-        {entry.cardTitle}
+        {entry.productTitle}
       </h4>
 
       <ul className="space-y-4 font-body text-on-surface-variant">
@@ -269,12 +311,15 @@ export const Experience = () => (
           </span>
         </div>
 
-        <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-on-surface mb-6 leading-tight">
-          Engineering High-Scale{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d1fffc] via-[#c392fc] to-[#ff7e6c]">
-            Enterprise
-          </span>{" "}
-          Foundations.
+        <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-10 leading-[1.1]">
+          {/* White part of the word */}
+          <span className="text-on-surface">Engin</span>
+
+          {/* Gradient starts exactly at 'ring' */}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d1fffc] via-[#c392fc] to-[#ff7e6c] drop-shadow-[0_0_25px_rgba(195,146,252,0.3)]">
+            eering High-Scale <br />
+            Enterprise Foundations.
+          </span>
         </h1>
 
         <p className="font-body text-lg text-on-surface-variant max-w-2xl leading-relaxed mx-auto relative pr-8">

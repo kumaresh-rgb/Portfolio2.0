@@ -22,19 +22,31 @@ const DETAILED_DATA: Record<string, any> = {
     challenge:
       "Handling massive semantic models (5M+ cells) and providing Power BI-parity features in a custom XMLA environment.",
     solution:
-      "Leveraged .NET 10, TOM, and ADOMD.NET to architect advanced DAX orchestration and high-performance query engines.",
+      "Leveraged .NET 8, TOM, and ADOMD.NET to architect advanced DAX orchestration and high-performance query engines.",
     result:
-      "50% faster filter loading and successful delivery of core analytical features (Split Measure/Implicit Measures).",
+      "50% faster filter loading and successful delivery of core analytical features (Split Measure/Nested Top N).",
     stack: [
-      ".NET 10",
-      "DAX",
+      "C#",
+      "ASP.NET 8",
+      "DAX Query Development",
       "ADOMD.NET",
-      "Tabular Object Model (TOM)",
-      "Redis",
+      "ADOTabular",
+      "In-Memory Caching",
       "Azure Services",
-      "Podman",
+      "Duck DB",
+      "Apache Parquet",
+      "Unit Testing with xUnit",
+      "Integration Testing",
     ],
     milestones: [
+      {
+        title: "Semantic Engine Innovation",
+        points: [
+          "Architected an XMLA 'Measure as Category' engine to unpivot measures into dynamic hierarchies, enabling restructuring across rows and columns.",
+          "Engineered 'Nested Top N' logic for matrix hierarchies, allowing level-by-level filtering with automatic 'Top N + Others' grouping.",
+          "Implemented support for Top N on flat date fields, ensuring contextual ranking within Planning Sheet visualizations.",
+        ],
+      },
       {
         title: "Analytical Feature Engineering",
         points: [
@@ -46,15 +58,15 @@ const DETAILED_DATA: Record<string, any> = {
       {
         title: "Performance & Infrastructure",
         points: [
-          "Optimized Batch Filter Pane loading by 40-50%, enabling efficient handling of 5+ million cells for enterprise-scale analysis.",
-          "Resolved critical TOPN/TOPNSKIP pagination bugs, ensuring 100% accuracy in large-data retrieval.",
+          "Optimized Batch Filter Pane loading by 40-50% for models with 5M+ cells by refining DAX execution plans and ADOMD connection pooling.",
+          "Resolved critical TOPN/TOPNSKIP pagination bugs, ensuring 100% accuracy in large-data retrieval for enterprise reports.",
           "Proactively identified and fixed .NET dependency conflicts across all environments to prevent CI/CD bottlenecks.",
         ],
       },
       {
         title: "Knowledge Management",
         points: [
-          "Authored comprehensive technical documentation (LOOP) for complex stories, accelerating team onboarding.",
+          "Authored comprehensive technical documentation (LOOP) for complex stories, accelerating team onboarding for DAX engine features.",
           "Actively utilized Semantic Model DMV queries and Redis caching for system-wide performance profiling.",
         ],
       },
@@ -72,13 +84,15 @@ const DETAILED_DATA: Record<string, any> = {
     result:
       "30% stability increase and successful migration of 30% of back-end modules.",
     stack: [
-      ".NET Core",
-      "Microservices",
+      "ASP.NET Core",
+      "Angular",
+      "SQL",
+      "ASP.NET Zero Framework",
+      "Microservices Architecture",
       "GraphQL",
-      "Roslyn",
+      "Roslyn (.NET Compiler Platform)",
       "Monaco Editor",
-      "Jira",
-      "Unit Testing",
+      "Unit Testing (xUnit)",
     ],
     milestones: [
       {

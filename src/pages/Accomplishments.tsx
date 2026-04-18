@@ -10,8 +10,8 @@ import {
   Download,
   ExternalLink,
   Rocket,
-  Database,
   LayoutList,
+  Layers,
 } from "lucide-react";
 
 // ─── Shared glass card style ──────────────────────────────────────────────────
@@ -340,52 +340,64 @@ export const Accomplishments = () => (
       </motion.section>
       {/* ── Section 3: Open Source & Research ── */}
       <motion.section
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="mb-24">
         <SectionTitle>Open Source & Ecosystem Research</SectionTitle>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Replaced with Timeline TODO Project */}
-          <div className="flex gap-6 p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-white/10">
-            <div className="flex-shrink-0 w-16 h-16 rounded-lg bg-[#c392fc]/10 flex items-center justify-center">
-              <LayoutList className="text-[#c392fc] w-8 h-8" />
+          {/* Card 1: Scalable Productivity Engines */}
+          <motion.div
+            whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.08)" }}
+            className="flex gap-6 p-6 rounded-xl bg-white/5 transition-colors duration-300 border border-white/5 hover:border-[#d1fffc]/30 group">
+            <div className="flex-shrink-0 w-16 h-16 rounded-lg bg-[#d1fffc]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+              <LayoutList className="text-[#d1fffc] w-8 h-8" />
             </div>
             <div>
-              <span className="font-label text-xs text-[#c392fc] uppercase tracking-widest mb-2 block">
-                Productivity Tools
+              <span className="font-label text-xs text-[#d1fffc] uppercase tracking-widest mb-2 block opacity-80">
+                Full-Stack Systems
               </span>
-              <h4 className="font-headline text-xl font-bold mb-2">
-                Modern Timeline TODO
+              <h4 className="font-headline text-xl font-bold mb-2 text-white">
+                Scalable Productivity Engines
               </h4>
               <p className="text-white/60 text-sm mb-4 leading-relaxed">
-                Developed a student-oriented task management system using .NET
-                10 and React to track complex deadlines through a modern
-                timeline interface.
+                Built a high-concurrency task engine using{" "}
+                <span className="text-white font-semibold">ASP.NET Core</span>{" "}
+                and <span className="text-white font-semibold">React</span>,
+                implementing automated{" "}
+                <span className="text-white font-semibold">Azure CI/CD</span>{" "}
+                pipelines and optimized state management to handle complex
+                academic and professional scheduling workflows.
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Research Section Grammar Fix */}
-          <div className="flex gap-6 p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-white/10">
-            <div className="flex-shrink-0 w-16 h-16 rounded-lg bg-[#d1fffc]/10 flex items-center justify-center">
-              <Database className="text-[#d1fffc] w-8 h-8" />
+          {/* Card 2: Advanced Query Orchestration */}
+          <motion.div
+            whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.08)" }}
+            className="flex gap-6 p-6 rounded-xl bg-white/5 transition-colors duration-300 border border-white/5 hover:border-[#c392fc]/30 group">
+            <div className="flex-shrink-0 w-16 h-16 rounded-lg bg-[#c392fc]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+              <Layers className="text-[#c392fc] w-8 h-8" />
             </div>
             <div>
-              <span className="font-label text-xs text-[#d1fffc] uppercase tracking-widest mb-2 block">
-                R&D Mastery
+              <span className="font-label text-xs text-[#c392fc] uppercase tracking-widest mb-2 block opacity-80">
+                Semantic R&D
               </span>
-              <h4 className="font-headline text-xl font-bold mb-2">
-                XMLA & Semantic Analytics
+              <h4 className="font-headline text-xl font-bold mb-2 text-white">
+                Advanced Query Orchestration
               </h4>
               <p className="text-white/60 text-sm mb-4 leading-relaxed">
-                Conducted advanced research into Power BI metadata automation
-                and high-scale data modeling performance optimization.
+                Researched and prototyped{" "}
+                <span className="text-white font-semibold">XMLA-based</span>{" "}
+                metadata automation, engineering recursive{" "}
+                <span className="text-white font-semibold">DAX logic</span> to
+                solve the 'Nested Top N' problem within complex enterprise
+                matrix hierarchies and high-scale semantic models.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </motion.section>
 
@@ -407,32 +419,37 @@ export const Accomplishments = () => (
         <div className="space-y-12 relative">
           <div className="absolute left-[11px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-[#73b1ff] via-[#c392fc] to-transparent opacity-20" />
 
-          <Milestone
-            year="2022 — PRESENT"
-            title="Product Developer at Lumel Technologies"
-            desc="Architecting high-scale data orchestration systems and high-throughput API gateways processing 50k+ requests/sec using .NET 8/10 and React."
-            dotColor="bg-[#73b1ff]"
-            dotGlow="0 0 15px rgba(115,177,255,0.4)"
-            yearColor="text-[#73b1ff]"
-          />
+          <div className="space-y-12 relative">
+            {/* The connecting line matches the full gradient journey */}
+            <div className="absolute left-[11px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-[#d1fffc] via-[#c392fc] to-[#ff7e6c] opacity-20" />
 
-          <Milestone
-            year="CURRENT PROJECTS"
-            title="AI & Matrimonial Platform Architect"
-            desc="Engineered ZEN-C MATRIMONY using Python and GPT-4, delivering personalized matchmaking and automated relationship advice through advanced AI integration."
-            dotColor="bg-[#c392fc]"
-            dotGlow="0 0 15px rgba(195, 146, 252, 0.4)"
-            yearColor="text-[#c392fc]"
-          />
+            <Milestone
+              year="2025 — PRESENT"
+              title="Product Developer at Lumel Technologies"
+              desc="Engineering core XMLA server features and high-performance DAX orchestration for Microsoft Fabric. Optimized semantic model interactions for 5M+ cells, achieving 50% faster filter processing."
+              dotColor="bg-[#d1fffc]"
+              dotGlow="0 0 15px rgba(209, 255, 252, 0.4)"
+              yearColor="text-[#d1fffc]"
+            />
 
-          <Milestone
-            year="FOUNDATIONS"
-            title="Full-Stack Developer (Microsoft Stack)"
-            desc="Developed a modern timeline-based productivity ecosystem and financial trackers, optimizing student workflows through sleek UI and automated Azure deployment."
-            dotColor="bg-white/20"
-            dotGlow="none"
-            yearColor="text-white/40"
-          />
+            <Milestone
+              year="2023 — 2025"
+              title="Associate Software Developer at Boston Harbor"
+              desc="Led the microservices migration of a monolithic low-code platform. Integrated Roslyn and Monaco Editor to power advanced version control and automated code generation for Quickly.app."
+              dotColor="bg-[#c392fc]"
+              dotGlow="0 0 15px rgba(195, 146, 252, 0.4)"
+              yearColor="text-[#c392fc]"
+            />
+
+            <Milestone
+              year="CORE PROJECTS"
+              title="AI Architect & Full-Stack Engineer"
+              desc="Architected ZEN-C MATRIMONY using Python/GPT-4 for AI-driven matchmaking. Developed scalable portfolio engines and financial trackers utilizing the full Microsoft Azure ecosystem."
+              dotColor="bg-[#ff7e6c]"
+              dotGlow="0 0 15px rgba(255, 126, 108, 0.4)"
+              yearColor="text-[#ff7e6c]"
+            />
+          </div>
         </div>
       </motion.section>
     </main>
