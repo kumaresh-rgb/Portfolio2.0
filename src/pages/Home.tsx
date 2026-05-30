@@ -1,548 +1,63 @@
+﻿// â”€â”€â”€ Solar System hero commented out â€” new HeroSection used instead â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// To restore: uncomment the solar system code below and remove <HeroSection />
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+import { HeroSection } from "./HeroSection";
 import {
   Cpu,
   Database,
   Layers,
   ShieldCheck,
   Zap,
-  Send,
-  Download,
 } from "lucide-react";
 import { motion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+/* SOLAR SYSTEM â€” kept for future restore
+import { Send, Download } from "lucide-react";
 import { Link } from "react-router-dom";
-interface PlanetData {
-  id: string;
-  rPct: number;
-  speed: number;
-  startAngle: number;
-  name: string;
-  color: string;
-}
+*/
+/* Solar system interfaces (kept for restore):
+interface PlanetData { id: string; rPct: number; speed: number; startAngle: number; name: string; color: string; }
+interface TechIconProps { name: string; color: string; delay: number; }
+*/
 
-interface TechIconProps {
-  name: string;
-  color: string;
-  delay: number;
-}
+/* â”€â”€ SOLAR SYSTEM DATA (kept for restore) â”€â”€ */
+/* PLANET_DATA, TechIcon, scene useEffects, galaxy canvas useEffect all removed.
+   See git history to restore. Now replaced by HeroSection component. */
 
 const Home = () => {
+  /* Solar system state removed â€” kept as comment for restore:
   const sceneRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const orbitAnimRef = useRef<number | null>(null);
-  const startTimeRef = useRef<number | null>(null);
   const [sceneSize, setSceneSize] = useState(0);
   const [imageError, setImageError] = useState(false);
+  */
 
-  const PLANET_DATA: PlanetData[] = [
-    {
-      id: "ic0",
-      rPct: 14.5,
-      speed: 0.55,
-      startAngle: 0,
-      name: ".NET",
-      color: "rgba(120,80,255,0.6)",
-    },
-    {
-      id: "ic1",
-      rPct: 19,
-      speed: 0.44,
-      startAngle: 60,
-      name: "React",
-      color: "rgba(0,230,255,0.6)",
-    },
-    {
-      id: "ic2",
-      rPct: 23.5,
-      speed: 0.36,
-      startAngle: 130,
-      name: "Angular",
-      color: "rgba(255,60,60,0.6)",
-    },
-    {
-      id: "ic3",
-      rPct: 28,
-      speed: 0.3,
-      startAngle: 200,
-      name: "Redis",
-      color: "rgba(220,50,50,0.6)",
-    },
-    {
-      id: "ic4",
-      rPct: 32.5,
-      speed: 0.25,
-      startAngle: 270,
-      name: "SQL Server",
-      color: "rgba(220,50,50,0.6)",
-    },
-    {
-      id: "ic5",
-      rPct: 37,
-      speed: 0.2,
-      startAngle: 310,
-      name: "Power BI",
-      color: "rgba(255,200,0,0.6)",
-    },
-    {
-      id: "ic6",
-      rPct: 41.5,
-      speed: 0.17,
-      startAngle: 40,
-      name: "Kubernetes",
-      color: "rgba(50,108,229,0.6)",
-    },
-    {
-      id: "ic7",
-      rPct: 37,
-      speed: 0.22,
-      startAngle: 340,
-      name: "DevOps",
-      color: "rgba(0,180,255,0.6)",
-    },
-    {
-      id: "ic8",
-      rPct: 41.5,
-      speed: 0.17,
-      startAngle: 220,
-      name: "MS Fabric",
-      color: "rgba(0,210,240,0.6)",
-    },
-    {
-      id: "ic9",
-      rPct: 32.5,
-      speed: 0.25,
-      startAngle: 90,
-      name: "C#",
-      color: "rgba(190,80,255,0.6)",
-    },
-    {
-      id: "ic10",
-      rPct: 50,
-      speed: 0.12,
-      startAngle: 280,
-      name: "EF Core",
-      color: "rgba(100,80,200,0.6)",
-    },
-    {
-      id: "ic11",
-      rPct: 55,
-      speed: 0.1,
-      startAngle: 340,
-      name: "Docker",
-      color: "rgba(0,200,150,0.6)",
-    },
-    {
-      id: "ic12",
-      rPct: 60,
-      speed: 0.08,
-      startAngle: 30,
-      name: "SSMS",
-      color: "rgba(255,140,0,0.6)",
-    },
-    {
-      id: "ic13",
-      rPct: 48,
-      speed: 0.14,
-      startAngle: 110,
-      name: "Azure",
-      color: "rgba(0,120,212,0.6)",
-    },
-  ];
-
-  const TechIcon: React.FC<TechIconProps> = ({ name, color, delay }) => {
-    const imgMap: Record<string, string> = {
-      ".NET": "/Microsoft_.NET_logo.png",
-      React: "/React.png",
-      Angular: "/Angular.png",
-      Redis: "/pngegg.png",
-      "SQL Server": "/sql-database.png",
-      "Power BI": "/power_bi.png",
-      Kubernetes: "/kubernetes-services.png",
-      DevOps: "/azure-devops.png",
-      "MS Fabric": "/fabric.png",
-      "C#": "/Logo_C_sharp.png",
-      "EF Core": "/Entity.svg",
-      Docker: "/Docker.png",
-      SSMS: "/ssms_21.png",
-      Azure: "/Azure.png",
-    };
-
-    return (
-      <div className="icon-pill-inner">
-        <div
-          className="ibox"
-          style={
-            {
-              "--gc": color,
-              "--gsize": "14px",
-              "--pd": `${3.5 + delay * 0.4}s`,
-              "--poff": `${delay * 0.15}s`,
-            } as React.CSSProperties
-          }>
-          {imgMap[name] && (
-            <img
-              src={imgMap[name]}
-              alt={name}
-              style={{
-                width: "70%",
-                height: "70%",
-                objectFit: "contain",
-                filter: `drop-shadow(0 0 4px ${color})`,
-                position: "relative",
-                zIndex: 1,
-              }}
-            />
-          )}
-        </div>
-        <span className="ilabel">{name}</span>
-      </div>
-    );
-  };
-
-  // ── Scene size ──────────────────────────────────────────────────────────────
-  useEffect(() => {
-    const update = () => {
-      if (sceneRef.current) {
-        setSceneSize(
-          Math.min(sceneRef.current.offsetWidth, sceneRef.current.offsetHeight),
-        );
-      }
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  // ── Orbit animation (timestamp-based) — handles burst AND lag ─────────────────
-  useEffect(() => {
-    if (!sceneSize) return;
-    const elements = PLANET_DATA.map((p) => document.getElementById(p.id));
-    startTimeRef.current = null;
-    const LAUNCH_MS = 1200;
-    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
-
-    const getHalf = () => {
-      const el = elements[0]?.querySelector(".ibox") as HTMLElement | null;
-      return el ? el.offsetWidth / 2 : 27;
-    };
-
-    const loop = (ts: number) => {
-      if (!startTimeRef.current) startTimeRef.current = ts;
-      const elapsed = ts - startTimeRef.current;
-      const half = getHalf();
-      const labelH = 20;
-
-      PLANET_DATA.forEach((p, i) => {
-        const r = (p.rPct / 100) * sceneSize;
-        let x: number, y: number;
-
-        if (elapsed < LAUNCH_MS) {
-          // Explosive burst phase
-          const t = easeOut(elapsed / LAUNCH_MS);
-          const a = (p.startAngle * Math.PI) / 180;
-          x = Math.cos(a) * r * t - half;
-          y = Math.sin(a) * r * t - half - labelH / 2;
-        } else {
-          // Stable orbit phase
-          const sec = (elapsed - LAUNCH_MS) / 1000;
-          const a = ((p.startAngle + sec * p.speed * 60) * Math.PI) / 180;
-          x = Math.cos(a) * r - half;
-          y = Math.sin(a) * r - half - labelH / 2;
-        }
-
-        if (elements[i]) {
-          (elements[i] as HTMLElement).style.transform =
-            `translate(${x}px,${y}px)`;
-        }
-      });
-
-      orbitAnimRef.current = requestAnimationFrame(loop);
-    };
-
-    orbitAnimRef.current = requestAnimationFrame(loop);
-    return () => {
-      if (orbitAnimRef.current) cancelAnimationFrame(orbitAnimRef.current);
-    };
-  }, [sceneSize]);
-
-  // ── Galaxy canvas ───────────────────────────────────────────────────────────
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d")!;
-    let animId: number;
-
-    // Offscreen nebula layer — rendered once, blitted every frame (cheap)
-    const offscreen = document.createElement("canvas");
-    const octx = offscreen.getContext("2d")!;
-
-    const buildNebula = () => {
-      offscreen.width = canvas.width;
-      offscreen.height = canvas.height;
-      const W = canvas.width,
-        H = canvas.height;
-
-      // True black base
-      octx.fillStyle = "#00030a";
-      octx.fillRect(0, 0, W, H);
-
-      // Nebula clouds
-      const clouds = [
-        { x: 0.15, y: 0.22, rx: 0.38, ry: 0.25, a: -0.3, c: "30,10,90" },
-        { x: 0.82, y: 0.18, rx: 0.3, ry: 0.2, a: 0.5, c: "0,20,80" },
-        { x: 0.6, y: 0.78, rx: 0.34, ry: 0.22, a: 0.2, c: "0,40,100" },
-        { x: 0.08, y: 0.68, rx: 0.26, ry: 0.18, a: -0.5, c: "20,5,70" },
-        { x: 0.5, y: 0.44, rx: 0.42, ry: 0.3, a: 0.1, c: "0,15,60" },
-        { x: 0.92, y: 0.58, rx: 0.24, ry: 0.16, a: 0.4, c: "15,0,65" },
-      ];
-
-      clouds.forEach(({ x, y, rx, ry, a, c }) => {
-        const cx = x * W,
-          cy = y * H;
-        const rr = rx * Math.min(W, H);
-        octx.save();
-        octx.translate(cx, cy);
-        octx.rotate(a);
-        octx.scale(1, ry / rx);
-        const g = octx.createRadialGradient(0, 0, 0, 0, 0, rr);
-        g.addColorStop(0, `rgba(${c},0.22)`);
-        g.addColorStop(0.5, `rgba(${c},0.08)`);
-        g.addColorStop(1, `rgba(${c},0)`);
-        octx.beginPath();
-        octx.arc(0, 0, rr, 0, Math.PI * 2);
-        octx.fillStyle = g;
-        octx.fill();
-        octx.restore();
-      });
-
-      // Milky Way diagonal band
-      const mw = octx.createLinearGradient(0, H * 0.25, W, H * 0.75);
-      mw.addColorStop(0, "rgba(0,0,0,0)");
-      mw.addColorStop(0.35, "rgba(25,45,110,0.07)");
-      mw.addColorStop(0.5, "rgba(35,60,140,0.11)");
-      mw.addColorStop(0.65, "rgba(25,45,110,0.07)");
-      mw.addColorStop(1, "rgba(0,0,0,0)");
-      octx.fillStyle = mw;
-      octx.fillRect(0, 0, W, H);
-
-      // Static stars — realistic density & colour spread
-      const count = Math.floor((W * H) / 1600);
-      for (let i = 0; i < count; i++) {
-        const sx = Math.random() * W;
-        const sy = Math.random() * H;
-        const rnd = Math.random();
-
-        if (rnd < 0.72) {
-          // tiny dim
-          const r = Math.random() * 0.55 + 0.15;
-          const al = Math.random() * 0.35 + 0.08;
-          octx.beginPath();
-          octx.arc(sx, sy, r, 0, Math.PI * 2);
-          octx.fillStyle = `rgba(200,215,255,${al})`;
-          octx.fill();
-        } else if (rnd < 0.93) {
-          // medium coloured
-          const r = Math.random() * 0.9 + 0.4;
-          const al = Math.random() * 0.45 + 0.25;
-          const h = Math.random();
-          const col =
-            h < 0.3
-              ? `rgba(170,200,255,${al})`
-              : h < 0.6
-                ? `rgba(255,255,245,${al})`
-                : `rgba(255,215,170,${al})`;
-          octx.beginPath();
-          octx.arc(sx, sy, r, 0, Math.PI * 2);
-          octx.fillStyle = col;
-          octx.fill();
-        } else {
-          // bright with diffraction glow
-          const r = Math.random() * 1.4 + 0.8;
-          const al = Math.random() * 0.35 + 0.65;
-          const gw = octx.createRadialGradient(sx, sy, 0, sx, sy, r * 6);
-          gw.addColorStop(0, `rgba(255,255,255,${al})`);
-          gw.addColorStop(0.25, `rgba(210,230,255,${al * 0.45})`);
-          gw.addColorStop(1, "rgba(0,0,0,0)");
-          octx.beginPath();
-          octx.arc(sx, sy, r * 6, 0, Math.PI * 2);
-          octx.fillStyle = gw;
-          octx.fill();
-          octx.beginPath();
-          octx.arc(sx, sy, r, 0, Math.PI * 2);
-          octx.fillStyle = `rgba(255,255,255,${al})`;
-          octx.fill();
-          // diffraction cross spikes
-          octx.strokeStyle = `rgba(255,255,255,${al * 0.25})`;
-          octx.lineWidth = 0.5;
-          octx.beginPath();
-          octx.moveTo(sx - r * 5, sy);
-          octx.lineTo(sx + r * 5, sy);
-          octx.stroke();
-          octx.beginPath();
-          octx.moveTo(sx, sy - r * 5);
-          octx.lineTo(sx, sy + r * 5);
-          octx.stroke();
-        }
-      }
-    };
-
-    // Twinkling star layer
-    interface Twinkler {
-      x: number;
-      y: number;
-      r: number;
-      phase: number;
-      speed: number;
-      base: number;
-    }
-    let twinklers: Twinkler[] = [];
-
-    const buildTwinklers = () => {
-      twinklers = [];
-      const n = Math.floor((canvas.width * canvas.height) / 5500);
-      for (let i = 0; i < n; i++) {
-        twinklers.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 1.6 + 0.4,
-          phase: Math.random() * Math.PI * 2,
-          speed: 0.35 + Math.random() * 1.4,
-          base: 0.2 + Math.random() * 0.55,
-        });
-      }
-    };
-
-    // Shooting star (meteor) layer
-    interface Meteor {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      len: number;
-      alpha: number;
-      active: boolean;
-      timer: number;
-    }
-    const meteors: Meteor[] = Array.from({ length: 5 }, () => ({
-      x: 0,
-      y: 0,
-      vx: 0,
-      vy: 0,
-      len: 0,
-      alpha: 0,
-      active: false,
-      timer: Math.random() * 250,
-    }));
-
-    const spawnMeteor = (m: Meteor) => {
-      m.x = Math.random() * canvas.width;
-      m.y = Math.random() < 0.5 ? -10 : Math.random() * canvas.height * 0.4;
-      const ang = ((25 + Math.random() * 35) * Math.PI) / 180;
-      const spd = 9 + Math.random() * 12;
-      m.vx = Math.cos(ang) * spd;
-      m.vy = Math.sin(ang) * spd;
-      m.len = 70 + Math.random() * 130;
-      m.alpha = 1;
-      m.active = true;
-    };
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      buildNebula();
-      buildTwinklers();
-    };
-
-    resize();
-    window.addEventListener("resize", resize);
-
-    const render = (ts: number) => {
-      const t = ts / 1000;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // 1. Nebula + static star layer
-      ctx.drawImage(offscreen, 0, 0);
-
-      // 2. Twinkling stars
-      twinklers.forEach((s) => {
-        const al =
-          s.base * (0.35 + 0.65 * Math.abs(Math.sin(t * s.speed + s.phase)));
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${al})`;
-        ctx.fill();
-      });
-
-      // 3. Meteors
-      meteors.forEach((m) => {
-        if (!m.active) {
-          m.timer--;
-          if (m.timer <= 0) spawnMeteor(m);
-          return;
-        }
-        m.x += m.vx;
-        m.y += m.vy;
-        m.alpha -= 0.016;
-        if (
-          m.alpha <= 0 ||
-          m.x > canvas.width + 60 ||
-          m.y > canvas.height + 60
-        ) {
-          m.active = false;
-          m.timer = 200 + Math.random() * 350;
-          return;
-        }
-        const spd = Math.sqrt(m.vx * m.vx + m.vy * m.vy);
-        const tx = m.x - (m.vx / spd) * m.len;
-        const ty = m.y - (m.vy / spd) * m.len;
-        const grad = ctx.createLinearGradient(tx, ty, m.x, m.y);
-        grad.addColorStop(0, "rgba(255,255,255,0)");
-        grad.addColorStop(0.6, `rgba(180,225,255,${m.alpha * 0.45})`);
-        grad.addColorStop(1, `rgba(255,255,255,${m.alpha})`);
-        ctx.beginPath();
-        ctx.moveTo(tx, ty);
-        ctx.lineTo(m.x, m.y);
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-        const tg = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, 5);
-        tg.addColorStop(0, `rgba(255,255,255,${m.alpha})`);
-        tg.addColorStop(1, "rgba(0,0,0,0)");
-        ctx.beginPath();
-        ctx.arc(m.x, m.y, 5, 0, Math.PI * 2);
-        ctx.fillStyle = tg;
-        ctx.fill();
-      });
-
-      // 4. Soft center glow behind solar system
-      const cx = canvas.width / 2,
-        cy = canvas.height / 2;
-      const pr = 130 + Math.sin(t * 0.5) * 18;
-      const pg = ctx.createRadialGradient(cx, cy, 0, cx, cy, pr);
-      pg.addColorStop(0, `rgba(0,140,255,${0.07 + Math.sin(t * 0.7) * 0.03})`);
-      pg.addColorStop(0.5, "rgba(0,80,200,0.04)");
-      pg.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.beginPath();
-      ctx.arc(cx, cy, pr, 0, Math.PI * 2);
-      ctx.fillStyle = pg;
-      ctx.fill();
-
-      animId = requestAnimationFrame(render);
-    };
-
-    animId = requestAnimationFrame(render);
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
+  // SOLAR SYSTEM RUNTIME CODE (PLANET_DATA, TechIcon, canvas useEffects)
+  // Removed — restore from git history if needed
 
   return (
     <>
+      {/* â”€â”€ New Modern Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      <HeroSection />
+
+      {/*
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      SOLAR SYSTEM HERO â€” COMMENTED OUT (restore if needed)
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
       <style>{`
-        /* Override root background for galaxy effect */
-        html, body { background: #00030a !important; margin: 0; padding: 0; }
-        
-        /* Preserved Solar System styles */
+        SOLAR SYSTEM CSS REMOVED â€” see HeroSection.tsx
+      `}</style>
+      <canvas ref={canvasRef} style={{ position:"fixed", top:0, left:0, right:0, bottom:0, zIndex:0, pointerEvents:"none", display:"block" }} />
+      <section style={{ minHeight:"100vh", background:"transparent", position:"relative", overflow:"hidden" }}>
+        ... solar system JSX ...
+      </section>
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      */}
+
+      {/* Sections B / C / D follow below */}
+      <div style={{ position: "relative", zIndex: 1, background: "var(--color-background)" }}>
+      <style>{`
+        /* Kept only for sections B/C/D below hero */
         .orbit-ring {
           position:absolute; 
           top: 50%; left: 50%;
@@ -693,8 +208,6 @@ const Home = () => {
           letter-spacing: 1.2px; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
           cursor: pointer; text-decoration: none;
           position: relative; overflow: hidden;
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
         }
         
         .cta-primary {
@@ -746,137 +259,12 @@ const Home = () => {
           .cta-primary::after { display: none; }
         }
       `}</style>
-      {/* Galaxy Background Canvas — fixed, z:0, behind ALL content */}
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 0,
-          pointerEvents: "none",
-          display: "block",
-        }}
-      />
-      {/* Main content container — z:10 */}
-      <section
-        style={{
-          minHeight: "100vh",
-          background: "transparent" /* NOT bg-gray-900 */,
-          position: "relative",
-          overflow: "hidden",
-        }}>
-        {/* Solar system scene */}
-        <div
-          ref={sceneRef}
-          style={{
-            position: "relative",
-            zIndex: 10,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            minHeight: "100vh",
-            width: "100vmin",
-            height: "100vmin",
-            maxWidth: "760px",
-            maxHeight: "760px",
-            margin: "0 auto",
-          }}>
-          {/* Orbit rings */}
-          {[29, 38, 47, 56, 65, 74, 83, 93].map((radius, index) => (
-            <div
-              key={radius}
-              className="orbit-ring"
-              style={
-                {
-                  "--rp": radius,
-                  animationDelay: `${index * 0.4}s`,
-                } as React.CSSProperties
-              }
-            />
-          ))}
+      {/* SOLAR SYSTEM SECTION COMMENTED OUT â€” replaced by HeroSection above */}
+      {/* <canvas ref={canvasRef} ... /> */}
+      {/* <section style={{ minHeight:"100vh", background:"transparent" }}> */}
+      {/* Solar system JSX removed — use HeroSection above */}
 
-          <div className="aura" />
-
-          <div className="center">
-            <div className="photo-circle">
-              {!imageError ? (
-                <img
-                  src="/cropped_circle_image.png"
-                  alt="Kumaresh"
-                  onError={() => setImageError(true)}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center 8%",
-                    borderRadius: "inherit",
-                  }}
-                />
-              ) : (
-                <div
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    background: "linear-gradient(145deg,#0a1929,#1e3a5f)",
-                    borderRadius: "inherit",
-                    fontSize: "clamp(48px,8vmin,72px)",
-                    fontWeight: "bold",
-                    color: "white",
-                  }}>
-                  K
-                </div>
-              )}
-            </div>
-            <div className="nametag">
-              <h1>Microsoft Stack Developer</h1>
-              <p>.NET · Azure · React · SQL · DevOps</p>
-            </div>
-
-            <div className="cta-group">
-              <Link to="/contact" className="cta-btn cta-primary">
-                <Send size={16} />
-                Get in Touch
-              </Link>
-              <a
-                href={import.meta.env.VITE_RESUME_URL}
-                className="cta-btn cta-secondary"
-                target="_blank"
-                rel="noopener noreferrer">
-                <Download size={16} />
-                Resume
-              </a>
-            </div>
-          </div>
-
-          {PLANET_DATA.map((planet, index) => (
-            <div
-              key={planet.id}
-              id={planet.id}
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                pointerEvents: "none",
-                willChange: "transform",
-                contain: "layout style",
-                zIndex: 5,
-              }}>
-              <TechIcon
-                name={planet.name}
-                color={planet.color}
-                delay={index * 0.3}
-              />
-            </div>
-          ))}
-        </div>
-      </section>
-      {/* Section B: The Enterprise Lifecycle */}
+      {/* â”€â”€ Section B: The Enterprise Lifecycle â”€â”€ */}
       <section className="py-24 md:py-32 px-6 md:px-8 bg-transparent relative overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           {/* Left Side: Production Grade Card */}
@@ -891,7 +279,7 @@ const Home = () => {
               <div className="absolute -inset-8 bg-gradient-to-r from-[#47ccff]/20 via-[#a259ff]/25 to-[#47ccff]/20 rounded-[3rem] blur-[50px] opacity-0 group-hover:opacity-100 transition-all duration-700 scale-90 group-hover:scale-105" />
 
               {/* Main Glass Card */}
-              <div className="relative rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-2xl overflow-hidden p-8 md:p-12 min-h-[380px] flex flex-col justify-between transition-all duration-500 group-hover:border-[#47ccff]/40 group-hover:bg-white/[0.06] group-hover:shadow-[0_0_50px_rgba(71,204,255,0.1)]">
+              <div className="relative rounded-[2rem] bg-surface-container border border-outline-variant overflow-hidden p-8 md:p-12 min-h-[380px] flex flex-col justify-between transition-all duration-500 group-hover:border-[#47ccff]/40 group-hover:shadow-[0_0_50px_rgba(71,204,255,0.1)]">
                 <div className="flex justify-between items-start mb-8">
                   {/* Icon with Neon Pulse */}
                   <div className="p-4 bg-[#47ccff]/10 rounded-2xl border border-[#47ccff]/20 group-hover:bg-[#47ccff]/20 group-hover:border-[#47ccff]/50 transition-all duration-300">
@@ -902,7 +290,7 @@ const Home = () => {
                   </div>
 
                   <div className="text-right">
-                    <span className="block text-[10px] tracking-[0.3em] text-[#a6abb4] uppercase mb-1 font-semibold group-hover:text-white transition-colors">
+                    <span className="block text-[10px] tracking-[0.3em] text-on-surface-variant uppercase mb-1 font-semibold group-hover:text-white transition-colors">
                       SERVICE STATUS
                     </span>
                     <span className="text-2xl font-mono font-bold text-white group-hover:text-[#47ccff] transition-colors duration-300">
@@ -915,7 +303,7 @@ const Home = () => {
                   <h3 className="text-3xl md:text-4xl font-bold mb-5 italic text-white tracking-tight group-hover:text-[#47ccff] transition-colors duration-300">
                     Enterprise-Grade Solutions.
                   </h3>
-                  <p className="text-[#a6abb4] text-sm md:text-base leading-relaxed max-w-md group-hover:text-white transition-colors duration-300">
+                  <p className="text-on-surface-variant text-sm md:text-base leading-relaxed max-w-md group-hover:text-white transition-colors duration-300">
                     Specializing in the implementation of high-performance
                     features within the Microsoft ecosystem, engineered for
                     global scalability and mission-critical reliability.
@@ -979,7 +367,7 @@ const Home = () => {
                     {s.label}
                   </h4>
 
-                  <p className="text-sm text-[#a6abb4] group-hover:text-white transition-colors duration-300">
+                  <p className="text-sm text-on-surface-variant group-hover:text-white transition-colors duration-300">
                     {s.text}
                   </p>
                 </motion.div>
@@ -1009,7 +397,7 @@ const Home = () => {
               </span>
             </h2>
 
-            <p className="mt-6 text-[#a6abb4] text-sm md:text-lg max-w-3xl leading-relaxed font-light tracking-wide">
+            <p className="mt-6 text-on-surface-variant text-sm md:text-lg max-w-3xl leading-relaxed font-light tracking-wide">
               Leveraging{" "}
               <span className="text-white font-semibold">
                 3+ years of experience
@@ -1081,8 +469,7 @@ const Home = () => {
             ].map((item, i) => (
               <div
                 key={i}
-                className={`group relative p-8 rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/10 
-          hover:border-white/20 hover:bg-white/[0.07] transition-all duration-500 cursor-default ${item.glow}`}>
+                className={`group relative p-8 rounded-2xl bg-surface-container border border-outline-variant hover:border-outline transition-all duration-500 cursor-default ${item.glow}`}>
                 {/* Decorative Top Accent */}
                 <div
                   className="absolute top-0 left-0 w-full h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl"
@@ -1103,7 +490,7 @@ const Home = () => {
                   {item.skills.map((skill) => (
                     <li
                       key={skill}
-                      className="text-[12px] text-[#a6abb4] flex items-center gap-2 group-hover:text-white transition-colors">
+                      className="text-[12px] text-on-surface-variant flex items-center gap-2 group-hover:text-white transition-colors">
                       <div
                         className="w-1 h-1 rounded-full opacity-30 group-hover:opacity-100 transition-all"
                         style={{ backgroundColor: item.accent }}
@@ -1143,7 +530,7 @@ const Home = () => {
               Native <br />
               <span className="text-[#47ccff]">Cache Migration.</span>
             </h2>
-            <p className="text-sm text-[#a6abb4] leading-relaxed mb-8">
+            <p className="text-sm text-on-surface-variant leading-relaxed mb-8">
               Successfully migrated the application layer from third-party Redis
               to <strong>Microsoft In-Memory Cache</strong>. This strategic
               shift eliminated external dependency overhead while maintaining
@@ -1170,8 +557,8 @@ const Home = () => {
                     x: 10,
                     backgroundColor: "rgba(255,255,255,0.08)",
                   }}
-                  className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 backdrop-blur-sm transition-colors cursor-default">
-                  <span className="text-[11px] uppercase tracking-wider text-[#a6abb4]">
+                  className="flex items-center justify-between p-3 rounded-xl bg-surface-container-low border border-outline-variant transition-colors cursor-default">
+                  <span className="text-[11px] uppercase tracking-wider text-on-surface-variant">
                     {stat.label}
                   </span>
                   <span
@@ -1198,7 +585,7 @@ const Home = () => {
               </div>
 
               {/* CHANGED: Swapped solid black bg for transparent glass backdrop */}
-              <div className="relative overflow-hidden rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl p-8 pt-14 shadow-2xl">
+              <div className="relative overflow-hidden rounded-2xl bg-surface-container border border-outline-variant p-8 pt-14 shadow-2xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* Live Migration Logs */}
                   <div className="space-y-3 font-mono text-[10px] leading-tight">
@@ -1249,7 +636,7 @@ const Home = () => {
                         <div className="text-6xl font-black text-white tracking-tighter drop-shadow-[0_0_15px_rgba(71,204,255,0.3)]">
                           90<span className="text-xl text-[#47ccff]">%</span>
                         </div>
-                        <div className="mt-2 inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+                        <div className="mt-2 inline-block px-3 py-1 rounded-full bg-surface-container border border-outline-variant">
                           <div className="text-[10px] uppercase tracking-[0.2em] text-[#47ccff] font-bold">
                             Latency Drop
                           </div>
@@ -1260,8 +647,8 @@ const Home = () => {
                 </div>
 
                 {/* Bottom Status Bar */}
-                <div className="mt-10 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full backdrop-blur-md transition-all hover:bg-white/10 hover:border-[#47ccff]/30 group">
+                <div className="mt-10 pt-6 border-t border-outline-variant flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-3 bg-surface-container border border-outline-variant px-3 py-1.5 rounded-full transition-all hover:border-[#47ccff]/30 group">
                     <div className="relative flex items-center justify-center">
                       <motion.div
                         animate={{ scale: [1, 2, 1], opacity: [0.5, 0, 0.5] }}
@@ -1292,25 +679,11 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* Final CTA - Transparent Gradient */}
-      {/* Final CTA - Completely Transparent & Minimalist */}
-      <section className="py-40 text-center relative z-10 bg-transparent">
-        <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-3xl md:text-6xl font-bold mb-10 text-white max-w-4xl mx-auto leading-tight tracking-tight">
-            Ready to build the <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#47ccff] to-[#a259ff]">
-              Scalable Enterprise Product?
-            </span>
-          </h2>
-          <Link to="/contact">
-            <button className="px-12 py-4 bg-white text-slate-950 font-black rounded-full hover:scale-110 hover:shadow-[0_0_50px_rgba(255,255,255,0.4)] transition-all duration-300 active:scale-95 shadow-xl">
-              LET'S TALK
-            </button>
-          </Link>
-        </div>
-      </section>
+      {/* CTA moved to end of SinglePage */}
+      </div>{/* end sections B/C/D wrapper */}
     </>
   );
 };
 
 export default Home;
+

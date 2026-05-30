@@ -28,10 +28,9 @@ function GlassCard({
     <div
       className={`glass-card rounded-2xl relative overflow-hidden ${className}`}
       style={{
-        background: "rgba(10, 14, 20, 0.6)",
-        backdropFilter: "blur(16px)",
-        border: "1px solid rgba(255, 255, 255, 0.05)",
-        boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.4)",
+        background: "rgba(8, 13, 21, 0.95)",
+        border: "1px solid rgba(255, 255, 255, 0.06)",
+        boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.5)",
         ...style,
       }}>
       {children}
@@ -216,7 +215,7 @@ const mobileGames = [
 
 const Gamer = () => {
   return (
-    <div className="min-h-screen bg-background text-on-surface selection:bg-primary/30">
+    <div className="min-h-screen text-white selection:bg-primary/30" style={{ background: "#0a0a0a", paddingBottom: 80 }}>
       {/* ── HERO SECTION ── */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -233,7 +232,7 @@ const Gamer = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
               <Gamepad2 className="w-5 h-5 text-primary" />
               <span className="text-xs font-black tracking-widest text-primary uppercase">
                 Gaming Profile & Battle-Station
@@ -276,6 +275,8 @@ const Gamer = () => {
                 <img
                   src={gamingSetup.laptop.image}
                   alt={gamingSetup.laptop.name}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-auto drop-shadow-[0_0_40px_rgba(0,120,212,0.3)] hover:scale-105 transition-transform duration-500"
                 />
               </div>
@@ -308,6 +309,8 @@ const Gamer = () => {
                     <img
                       src={item.image}
                       alt={item.name}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-contain group-hover:scale-110 transition-transform"
                     />
                   </div>
@@ -361,12 +364,14 @@ const Gamer = () => {
                 <img
                   src={game.img}
                   alt={game.name}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent group-hover:via-black/40 transition-all duration-300" />
 
                 {game.status === "Currently Playing" && (
-                  <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-full bg-green-500/80 backdrop-blur-md text-[10px] font-black text-black flex items-center gap-1.5 animate-pulse">
+                  <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-full bg-green-500/90 text-[10px] font-black text-black flex items-center gap-1.5 animate-pulse">
                     <Activity className="w-3 h-3" />
                     PLAYING NOW
                   </div>
@@ -416,6 +421,8 @@ const Gamer = () => {
                   <img
                     src={game.img}
                     alt={game.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
@@ -476,6 +483,8 @@ const Gamer = () => {
                     <img
                       src={item.image}
                       alt={item.name}
+                      loading="lazy"
+                      decoding="async"
                       className="max-h-full w-full object-contain group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>

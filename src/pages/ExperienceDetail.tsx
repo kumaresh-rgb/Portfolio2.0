@@ -244,3 +244,5 @@ export const ExperienceDetail = () => {
     </div>
   );
 };
+
+export default ExperienceDetail;

@@ -29,9 +29,8 @@ function GlassCard({
     <div
       className={`glass-card rounded-xl ${className}`}
       style={{
-        background: "rgba(10, 15, 20, 0.6)",
-        backdropFilter: "blur(12px)",
-        border: "1px solid rgba(255, 255, 255, 0.08)",
+        background: "var(--color-surface-container)",
+        border: "1px solid var(--color-outline-variant)",
         ...style,
       }}>
       {children}
@@ -79,7 +78,7 @@ function Milestone({
       transition={{ duration: 0.5 }}
       className="relative pl-12">
       <div
-        className={`absolute left-0 top-1.5 w-6 h-6 rounded-full border-4 border-[#0a0f14] ${dotColor}`}
+        className={`absolute left-0 top-1.5 w-5 h-5 rounded-full border-2 border-background ${dotColor}`}
         style={{ boxShadow: dotGlow }}
       />
       <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2">
@@ -96,33 +95,28 @@ function Milestone({
 }
 
 export const Accomplishments = () => (
-  <div className="min-h-screen bg-[#050505] text-white font-body">
-    <main className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+  <div className="w-full bg-background text-on-surface font-body">
+    <main className="pt-16 pb-16 px-4 sm:px-6 max-w-6xl mx-auto">
       {/* ── Hero Header ── */}
       <motion.header
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-24 space-y-6">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-4">
-          <span className="w-2 h-2 rounded-full bg-[#c392fc] animate-pulse" />
-          <span className="font-label text-xs uppercase tracking-widest text-[#c392fc]">
-            Portfolio Milestones
-          </span>
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-10 space-y-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20">
+          <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
+          <span className="font-label text-[10px] uppercase tracking-widest text-secondary">Portfolio Milestones</span>
         </div>
 
-        <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter leading-tight">
-          Beyond the Code:
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d1fffc] via-[#c392fc] to-[#ff7e6c]">
+        <h1 className="font-headline text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
+          Beyond the Code:{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-tertiary">
             Milestones & Recognition
           </span>
         </h1>
 
-        <p className="max-w-2xl text-lg text-white/60 leading-relaxed">
-          A curated timeline of technical excellence and architectural mastery
-          within the Microsoft ecosystem. This is where high-scale engineering
-          meets validation.
+        <p className="max-w-xl text-sm text-on-surface-variant leading-relaxed">
+          A curated timeline of technical excellence within the Microsoft ecosystem.
         </p>
       </motion.header>
 
@@ -132,7 +126,7 @@ export const Accomplishments = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+        className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
         <GlassCard
           className="md:col-span-2 p-8 flex flex-col justify-between relative overflow-hidden group"
           style={{ boxShadow: "0 0 40px -10px rgba(115,177,255,0.15)" }}>
@@ -145,12 +139,12 @@ export const Accomplishments = () => (
                 Verified Expert
               </span>
             </div>
-            <h3 className="font-headline text-3xl font-bold mb-6">
+            <h3 className="font-headline text-lg font-bold mb-4">
               Verified Certifications
             </h3>
 
             <div className="space-y-6">
-              <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:border-[#73b1ff]/30 transition-colors">
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant hover:border-[#73b1ff]/30 transition-colors">
                 <img
                   src="https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg"
                   alt="AZ-900"
@@ -163,7 +157,7 @@ export const Accomplishments = () => (
                   <div className="text-white font-semibold text-base">
                     Azure Fundamentals
                   </div>
-                  <div className="text-white/50 text-xs">
+                  <div className="text-on-surface-variant text-xs">
                     Standardized baseline for Microsoft Cloud architectures.
                   </div>
                 </div>
@@ -174,13 +168,13 @@ export const Accomplishments = () => (
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="font-label text-sm flex gap-6">
               <div>
-                <div className="text-white/40 text-[10px] uppercase tracking-widest mb-1">
+                <div className="text-on-surface-variant text-[10px] uppercase tracking-widest mb-1">
                   Status
                 </div>
                 <div className="text-[#73b1ff] font-bold">ACTIVE</div>
               </div>
               <div>
-                <div className="text-white/40 text-[10px] uppercase tracking-widest mb-1">
+                <div className="text-on-surface-variant text-[10px] uppercase tracking-widest mb-1">
                   Last Update
                 </div>
                 <div className="text-white font-bold">JAN 2024</div>
@@ -190,7 +184,7 @@ export const Accomplishments = () => (
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="#"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-tertiary text-white px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide transition-all shadow-xl shadow-primary/20 hover:shadow-primary/40 group">
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-tertiary text-on-surfacepx-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide transition-all shadow-xl shadow-primary/20 hover:shadow-primary/40 group">
               <ExternalLink className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
               View Certificate
             </motion.a>
@@ -204,10 +198,10 @@ export const Accomplishments = () => (
             <div className="w-12 h-12 rounded-xl bg-[#c392fc]/10 flex items-center justify-center mb-6">
               <RefreshCw className="w-7 h-7 text-[#c392fc] animate-spin-slow" />
             </div>
-            <h3 className="font-headline text-2xl font-bold mb-2">
+            <h3 className="font-headline text-base font-bold mb-2">
               On-going / Future
             </h3>
-            <p className="text-white/50 text-xs leading-relaxed">
+            <p className="text-on-surface-variant text-xs leading-relaxed">
               Actively mastering advanced specialties in DevOps and Data
               Engineering.
             </p>
@@ -227,17 +221,17 @@ export const Accomplishments = () => (
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="flex justify-between items-center p-3 py-2 rounded-lg bg-white/5 border border-white/5 hover:bg-[#c392fc]/5 transition-colors">
+                className="flex justify-between items-center p-3 py-2 rounded-lg bg-surface-container-low border border-outline-variant hover:bg-[#c392fc]/5 transition-colors">
                 <div>
                   <div className="text-[10px] font-black text-[#c392fc] tracking-tighter leading-none mb-1">
                     {item.id}
                   </div>
-                  <div className="text-[12px] font-bold text-white leading-tight">
+                  <div className="text-[12px] font-bold text-on-surfaceleading-tight">
                     {item.name}
                   </div>
                 </div>
                 <span
-                  className={`text-[9px] font-bold py-1 px-2 rounded-md uppercase ${item.sub === "Learning" ? "bg-[#c392fc]/20 text-[#c392fc] animate-pulse" : "bg-white/5 text-white/40"}`}>
+                  className={`text-[9px] font-bold py-1 px-2 rounded-md uppercase ${item.sub === "Learning" ? "bg-[#c392fc]/20 text-[#c392fc] animate-pulse" : "bg-surface-container-low text-on-surface-variant"}`}>
                   {item.sub}
                 </span>
               </div>
@@ -252,16 +246,16 @@ export const Accomplishments = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24">
+        className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
         <GlassCard className="p-8 flex items-start gap-6">
           <div className="w-14 h-14 rounded-xl bg-[#73b1ff]/10 flex items-center justify-center flex-shrink-0">
             <BookOpen className="w-7 h-7 text-[#73b1ff]" />
           </div>
           <div>
-            <h3 className="font-headline text-2xl font-bold mb-2">
+            <h3 className="font-headline text-base font-bold mb-2">
               The End of Feminist (Sci-Fi)
             </h3>
-            <p className="text-white/60 text-sm leading-relaxed mb-6">
+            <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
               Author of the techno-thriller series **"THE END OF FEMINIST"**. A
               morally complex exploration of biological engineering, identity,
               and the unintended consequences of technology on humanity's
@@ -269,12 +263,12 @@ export const Accomplishments = () => (
             </p>
 
             {/* Volume details based on your design specs */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8 border-y border-white/10 py-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8 border-y border-outline-variant py-6">
               <div>
                 <h4 className="text-xs uppercase tracking-[0.2em] font-black text-[#73b1ff] mb-3">
                   Volume 1: Genesis
                 </h4>
-                <ul className="space-y-2 text-[11px] text-white/50 font-medium">
+                <ul className="space-y-2 text-[11px] text-on-surface-variant font-medium">
                   <li>• Male evolution & invention of the Catalyst</li>
                   <li>• International spread & global disruption</li>
                   <li>• Misuse of biological patents</li>
@@ -284,7 +278,7 @@ export const Accomplishments = () => (
                 <h4 className="text-xs uppercase tracking-[0.2em] font-black text-[#c392fc] mb-3">
                   Volume 2: Consequences
                 </h4>
-                <ul className="space-y-2 text-[11px] text-white/50 font-medium">
+                <ul className="space-y-2 text-[11px] text-on-surface-variant font-medium">
                   <li>• WWW III & The Treaty of BWBM</li>
                   <li>• AI Integration & Human Mankind Preservation</li>
                   <li>• The Global Peace Accords (UNIDO)</li>
@@ -297,7 +291,7 @@ export const Accomplishments = () => (
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="#"
-                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-primary to-tertiary text-white px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide shadow-xl shadow-primary/20 group">
+                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-primary to-tertiary text-on-surface px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide shadow-xl shadow-primary/20 group">
                 <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
                 Download Vol 1
               </motion.a>
@@ -307,7 +301,7 @@ export const Accomplishments = () => (
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="#"
-                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-tertiary to-secondary text-white px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide shadow-xl shadow-tertiary/20 group">
+                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-tertiary to-secondary text-on-surface px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide shadow-xl shadow-tertiary/20 group">
                 <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
                 Download Vol 2
               </motion.a>
@@ -320,10 +314,10 @@ export const Accomplishments = () => (
             <Gamepad2 className="w-7 h-7 text-secondary" />
           </div>
           <div>
-            <h3 className="font-headline text-2xl font-bold mb-2">
+            <h3 className="font-headline text-base font-bold mb-2">
               Level Up: Gamer Profile
             </h3>
-            <p className="text-white/60 text-sm leading-relaxed mb-4">
+            <p className="text-on-surface-variant text-sm leading-relaxed mb-4">
               Exploring high-performance digital storytelling. From competitive
               field-ops to immersive PC narrative epics.
             </p>
@@ -344,14 +338,14 @@ export const Accomplishments = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="mb-24">
+        className="mb-10">
         <SectionTitle>Open Source & Ecosystem Research</SectionTitle>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Card 1: Scalable Productivity Engines */}
           <motion.div
             whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.08)" }}
-            className="flex gap-6 p-6 rounded-xl bg-white/5 transition-colors duration-300 border border-white/5 hover:border-[#d1fffc]/30 group">
+            className="flex gap-6 p-5 rounded-xl bg-surface-container border border-outline-variant hover:border-outline transition-colors duration-300 group">
             <div className="flex-shrink-0 w-16 h-16 rounded-lg bg-[#d1fffc]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
               <LayoutList className="text-[#d1fffc] w-8 h-8" />
             </div>
@@ -359,10 +353,10 @@ export const Accomplishments = () => (
               <span className="font-label text-xs text-[#d1fffc] uppercase tracking-widest mb-2 block opacity-80">
                 Full-Stack Systems
               </span>
-              <h4 className="font-headline text-xl font-bold mb-2 text-white">
+              <h4 className="font-headline text-base font-bold mb-2 text-on-surface">
                 Scalable Productivity Engines
               </h4>
-              <p className="text-white/60 text-sm mb-4 leading-relaxed">
+              <p className="text-on-surface-variant text-sm mb-4 leading-relaxed">
                 Built a high-concurrency task engine using{" "}
                 <span className="text-white font-semibold">ASP.NET Core</span>{" "}
                 and <span className="text-white font-semibold">React</span>,
@@ -377,7 +371,7 @@ export const Accomplishments = () => (
           {/* Card 2: Advanced Query Orchestration */}
           <motion.div
             whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.08)" }}
-            className="flex gap-6 p-6 rounded-xl bg-white/5 transition-colors duration-300 border border-white/5 hover:border-[#c392fc]/30 group">
+            className="flex gap-6 p-5 rounded-xl bg-surface-container border border-outline-variant hover:border-outline transition-colors duration-300 group">
             <div className="flex-shrink-0 w-16 h-16 rounded-lg bg-[#c392fc]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
               <Layers className="text-[#c392fc] w-8 h-8" />
             </div>
@@ -385,10 +379,10 @@ export const Accomplishments = () => (
               <span className="font-label text-xs text-[#c392fc] uppercase tracking-widest mb-2 block opacity-80">
                 Semantic R&D
               </span>
-              <h4 className="font-headline text-xl font-bold mb-2 text-white">
+              <h4 className="font-headline text-base font-bold mb-2 text-on-surface">
                 Advanced Query Orchestration
               </h4>
-              <p className="text-white/60 text-sm mb-4 leading-relaxed">
+              <p className="text-on-surface-variant text-sm mb-4 leading-relaxed">
                 Researched and prototyped{" "}
                 <span className="text-white font-semibold">XMLA-based</span>{" "}
                 metadata automation, engineering recursive{" "}
@@ -407,12 +401,12 @@ export const Accomplishments = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="bg-white/[0.02] border border-white/5 rounded-3xl p-12 overflow-hidden relative">
+        className="bg-surface-container border border-outline-variant rounded-2xl p-8 overflow-hidden relative">
         <div className="absolute top-0 right-0 p-12 opacity-[0.04] pointer-events-none select-none">
           <TrendingUp className="w-48 h-48 text-white" />
         </div>
 
-        <h2 className="font-headline text-3xl font-bold mb-16">
+        <h2 className="font-headline text-xl font-bold mb-10 text-on-surface">
           Career Highlights
         </h2>
 

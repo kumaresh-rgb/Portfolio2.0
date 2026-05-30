@@ -219,76 +219,48 @@ const TECH_ORBIT = [
 // ─── Experience Card ──────────────────────────────────────────────────────────
 
 function ExpCard({ entry }: { entry: ExperienceEntry }) {
-  const metaBlock = (
-    <div className={entry.reversed ? "md:text-left" : "md:text-right"}>
-      <div
-        className={`font-label text-sm tracking-widest uppercase mb-2 ${entry.accentColor}`}>
-        {entry.year}
-      </div>
-      <h3 className="font-headline text-3xl font-bold text-on-surface">
-        {entry.role}
-      </h3>
-      <p className={`font-body text-lg font-medium ${entry.accentColor}`}>
-        {entry.company}
-      </p>
-    </div>
-  );
-
-  const cardBlock = (
-    <div
-      className={`group relative bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 ${entry.glowClass} hover:bg-surface-container transition-all duration-500`}>
-      <div className="flex gap-3 mb-6">
-        {entry.icons.map(({ icon: Icon, color, border }, idx) => (
-          <div
-            key={idx}
-            className={`w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center border ${border} group-hover:scale-110 transition-transform duration-300`}>
-            <Icon className={`w-5 h-5 ${color}`} />
-          </div>
-        ))}
-      </div>
-
-      <h4 className="font-headline text-xl font-semibold mb-4 text-on-surface">
-        {entry.productTitle}
-      </h4>
-
-      <ul className="space-y-4 font-body text-on-surface-variant">
-        {entry.bullets.map(({ icon: BulletIcon, text }, idx) => (
-          <li key={idx} className="flex gap-3 text-sm leading-relaxed">
-            <BulletIcon
-              className={`w-4 h-4 mt-0.5 flex-shrink-0 ${entry.accentColor}`}
-            />
-            <span>{text}</span>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-8 pt-6 border-t border-outline-variant/10">
-        <Link
-          to={`/experience/${entry.company.toLowerCase().replace(/\s+/g, "-")}`}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg text-sm font-semibold transition-all group/btn">
-          View Mission Brief
-          <motion.span
-            animate={{ x: [0, 5, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}>
-            <Rocket size={14} />
-          </motion.span>
-        </Link>
-      </div>
-    </div>
-  );
-
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6 }}
-      className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
-      <div className="absolute left-4 md:left-1/2 top-3 w-3 h-3 -translate-x-1/2 rounded-full bg-primary border-2 border-background hidden md:block z-10" />
-      <div className={`${entry.reversed ? "md:order-2" : "md:order-1"} pt-2`}>
-        {metaBlock}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="relative pl-0 sm:pl-10">
+      {/* Timeline dot */}
+      <div className="absolute left-0 top-3 w-2.5 h-2.5 rounded-full bg-primary border-2 border-background hidden sm:block" />
+
+      {/* Meta */}
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
+        <span className={`font-label text-[11px] tracking-widest uppercase ${entry.accentColor}`}>{entry.year}</span>
+        <h3 className="font-headline text-base font-bold text-on-surface">{entry.role}</h3>
+        <span className={`text-sm font-medium ${entry.accentColor}`}>@ {entry.company}</span>
       </div>
-      <div className={entry.reversed ? "md:order-1" : "md:order-2"}>
-        {cardBlock}
+
+      {/* Card */}
+      <div className="bg-surface-container rounded-xl border border-outline-variant p-5 hover:border-outline transition-all duration-300">
+        <div className="flex gap-2 mb-3">
+          {entry.icons.map(({ icon: Icon, color, border }, idx) => (
+            <div key={idx} className={`w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center border ${border}`}>
+              <Icon className={`w-4 h-4 ${color}`} />
+            </div>
+          ))}
+        </div>
+        <h4 className="font-headline text-sm font-semibold mb-3 text-on-surface">{entry.productTitle}</h4>
+        <ul className="space-y-2.5 text-on-surface-variant">
+          {entry.bullets.map(({ icon: BulletIcon, text }, idx) => (
+            <li key={idx} className="flex gap-2.5 text-xs leading-relaxed">
+              <BulletIcon className={`w-3.5 h-3.5 mt-0.5 flex-shrink-0 ${entry.accentColor}`} />
+              <span>{text}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-4 pt-4 border-t border-outline-variant/10">
+          <Link
+            to={`/experience/${entry.company.toLowerCase().replace(/\s+/g, "-")}`}
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg text-xs font-semibold transition-all">
+            View Details <Rocket size={12} />
+          </Link>
+        </div>
       </div>
     </motion.div>
   );
@@ -297,83 +269,55 @@ function ExpCard({ entry }: { entry: ExperienceEntry }) {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export const Experience = () => (
-  <div className="min-h-screen bg-background text-on-surface font-body">
-    <main className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+  <div className="w-full bg-background text-on-surface font-body">
+    <div className="pt-16 pb-16 px-4 sm:px-6 max-w-6xl mx-auto">
       <motion.header
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-20 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-xl">
-          <span className="w-2 h-2 rounded-full bg-tertiary animate-pulse" />
-          <span className="font-label text-xs uppercase tracking-widest text-tertiary">
-            Mission Timeline
-          </span>
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full border border-primary/20 bg-primary/5">
+          <span className="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse" />
+          <span className="font-label text-[10px] uppercase tracking-widest text-tertiary">Career Timeline</span>
         </div>
-
-        <h1 className="font-headline text-[11vw] xs:text-[10vw] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-10 leading-[1.1] hyphens-none">
-          {/* Force the word to scale with the screen width */}
-          <span className="inline-block whitespace-nowrap">
-            <span className="text-on-surface">Engin</span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d1fffc] via-[#c392fc] to-[#ff7e6c] drop-shadow-[0_0_25px_rgba(195,146,252,0.3)]">
-              eering
-            </span>
-          </span>
-
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d1fffc] via-[#c392fc] to-[#ff7e6c] drop-shadow-[0_0_25px_rgba(195,146,252,0.3)]">
-            {" "}
-            High-Scale <br className="hidden sm:block" />
-            Enterprise Foundations.
+        <h1 className="font-headline text-2xl sm:text-3xl md:text-4xl font-bold mb-3 leading-tight">
+          <span className="text-on-surface">Engineering </span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-tertiary">
+            Enterprise Solutions.
           </span>
         </h1>
-
-        <p className="font-body text-lg text-on-surface-variant max-w-2xl leading-relaxed mx-auto relative pr-8">
-          Specializing in Full-Stack .NET & Analytics. Pushing the boundaries of
-          high-scale data modeling and Microsoft ecosystem performance.
-          <span className="absolute bottom-1 right-2 w-4 h-4 text-on-surface/50 font-sans">
-            ✦
-          </span>
+        <p className="text-on-surface-variant text-sm max-w-xl leading-relaxed">
+          Full-Stack .NET & Analytics — specialising in high-scale data modelling and Microsoft ecosystem performance.
         </p>
       </motion.header>
 
-      <div className="relative space-y-24">
-        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-tertiary/20 to-transparent hidden md:block opacity-40 -translate-x-1/2" />
+      {/* Timeline */}
+      <div className="relative space-y-8">
+        <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-primary/40 via-primary/10 to-transparent hidden sm:block" />
         {EXPERIENCES.map((entry, i) => (
           <ExpCard key={i} entry={entry} />
         ))}
       </div>
 
+      {/* Tech orbit */}
       <motion.section
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mt-40">
-        <h2 className="font-headline text-4xl font-bold text-on-surface mb-12">
-          Technical Arsenal
-        </h2>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {TECH_ORBIT.map(({ icon: Icon, color, border, label }) => (
-            <div
-              key={label}
-              className={`group bg-surface-container p-6 rounded-xl border border-outline-variant/10 ${border} flex flex-col items-center justify-center gap-4 transition-colors duration-300`}>
-              <div className="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <Icon className={`w-6 h-6 ${color}`} />
-              </div>
-              <span className="font-label text-xs uppercase tracking-widest text-on-surface-variant">
-                {label}
-              </span>
+        className="mt-12">
+        <div className="flex items-center gap-4 mb-6">
+          <h2 className="font-headline text-xl font-bold text-on-surface whitespace-nowrap">Core Technologies</h2>
+          <div className="h-px flex-1 bg-outline-variant" />
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {TECH_ORBIT.map(({ icon: Icon, color, label }) => (
+            <div key={label} className="bg-surface-container p-3 rounded-lg border border-outline-variant flex items-center gap-2.5 transition-colors hover:border-outline">
+              <Icon className={`w-4 h-4 flex-shrink-0 ${color}`} />
+              <span className="text-xs font-medium text-on-surface">{label}</span>
             </div>
           ))}
         </div>
       </motion.section>
-    </main>
-
-    <style>{`
-      .glow-azure     { box-shadow: 0 0 30px rgba(115, 177, 255, 0.10); }
-      .glow-secondary { box-shadow: 0 0 30px rgba(195, 146, 252, 0.10); }
-      .glow-tertiary  { box-shadow: 0 0 30px rgba(71,  204, 255, 0.10); }
-    `}</style>
+    </div>
   </div>
 );
