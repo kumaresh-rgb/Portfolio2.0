@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { Home, User, Code, Briefcase, Mail, Menu, X, Award, Gamepad2, BookOpen } from "lucide-react";
 
@@ -17,6 +17,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome =
     location.pathname === "/" ||
     ["/about", "/projects", "/skills", "/experience", "/accomplishments", "/contact"].includes(
@@ -49,9 +50,15 @@ const Navbar = () => {
   const scrollToSection = useCallback((id: string) => {
     setIsMobileMenuOpen(false);
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    else window.location.href = `/#${id}`;
-  }, []);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 350);
+    }
+  }, [navigate]);
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex flex-col">
@@ -152,6 +159,12 @@ const Navbar = () => {
                     {item.name}
                   </button>
                 ))}
+                <Link
+                  to="/blog"
+                  className={`flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-colors ${location.pathname.startsWith("/blog") ? "bg-[#47ccff]/10 text-[#47ccff]" : "text-gray-400 hover:bg-white/5 hover:text-white"}`}>
+                  <BookOpen className="w-4 h-4 mr-3" />
+                  Blog
+                </Link>
                 <Link
                   to="/gamer"
                   className={`flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-colors ${location.pathname === "/gamer" ? "bg-[#47ccff]/10 text-[#47ccff]" : "text-gray-400 hover:bg-white/5 hover:text-white"}`}>

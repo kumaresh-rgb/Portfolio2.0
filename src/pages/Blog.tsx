@@ -31,7 +31,7 @@ function formatDate(dateStr: string) {
 
 const Blog = () => (
   <div className="min-h-screen bg-background text-on-surface" style={{ paddingBottom: 80 }}>
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-10 pb-16">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-24 pb-16">
       <motion.header
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}

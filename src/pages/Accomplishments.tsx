@@ -291,7 +291,7 @@ export const Accomplishments = () => (
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="#"
-                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-primary to-tertiary text-on-surface px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide shadow-xl shadow-primary/20 group">
+                className="flex w-full sm:w-auto justify-center items-center gap-2.5 bg-gradient-to-r from-primary to-tertiary text-on-surface px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide shadow-xl shadow-primary/20 group">
                 <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
                 Download Vol 1
               </motion.a>
@@ -301,7 +301,7 @@ export const Accomplishments = () => (
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="#"
-                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-tertiary to-secondary text-on-surface px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide shadow-xl shadow-tertiary/20 group">
+                className="flex w-full sm:w-auto justify-center items-center gap-2.5 bg-gradient-to-r from-tertiary to-secondary text-on-surface px-6 py-2.5 rounded-full font-headline font-bold text-xs tracking-wide shadow-xl shadow-tertiary/20 group">
                 <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
                 Download Vol 2
               </motion.a>
