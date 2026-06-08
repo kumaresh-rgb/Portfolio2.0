@@ -27,3 +27,7 @@ protfolio.client/public/DemoPortfolio.gif
 
 # Vite
 .vite
+
+# .NET build artifacts
+obj/
+bin/

@@ -47,7 +47,7 @@ export default function App() {
                 <Route path="/projects"       element={<SinglePage />} />
                 <Route path="/skills"         element={<SinglePage />} />
                 <Route path="/experience"     element={<SinglePage />} />
-                <Route path="/accomplishments"element={<SinglePage />} />
+                {/* <Route path="/accomplishments"element={<SinglePage />} /> */}
                 <Route path="/contact"        element={<SinglePage />} />
               </Routes>
             </motion.div>

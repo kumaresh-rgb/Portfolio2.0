@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { Home, User, Code, Briefcase, Mail, Menu, X, Award, Gamepad2, BookOpen } from "lucide-react";
+import { Home, User, Code, Briefcase, Mail, Menu, X, Gamepad2, BookOpen } from "lucide-react";
 
 const SECTIONS = [
   { id: "hero",            name: "Home",       icon: Home },
@@ -10,7 +10,7 @@ const SECTIONS = [
   { id: "skills",          name: "Skills",      icon: Briefcase },
   { id: "experience",      name: "Experience",  icon: Briefcase },
   { id: "contact",         name: "Contact",     icon: Mail },
-  { id: "accomplishments", name: "Milestones",  icon: Award },
+  // { id: "accomplishments", name: "Milestones",  icon: Award },
 ];
 
 const Navbar = () => {

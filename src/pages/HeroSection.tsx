@@ -16,8 +16,8 @@ import { Link } from "react-router-dom";
 
 const ROLES = [
   ".NET Full Stack Developer",
-  "Azure Cloud Engineer",
-  "AI Product Builder",
+  "Azure Cloud Integrator",
+  "AI Product Integrator",
   "Backend Systems Architect",
 ];
 
@@ -233,8 +233,8 @@ export const HeroSection = () => {
               <span className="text-on-surface font-semibold">
                 .NET, Azure & React
               </span>
-              . 3+ years shipping production systems — from XMLA engines on
-              Microsoft Fabric to AI platforms serving 12K+ users globally.
+              . 3+ yearsof experience shipping enterprise-grade systems and
+              AI-powered products that serve 1,000+ users worldwide.
             </motion.p>
 
             {/* Location */}
@@ -283,9 +283,21 @@ export const HeroSection = () => {
               className="flex flex-col sm:flex-row sm:flex-wrap mt-5 lg:mt-2 gap-y-3 gap-x-5">
               <div className="flex items-center gap-5">
                 {[
-                  { href: "https://github.com/kumaresh-rgb",        icon: <Github size={15} />,   label: "GitHub" },
-                  { href: "https://www.linkedin.com/in/mkumaresh/", icon: <Linkedin size={15} />, label: "LinkedIn" },
-                  { href: "https://x.com/KumareshLovable",          icon: <XIcon />,              label: "X" },
+                  {
+                    href: "https://github.com/kumaresh-rgb",
+                    icon: <Github size={15} />,
+                    label: "GitHub",
+                  },
+                  {
+                    href: "https://www.linkedin.com/in/mkumaresh/",
+                    icon: <Linkedin size={15} />,
+                    label: "LinkedIn",
+                  },
+                  {
+                    href: "https://x.com/KumareshLovable",
+                    icon: <XIcon />,
+                    label: "X",
+                  },
                 ].map((s) => (
                   <a
                     key={s.label}
@@ -492,7 +504,9 @@ export const HeroSection = () => {
           <div
             style={{
               position: "absolute",
-              left: 0, top: 0, bottom: 0,
+              left: 0,
+              top: 0,
+              bottom: 0,
               width: 40,
               background: `linear-gradient(to right, ${edgeFade}, transparent)`,
               pointerEvents: "none",
@@ -501,7 +515,9 @@ export const HeroSection = () => {
           <div
             style={{
               position: "absolute",
-              right: 0, top: 0, bottom: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
               width: 40,
               background: `linear-gradient(to left, ${edgeFade}, transparent)`,
               pointerEvents: "none",
@@ -515,15 +531,33 @@ export const HeroSection = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9 }}
           className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-y-1.5 gap-x-3 text-center px-2">
-          <div className="hidden sm:block h-px w-10 flex-shrink-0" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.08))" }} />
-          <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.15em] sm:tracking-[0.18em] uppercase font-label whitespace-nowrap" style={{ color: "rgba(255,255,255,0.3)" }}>
+          <div
+            className="hidden sm:block h-px w-10 flex-shrink-0"
+            style={{
+              background:
+                "linear-gradient(to right, transparent, rgba(255,255,255,0.08))",
+            }}
+          />
+          <span
+            className="text-[9px] sm:text-[10px] font-bold tracking-[0.15em] sm:tracking-[0.18em] uppercase font-label whitespace-nowrap"
+            style={{ color: "rgba(255,255,255,0.3)" }}>
             Loved by Developers &amp; Professionals worldwide
           </span>
-          <span className="text-[11px]" style={{ lineHeight: 1 }}>❤️</span>
-          <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.15em] sm:tracking-[0.18em] uppercase font-label whitespace-nowrap" style={{ color: "rgba(255,255,255,0.3)" }}>
+          <span className="text-[11px]" style={{ lineHeight: 1 }}>
+            ❤️
+          </span>
+          <span
+            className="text-[9px] sm:text-[10px] font-bold tracking-[0.15em] sm:tracking-[0.18em] uppercase font-label whitespace-nowrap"
+            style={{ color: "rgba(255,255,255,0.3)" }}>
             Kumaresh is a Hard Heart Developer
           </span>
-          <div className="hidden sm:block h-px w-10 flex-shrink-0" style={{ background: "linear-gradient(to left, transparent, rgba(255,255,255,0.08))" }} />
+          <div
+            className="hidden sm:block h-px w-10 flex-shrink-0"
+            style={{
+              background:
+                "linear-gradient(to left, transparent, rgba(255,255,255,0.08))",
+            }}
+          />
         </motion.div>
       </div>
 
